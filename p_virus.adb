@@ -6,6 +6,7 @@ package body p_virus is
 
   begin
 
-  end InitPartie;
+  end InitPartie;*
+  
 
 end p_virus;
