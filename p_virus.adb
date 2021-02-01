@@ -59,7 +59,7 @@ package body p_virus is
     end if;
     compteurRouge := 0;
 
-    while not end_of_file(f) and then compteurRouge /= 2 loop 
+    while not end_of_file(f) and then compteurRouge /= 2 loop
       Grille(piece.ligne, piece.colonne) := piece.couleur;    --Save la couleur sur la map
       Pieces(piece.couleur) := true;                          --Enregistre que la couleur a été utilisée
 
