@@ -1,8 +1,14 @@
 with p_esiut; use p_esiut;
 with p_virus; use p_virus; use p_virus.p_piece_io;
 with interface_CL; use interface_CL;
+<<<<<<< HEAD
 use p_virus.p_dir_io;
 use p_virus.p_coul_io;
+=======
+with Ada.Text_IO;
+with Interfaces.C;
+
+>>>>>>> 072ce9c340beb2cb83f220cd602400c29793aa28
 procedure testjeu is
   numdef : integer;
   Grille : TV_Grille;
@@ -11,11 +17,30 @@ procedure testjeu is
   nombre : boolean:=false;
   rejouer : string(1..2);
   stop : boolean :=false;
+<<<<<<< HEAD
   possibilite : boolean;
   dir : T_direction;
   couleur : T_coul;
   compteur_mouvement:integer:=0;
+=======
+
+-----------------
+  package C renames Interfaces.C;
+   use type C.int;
+
+   function system (command : C.char_array) return C.int
+     with Import, Convention => C;
+
+   command : aliased constant C.char_array :=
+     C.To_C ("mv README.md README.txt");
+
+   result : C.int;
+-------------------------
+>>>>>>> 072ce9c340beb2cb83f220cd602400c29793aa28
 begin
+  ----
+    result := system ("firefox https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+  ---
     open(f, in_file, "Defis.bin");
     InitPartie(Grille, Pieces);
 
