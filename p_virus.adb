@@ -30,18 +30,18 @@ package body p_virus is
 
   begin
 
-    reset(f, in_file);
+    reset(f, in_file); --Reset la lecture du fichier pour revenir au début
 
     if num > 1 then
-      while not end_of_file(f) and then numDefActu < num loop
+      while not end_of_file(f) and then numDefActu < num loop --Parcours tout le fichier
 
         read(f,piece);
     
-        if piece.couleur = rouge then
+        if piece.couleur = rouge then             --Compte les rouges
           compteurRouge := compteurRouge + 1;
-          if compteurRouge = 2 then
+          if compteurRouge = 2 then               --Si on a tout les rouges, on change de map
             numDefActu := numDefActu  +1;
-            compteurRouge := 0;
+            compteurRouge := 0;                   --Et on reset le compteur de rouge
           end if;
 
         end if;
@@ -55,9 +55,9 @@ package body p_virus is
     end if;
     compteurRouge := 0;
 
-    while not end_of_file(f) and then compteurRouge /= 2 loop
-      Grille(piece.ligne, piece.colonne) := piece.couleur;
-      Pieces(piece.couleur) := true;
+    while not end_of_file(f) and then compteurRouge /= 2 loop 
+      Grille(piece.ligne, piece.colonne) := piece.couleur;    --Save la couleur sur la map
+      Pieces(piece.couleur) := true;                          --Enregistre que la couleur a été utilisée
 
       if piece.couleur = rouge then
         compteurRouge := compteurRouge  + 1;
