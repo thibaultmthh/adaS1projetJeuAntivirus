@@ -94,17 +94,25 @@ package body p_virus is
    end Guerison;
 
 	procedure MajGrille(Grille : in out TV_Grille; coul : in T_CoulP; Dir : in T_Direction) is
-  tampon: TV_Grille := Grille; -- Je sais plus pk il le faut, mais pour eviter de deplacer des truc deja deplacés je crois
+  tampon: TV_Grille ; -- Je sais plus pk il le faut, mais pour eviter de deplacer des truc deja deplacés je crois
   begin
+  for i in T_lig'range loop -- tambon = grille vide qui stoque que les nouveau deplacements
+      for j in T_col'range loop
+        tampon(i, j) := vide;
+
+      end loop;
+    end loop;
+
   for y in T_lig'range loop
       for x in T_col'range loop
         if Grille(y, x) = coul then
           Grille(y, x) := vide; -- vide l'ancienne case
+          ecrire("ok2");
           case Dir is
-            when bg => tampon(T_lig'pred(y), T_col'pred(x)):= coul; -- pas besoin de faire de check suplementaires car le mouvement et cencé etre possible
-            when bd => tampon(T_lig'pred(y), T_col'succ(x)) := coul;
-            when hg => tampon(T_lig'succ(y), T_col'pred(x)) := coul;
-            when hd => tampon(T_lig'succ(y), T_col'succ(x)) := coul;
+            when bg => tampon(T_lig'succ(y), T_col'pred(x)):= coul; -- pas besoin de faire de check suplementaires car le mouvement et cencé etre possible
+            when bd => tampon(T_lig'succ(y), T_col'succ(x)) := coul;
+            when hg => tampon(T_lig'pred(y), T_col'pred(x)) := coul;
+            when hd => tampon(T_lig'pred(y), T_col'succ(x)) := coul;
           end case;
         end if;
       end loop;
@@ -112,6 +120,7 @@ package body p_virus is
     for y in T_lig'range loop
       for x in T_col'range loop
         if tampon(y, x) = coul then
+          ecrire("ok");
           Grille(y,x) := coul; -- copie les nouveau deplacement dans la grille
         end if;
       end loop;
