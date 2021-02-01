@@ -65,4 +65,76 @@ package body p_virus is
    end Guerison;
 
 
+
+
+  function Possible(Grille : in TV_Grille; coul : in T_CoulP; Dir : in T_Direction) is
+
+  begin
+
+  for i in T_lig'range loop
+    for j in T_col'range loop
+
+      if Grille(i,j) = coul then
+
+        if Dir = bg then
+
+          if i /= T_lig'first and j /= T_col'first then --Check si c'est pas les premiers pour sortir de la range
+
+            if Grille(i-1, j-1) /= vide then
+              return false;
+            end if;
+
+          else 
+            return false; --Si on sort de la range, on peut pas déplacer donc false
+          end if;
+
+
+        elsif Dir = hg then
+          if i /= T_lig'last and j /= T_col'first then 
+          
+            if Grille(i+1, j-1) /= vide then
+              return false;
+            end if;
+
+          else 
+            return false; --Si on sort de la range, on peut pas déplacer donc false
+          end if;
+
+
+        elsif Dir = bd then
+          if i /= T_lig'first and j /= T_col'last then 
+          
+            if Grille(i-1, j+1) /= vide then
+              return false;
+            end if;
+
+          else 
+            return false; --Si on sort de la range, on peut pas déplacer donc false
+          end if;
+
+
+        elsif Dir = hd then
+          if i /= T_lig'last and j /= T_col'last then 
+          
+            if Grille(i+1, j-1) /= vide then
+              return false;
+            end if;
+
+          else 
+            return false; --Si on sort de la range, on peut pas déplacer donc false
+          end if;
+
+
+        end if;
+      end if;
+
+    end loop;
+  end loop;
+
+  --Si on a verifié les mouvement et que y'a rien qui bloque, on return true
+  return true;
+
+  end Possible;
+
+
 end p_virus;
