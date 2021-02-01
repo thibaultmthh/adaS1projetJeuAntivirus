@@ -57,12 +57,33 @@ package body p_virus is
 
 
 
-
-
 	function Guerison(Grille : in TV_Grille) return boolean is
    begin
     return (Grille(1,'A') = rouge) and (Grille(2,'B') = rouge);
    end Guerison;
 
-
+	procedure MajGrille(Grille : in out TV_Grille; coul : in T_CoulP; Dir : in T_Direction) is
+  tampon: TV_Grille := Grille;
+  begin 
+  for y in T_lig'range loop
+      for x in T_col'range loop
+        if Grille(y, x) = coul then
+          Grille(y, x) := vide;
+          case Dir is 
+            when bg => tampon(T_lig'pred(y), T_col'pred(x)):= coul;
+            when bd => tampon(T_lig'pred(y), T_col'succ(x)) := coul;
+            when hg => tampon(T_lig'succ(y), T_col'pred(x)) := coul;
+            when hd => tampon(T_lig'succ(y), T_col'succ(x)) := coul;
+          end case;
+        end if;
+      end loop;
+    end loop;
+    for y in T_lig'range loop
+      for x in T_col'range loop
+        if tampon(y, x) = coul then
+          Grille(y,x) := coul;
+        end if;
+      end loop;
+    end loop;
+  end MajGrille;
 end p_virus;
