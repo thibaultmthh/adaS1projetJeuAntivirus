@@ -1,6 +1,6 @@
 with p_esiut; use p_esiut;
 with p_virus; use p_virus; use p_virus.p_piece_io;
-
+with interface_CL; use interface_CL;
 procedure testjeu is
   numdef : integer;
   Grille : TV_Grille;
@@ -23,6 +23,8 @@ begin
     end loop;
 
     Configurer(f, numdef, Grille, Pieces);
+      AfficheGrille(grille);
+
     for coul in T_coul'range loop
       if coul/=vide then
         pospiece(grille,coul);

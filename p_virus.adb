@@ -40,10 +40,8 @@ package body p_virus is
       while not end_of_file(f) and then numDefActu < num loop --Parcours tout le fichier
 
         read(f,piece);
-
-
+    
         if piece.couleur = rouge then             --Compte les rouges
-
           compteurRouge := compteurRouge + 1;
           if compteurRouge = 2 then               --Si on a tout les rouges, on change de map
             numDefActu := numDefActu  +1;
@@ -99,9 +97,9 @@ package body p_virus is
     return (Grille(1,'A') = rouge) and (Grille(2,'B') = rouge);
    end Guerison;
 
-   procedure MajGrille(Grille : in out TV_Grille; coul : in T_CoulP; Dir : in T_Direction) is
-  tampon: TV_Grille := Grille; -- Je sais plus pk il le faut mais pour eviter de deplacer des truc deja deplacés je crois
-  begin
+	procedure MajGrille(Grille : in out TV_Grille; coul : in T_CoulP; Dir : in T_Direction) is
+  tampon: TV_Grille := Grille; -- Je sais plus pk il le faut, mais pour eviter de deplacer des truc deja deplacés je crois
+  begin 
   for y in T_lig'range loop
       for x in T_col'range loop
         if Grille(y, x) = coul then
