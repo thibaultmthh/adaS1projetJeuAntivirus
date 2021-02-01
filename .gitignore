@@ -3,3 +3,4 @@ p_esiut.ads
 *.ali
 *.o
 tests.adb
+testjeu
