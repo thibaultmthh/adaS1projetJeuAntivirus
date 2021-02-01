@@ -40,7 +40,7 @@ package body p_virus is
     while not end_of_file(f) and then numDefActu < num loop --Parcours tout le fichier
 
       read(f,piece);
-      
+
       if piece.couleur = rouge then             --Compte les rouges
         compteurRouge := compteurRouge + 1;
         if compteurRouge = 2 then               --Si on a tout les rouges, on change de map
@@ -73,14 +73,13 @@ package body p_virus is
 
     -- {} => {la position de la pièce de couleur coul a été affichée, si coul appartient à Grille:
     --                exemple : ROUGE : F4 - G5}
-
   begin
     for ligne in T_lig'range loop
       for colo in T_col'range loop
 
 
         if grille(ligne,colo)=coul then
-          ecrire_ligne("il y a" & image(coul) & "couleur à" & image(ligne) & "ligne" & colo & "colonne");
+          ecrire_ligne("il y a du " & image(coul) & " En ligne : " & image(ligne) & " Colone :" & colo);
         end if;
 
       end loop;
