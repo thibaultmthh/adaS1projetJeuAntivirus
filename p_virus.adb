@@ -26,6 +26,7 @@ package body p_virus is
     numDefActu : natural := 1;
     piece: TR_ElemP;
     couleurPrec : T_Coul := vide;
+    compteurRouge : natural := 0;
 
   begin
 
@@ -46,16 +47,19 @@ package body p_virus is
       end if;
     end if;
 
-    while not end_of_file(f) and then couleurPrec /= rouge loop
+    while not end_of_file(f) and then compteurRouge /= 2 loop
       Grille(piece.ligne, piece.colonne) := piece.couleur;
       Pieces(piece.couleur) := true;
-      couleurPrec := piece.couleur;
+
+      if piece.couleur = rouge then
+        compteurRouge := compteurRouge  + 1;
+      end if;
       read(f, piece);
 
     end loop;
   end Configurer;
 
-procedure PosPiece(Grille : in TV_Grille; coul : in T_coulP);
+procedure PosPiece(Grille : in TV_Grille; coul : in T_coulP) is
     -- {} => {la position de la pièce de couleur coul a été affichée, si coul appartient à Grille:
     --                exemple : ROUGE : F4 - G5}
 
@@ -63,7 +67,7 @@ procedure PosPiece(Grille : in TV_Grille; coul : in T_coulP);
     for ligne in T_lig'range loop
       for colo in T_col'range loop
           if grille(ligne,colo)=coul then
-            ecrire_ligne("il y a cette couleur à" & image(ligne) & "colonne" & image(colo) & "colonne");
+            ecrire_ligne("il y a cette couleur à" & image(ligne) & "colonne" & T_Col'image(colo) & "colonne");
           end if;
       end loop;
     end loop;
