@@ -9,11 +9,13 @@ package body p_virus is
     for i in T_lig'range loop
       for j in T_col'range loop
         Grille(i, j) := vide;
+
       end loop;
     end loop;
 
     for i in Pieces'range loop
       pieces(i) := false;
+
     end loop;
 
   end InitPartie;
@@ -28,27 +30,37 @@ package body p_virus is
   begin
 
     reset(f, in_file);
-    while not end_of_file(f) and then numDefActu < num loop
-      read(f,piece);
-      if couleurPrec = rouge then
-        numDefActu := numDefActu + 1;
+
+    if num > 1 then
+      while not end_of_file(f) and then numDefActu < num loop
+
+        read(f,piece);
+        if couleurPrec = rouge then
+          numDefActu := numDefActu + 1;
+        end if;
+        couleurPrec := piece.couleur;
+      end loop;
+    else
+      if not end_of_file(f) then
+        read(f, piece);
       end if;
-      couleurPrec := piece.couleur;
-    end loop;
+    end if;
 
     while not end_of_file(f) and then couleurPrec /= rouge loop
       Grille(piece.ligne, piece.colonne) := piece.couleur;
       Pieces(piece.couleur) := true;
       couleurPrec := piece.couleur;
       read(f, piece);
+
     end loop;
+  end Configurer;
 
 
 
 
 
 	function Guerison(Grille : in TV_Grille) return boolean is
-   begin 
+   begin
     return (Grille(1,'A') = rouge) and (Grille(2,'B') = rouge);
    end Guerison;
 
