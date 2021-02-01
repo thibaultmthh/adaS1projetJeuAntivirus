@@ -41,7 +41,7 @@ begin
             couleurANSI3 := "243";
         end if;
     
-        if couleurANSI3 = "   " and couleurANSI2 = "  "and then
+        if couleurANSI3 = "   " and couleurANSI2 = "  " then
             Put (ESC & "[48:5:" & couleurANSI2 & "m   " & ESC & "[0m");
         else
             Put (ESC & "[48:5:" & couleurANSI3 & "m   " & ESC & "[0m");
