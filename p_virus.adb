@@ -79,7 +79,7 @@ package body p_virus is
 
 
 
-  function Possible(Grille : in TV_Grille; coul : in T_CoulP; Dir : in T_Direction) is
+  function Possible(Grille : in TV_Grille; coul : in T_CoulP; Dir : in T_Direction) return boolean is
 
   begin
 
