@@ -90,7 +90,7 @@ package body p_virus is
 
         if Dir = bg then
 
-          if i /= T_lig'first and j /= T_col'first then --Check si c'est pas les premiers pour sortir de la range
+          if i /= T_lig'first and then j /= T_col'first then --Check si c'est pas les premiers pour sortir de la range
 
             if Grille(i-1, j-1) /= vide then
               return false;
@@ -102,7 +102,7 @@ package body p_virus is
 
 
         elsif Dir = hg then
-          if i /= T_lig'last and j /= T_col'first then 
+          if i /= T_lig'last and then j /= T_col'first then 
           
             if Grille(i+1, j-1) /= vide then
               return false;
@@ -114,7 +114,7 @@ package body p_virus is
 
 
         elsif Dir = bd then
-          if i /= T_lig'first and j /= T_col'last then 
+          if i /= T_lig'first and then j /= T_col'last then 
           
             if Grille(i-1, j+1) /= vide then
               return false;
@@ -128,7 +128,7 @@ package body p_virus is
         elsif Dir = hd then
           if i /= T_lig'last and then j /= T_col'last then 
           
-            if Grille(i+1, j-1) /= vide then
+            if Grille(i+1, j+1) /= vide then
               return false;
             end if;
 
