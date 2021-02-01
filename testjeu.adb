@@ -14,7 +14,6 @@ procedure testjeu is
   nombre : boolean:=false;
   rejouer : string(1..2);
   stop : boolean :=false;
-  possibilite : boolean;
   dir : T_direction;
   couleur : T_coul;
   compteur_mouvement:integer:=0;
@@ -36,6 +35,7 @@ begin
     result := system ("firefox https://www.youtube.com/watch?v=dQw4w9WgXcQ");
   ---
     open(f, in_file, "Defis.bin");
+  while not stop loop
     InitPartie(Grille, Pieces);
 
     while not nombre loop
@@ -90,4 +90,5 @@ begin
         ecrire_ligne("écris 'y' si tu veux rejouer ou 'n' si tu ne veux pas");
       end if;
     end if;
+  end loop;
 end testjeu;
