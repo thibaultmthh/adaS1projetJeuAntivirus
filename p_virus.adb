@@ -75,7 +75,7 @@ package body p_virus is
    end Guerison;
 
 	procedure MajGrille(Grille : in out TV_Grille; coul : in T_CoulP; Dir : in T_Direction) is
-  tampon: TV_Grille := Grille; -- Je sais plus pk il le faut mais pour eviter de deplacer des truc deja deplacés je crois
+  tampon: TV_Grille := Grille; -- Je sais plus pk il le faut, mais pour eviter de deplacer des truc deja deplacés je crois
   begin 
   for y in T_lig'range loop
       for x in T_col'range loop
