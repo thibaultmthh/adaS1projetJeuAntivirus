@@ -18,5 +18,10 @@ package body p_virus is
     
   end InitPartie;
 
+  procedure PosPiece(Grille : in TV_Grille; coul : in T_coulP) is
+	-- {} => {la position de la pièce de couleur coul a été affichée, si coul appartient à Grille:
+	--				exemple : ROUGE : F4 - G5}
+  begin
+  end PosPiece;
 
 end p_virus;
