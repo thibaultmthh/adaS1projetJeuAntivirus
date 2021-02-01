@@ -56,7 +56,7 @@ package p_virus is
 	-- {coul /= blanc}
 	--	=> {resultat = vrai si la pièce de couleur coul peut être déplacée dans la direction Dir}
 
-	 procedure MajGrille(Grille : in out TV_Grille; coul : in T_CoulP; Dir : in T_Direction);
+	 --procedure MajGrille(Grille : in out TV_Grille; coul : in T_CoulP; Dir : in T_Direction);
 	-- {la pièce de couleur coul peut être déplacée dans la direction Dir}
 	--	=> {Grille a été mis à jour suite au deplacement}
 
