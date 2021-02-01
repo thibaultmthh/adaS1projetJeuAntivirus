@@ -126,7 +126,7 @@ package body p_virus is
 
 
         elsif Dir = hd then
-          if i /= T_lig'last and j /= T_col'last then 
+          if i /= T_lig'last and then j /= T_col'last then 
           
             if Grille(i+1, j-1) /= vide then
               return false;
