@@ -25,7 +25,7 @@ package body p_virus is
 
     numDefActu : natural := 1;
     piece: TR_ElemP;
-    couleurPrec : T_Coul := vide;
+
     compteurRouge : natural := 0;
 
   begin
@@ -36,16 +36,24 @@ package body p_virus is
       while not end_of_file(f) and then numDefActu < num loop
 
         read(f,piece);
-        if couleurPrec = rouge then
-          numDefActu := numDefActu + 1;
+    
+        if piece.couleur = rouge then
+          compteurRouge := compteurRouge + 1;
+          if compteurRouge = 2 then
+            numDefActu := numDefActu  +1;
+            compteurRouge := 0;
+          end if;
+
         end if;
-        couleurPrec := piece.couleur;
+
+
       end loop;
     else
       if not end_of_file(f) then
         read(f, piece);
       end if;
     end if;
+    compteurRouge := 0;
 
     while not end_of_file(f) and then compteurRouge /= 2 loop
       Grille(piece.ligne, piece.colonne) := piece.couleur;
