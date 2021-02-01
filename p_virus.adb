@@ -36,37 +36,34 @@ package body p_virus is
 
     reset(f, in_file); --Reset la lecture du fichier pour revenir au début
 
-    if num > 1 then
-      while not end_of_file(f) and then numDefActu < num loop --Parcours tout le fichier
 
-        read(f,piece);
-    
-        if piece.couleur = rouge then             --Compte les rouges
-          compteurRouge := compteurRouge + 1;
-          if compteurRouge = 2 then               --Si on a tout les rouges, on change de map
-            numDefActu := numDefActu  +1;
-            compteurRouge := 0;                   --Et on reset le compteur de rouge
-          end if;
+    while not end_of_file(f) and then numDefActu < num loop --Parcours tout le fichier
 
+      read(f,piece);
+      
+      if piece.couleur = rouge then             --Compte les rouges
+        compteurRouge := compteurRouge + 1;
+        if compteurRouge = 2 then               --Si on a tout les rouges, on change de map
+          numDefActu := numDefActu  +1;
+          compteurRouge := 0;                   --Et on reset le compteur de rouge
         end if;
 
-
-      end loop;
-    else
-      if not end_of_file(f) then
-        read(f, piece);
       end if;
-    end if;
+
+
+    end loop;
+
     compteurRouge := 0;
 
     while not end_of_file(f) and then compteurRouge /= 2 loop
+      read(f, piece);
       Grille(piece.ligne, piece.colonne) := piece.couleur;    --Save la couleur sur la map
       Pieces(piece.couleur) := true;                          --Enregistre que la couleur a été utilisée
 
       if piece.couleur = rouge then
         compteurRouge := compteurRouge  + 1;
       end if;
-      read(f, piece);
+
 
     end loop;
   end Configurer;
@@ -99,7 +96,7 @@ package body p_virus is
 
 	procedure MajGrille(Grille : in out TV_Grille; coul : in T_CoulP; Dir : in T_Direction) is
   tampon: TV_Grille := Grille; -- Je sais plus pk il le faut, mais pour eviter de deplacer des truc deja deplacés je crois
-  begin 
+  begin
   for y in T_lig'range loop
       for x in T_col'range loop
         if Grille(y, x) = coul then
