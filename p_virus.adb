@@ -55,7 +55,19 @@ package body p_virus is
     end loop;
   end Configurer;
 
+  procedure PosPiece(Grille : in TV_Grille; coul : in T_coulP) is
+    -- {} => {la position de la pièce de couleur coul a été affichée, si coul appartient à Grille:
+    --                exemple : ROUGE : F4 - G5}
 
+  begin
+    for ligne in T_lig'range loop
+      for colo in T_col'range loop
+        if grille(ligne,colo)=coul then
+          ecrire_ligne("il y a cette couleur à la ligne" & image(ligne) & "et la colonne"  & colo);
+        end if;
+      end loop;
+    end loop;
+  end PosPiece;
 
 	function Guerison(Grille : in TV_Grille) return boolean is
    begin
@@ -86,4 +98,77 @@ package body p_virus is
       end loop;
     end loop;
   end MajGrille;
+
+
+
+  function Possible(Grille : in TV_Grille; coul : in T_CoulP; Dir : in T_Direction) return boolean is
+
+  begin
+
+  for i in T_lig'range loop
+    for j in T_col'range loop
+
+      if Grille(i,j) = coul then
+
+        if Dir = bg then
+
+          if i /= T_lig'first and then j /= T_col'first then --Check si c'est pas les premiers pour sortir de la range
+
+            if Grille(i-1, j-1) /= vide then
+              return false;
+            end if;
+
+          else 
+            return false; --Si on sort de la range, on peut pas déplacer donc false
+          end if;
+
+
+        elsif Dir = hg then
+          if i /= T_lig'last and then j /= T_col'first then 
+          
+            if Grille(i+1, j-1) /= vide then
+              return false;
+            end if;
+
+          else 
+            return false; --Si on sort de la range, on peut pas déplacer donc false
+          end if;
+
+
+        elsif Dir = bd then
+          if i /= T_lig'first and then j /= T_col'last then 
+          
+            if Grille(i-1, j+1) /= vide then
+              return false;
+            end if;
+
+          else 
+            return false; --Si on sort de la range, on peut pas déplacer donc false
+          end if;
+
+
+        elsif Dir = hd then
+          if i /= T_lig'last and then j /= T_col'last then 
+          
+            if Grille(i+1, j+1) /= vide then
+              return false;
+            end if;
+
+          else 
+            return false; --Si on sort de la range, on peut pas déplacer donc false
+          end if;
+
+
+        end if;
+      end if;
+
+    end loop;
+  end loop;
+
+  --Si on a verifié les mouvement et que y'a rien qui bloque, on return true
+  return true;
+
+  end Possible;
+
+
 end p_virus;

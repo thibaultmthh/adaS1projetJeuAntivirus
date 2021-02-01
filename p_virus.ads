@@ -46,13 +46,13 @@ package p_virus is
 	--					Pieces a été mis à jour en fonction des pièces de cette configuration}
 
 	-- pour tester une configuration initiale
-	-- procedure PosPiece(Grille : in TV_Grille; coul : in T_coulP);
+	 procedure PosPiece(Grille : in TV_Grille; coul : in T_coulP);
 	-- {} => {la position de la pièce de couleur coul a été affichée, si coul appartient à Grille:
 	--				exemple : ROUGE : F4 - G5}
 
 	--------------- Contrôle du jeu
 
-	-- function Possible(Grille : in TV_Grille; coul : in T_CoulP; Dir : in T_Direction) return boolean;
+	 --function Possible(Grille : in TV_Grille; coul : in T_CoulP; Dir : in T_Direction) return boolean;
 	-- {coul /= blanc}
 	--	=> {resultat = vrai si la pièce de couleur coul peut être déplacée dans la direction Dir}
 
