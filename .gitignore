@@ -1,2 +1,5 @@
 p_esiut.adb
 p_esiut.ads
+*.ali
+*.o
+tests.adb
