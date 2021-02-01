@@ -19,4 +19,10 @@ package body p_virus is
   end InitPartie;
 
 
+	function Guerison(Grille : in TV_Grille) return boolean is
+   begin 
+    return (Grille(1,'A') = rouge) and (Grille(2,'B') = rouge);
+   end Guerison;
+
+
 end p_virus;
