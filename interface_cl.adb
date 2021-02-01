@@ -1,23 +1,28 @@
 package body interface_CL is
 
 procedure AfficheCase(coul : in T_Coul) is
-couleurANSI: string(1..3);
+couleurANSI3: string(1..3) := "   ";
+couleurANSI2: string(1..2);
 begin
     case coul is
-        when rouge => couleurANSI:= "196";
-        when turquoise => couleurANSI := "51 ";
-        when orange => couleurANSI := "202";
-        when rose => couleurANSI := "105";
-        when marron => couleurANSI := "52 ";
-        when bleu => couleurANSI := "21 ";
-        when violet => couleurANSI := "129";
-        when vert => couleurANSI := "40 ";
-        when jaune => couleurANSI := "226";
-        when blanc => couleurANSI := "231";
-        when vide => couleurANSI := "16 ";
+        when rouge => couleurANSI3:= "196";
+        when orange => couleurANSI3 := "202";
+        when rose => couleurANSI3 := "105";
+        when violet => couleurANSI3 := "129";
+        when jaune => couleurANSI3 := "226";
+        when blanc => couleurANSI3 := "231";
+        when turquoise => couleurANSI2 := "51";
+        when marron => couleurANSI2 := "52";
+        when bleu => couleurANSI2 := "21";
+        when vert => couleurANSI2 := "40";
+        when vide => couleurANSI3 := "16";
     end case;
-    
-    Put (ESC & "[48:5:" & couleurANSI & "m  " & ESC & "[0m");
+   
+    if couleurANSI3 = "   " then
+        Put (ESC & "[48:5:" & couleurANSI2 & "m  " & ESC & "[0m");
+    else
+        Put (ESC & "[48:5:" & couleurANSI3 & "m  " & ESC & "[0m");
+    end if;
 end AfficheCase;
 
 procedure AfficheGrille(Grille : in TV_Grille) is
