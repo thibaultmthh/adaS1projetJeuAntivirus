@@ -2,7 +2,7 @@ package body interface_CL is
 
 procedure AfficheCase(coul : in T_Coul;x: in integer; y : in integer; colored: in boolean) is
 couleurANSI3: string(1..3) := "   ";
-couleurANSI2: string(1..2);
+couleurANSI2: string(1..2) := "  ";
 couleurText: string(1..3);
 begin
     if colored then 
@@ -41,7 +41,7 @@ begin
             couleurANSI3 := "243";
         end if;
     
-        if couleurANSI3 = "   " then
+        if couleurANSI3 = "   " and couleurANSI2 = "  "and then
             Put (ESC & "[48:5:" & couleurANSI2 & "m   " & ESC & "[0m");
         else
             Put (ESC & "[48:5:" & couleurANSI3 & "m   " & ESC & "[0m");
