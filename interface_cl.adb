@@ -42,9 +42,9 @@ begin
         end if;
     
         if couleurANSI3 = "   " then
-            Put (ESC & "[48:5:" & couleurANSI2 & "m  " & ESC & "[0m");
+            Put (ESC & "[48:5:" & couleurANSI2 & "m   " & ESC & "[0m");
         else
-            Put (ESC & "[48:5:" & couleurANSI3 & "m  " & ESC & "[0m");
+            Put (ESC & "[48:5:" & couleurANSI3 & "m   " & ESC & "[0m");
         end if;
 
     else 
@@ -65,6 +65,15 @@ begin
     end if;
 end AfficheCase;
 
+procedure AfficheBord(char : in character; colored: in boolean) is
+    begin 
+        if colored then
+            Put (ESC & "[48:5:102m   " & ESC & "[0m");
+        else
+        put(" "& char &" ");
+        end if;
+
+end AfficheBord; 
 
 
 
@@ -72,14 +81,33 @@ procedure AfficheGrille(Grille : in TV_Grille) is
     ncol : integer := 0;
     colored: boolean := true;
     begin 
+        AfficheBord('+',colored);
+
+        for y in T_col'range loop
+            AfficheBord('-',colored);
+        end loop;
+        AfficheBord('+',colored);
+        put_line(" ");
+
+
         for y in T_lig'range loop
+            AfficheBord('|', colored);
+
             for x in T_col'range loop
                 ncol := ncol+1;
                 AfficheCase(Grille(y,x), ncol, y, colored);
             end loop;
+            AfficheBord('|', colored);
+
             put_line(" ");
             ncol := 0;
         end loop;
+
+        AfficheBord('+',colored);
+        for y in T_col'range loop
+            AfficheBord('-', colored);
+        end loop;
+        AfficheBord('+',colored);
 
     end AfficheGrille;
 
