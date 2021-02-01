@@ -55,16 +55,16 @@ package body p_virus is
     end loop;
   end Configurer;
 
-procedure PosPiece(Grille : in TV_Grille; coul : in T_coulP);
+  procedure PosPiece(Grille : in TV_Grille; coul : in T_coulP) is
     -- {} => {la position de la pièce de couleur coul a été affichée, si coul appartient à Grille:
     --                exemple : ROUGE : F4 - G5}
 
   begin
     for ligne in T_lig'range loop
       for colo in T_col'range loop
-          if grille(ligne,colo)=coul then
-            ecrire_ligne("il y a cette couleur à" & image(ligne) & "colonne" & image(colo) & "colonne");
-          end if;
+        if grille(ligne,colo)=coul then
+          ecrire_ligne("il y a cette couleur à" & image(ligne) & "ligne" & colo & "colonne");
+        end if;
       end loop;
     end loop;
   end PosPiece;
