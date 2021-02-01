@@ -26,7 +26,11 @@ package body p_virus is
     numDefActu : natural := 1;
     piece: TR_ElemP;
 
-    compteurRouge : natural := 0;
+    compteurRouge : natural range 0..2 := 0;
+    -- ce compteur sera incrémenté a chaque fois que la
+    -- tête de lecture rencontrera une pièce rouge.
+    -- lorsque sa valeur vaut 2 on le réinitialise et on incremente le compteur de défis :
+    -- On est passé au défis suivant
 
   begin
 
@@ -36,7 +40,7 @@ package body p_virus is
       while not end_of_file(f) and then numDefActu < num loop
 
         read(f,piece);
-    
+
         if piece.couleur = rouge then
           compteurRouge := compteurRouge + 1;
           if compteurRouge = 2 then
