@@ -52,7 +52,7 @@ package p_virus is
 
 	--------------- Contrôle du jeu
 
-	 --function Possible(Grille : in TV_Grille; coul : in T_CoulP; Dir : in T_Direction) return boolean;
+	 function Possible(Grille : in TV_Grille; coul : in T_CoulP; Dir : in T_Direction) return boolean;
 	-- {coul /= blanc}
 	--	=> {resultat = vrai si la pièce de couleur coul peut être déplacée dans la direction Dir}
 
