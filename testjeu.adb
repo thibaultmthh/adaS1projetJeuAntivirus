@@ -8,6 +8,8 @@ procedure testjeu is
 begin
   InitPartie(Grille, Pieces);
   open(f, in_file, "Defis.bin");
+  ecrire_ligne("entrez un numéro de défi:");
   lire(numdef);
   Configurer(f, numdef, Grille, Pieces);
+  pospiece(grille,rouge);
 end testjeu;
