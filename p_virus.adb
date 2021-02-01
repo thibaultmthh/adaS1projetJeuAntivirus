@@ -6,7 +6,17 @@ package body p_virus is
 
   begin
 
-  end InitPartie;*
-  
+    for i in T_lig'range loop
+      for j in T_col'range loop
+        Grille(i, j) := vide;
+      end loop;
+    end loop;
+
+    for i in Pieces'range loop
+      pieces(i) := false;
+    end loop;
+    
+  end InitPartie;
+
 
 end p_virus;
