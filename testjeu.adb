@@ -7,12 +7,11 @@ procedure testjeu is
   Pieces :TV_Pieces;
   f : p_piece_io.file_type;
   nombre : boolean:=false;
-  rejouer : string(0..1);
+  rejouer : string(1..2);
   stop : boolean :=false;
 begin
-  while not stop loop
-    InitPartie(Grille, Pieces);
     open(f, in_file, "Defis.bin");
+    InitPartie(Grille, Pieces);
     while not nombre loop
       ecrire_ligne("entrez un numéro de défi entre 1 et 20:");
       lire(numdef);
@@ -44,5 +43,4 @@ begin
         ecrire_ligne("écris 'y' si tu veux rejouer ou 'n' si tu ne veux pas");
       end if;
     end if;
-  end loop;
 end testjeu;
