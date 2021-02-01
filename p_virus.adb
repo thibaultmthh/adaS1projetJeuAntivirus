@@ -18,6 +18,32 @@ package body p_virus is
 
   end InitPartie;
 
+  procedure Configurer(f : in out p_piece_io.file_type; num : in integer;
+                       Grille : in out TV_Grille; Pieces : in out TV_Pieces) is
+
+    numDefActu : natural := 1;
+    piece: TR_ElemP;
+    couleurPrec : T_Coul := vide;
+
+  begin
+
+    reset(f, in_file);
+    while not end_of_file(f) and then numDefActu < num loop
+      read(f,piece);
+      if couleurPrec = rouge then
+        numDefActu := numDefActu + 1;
+      end if;
+      couleurPrec := piece.couleur;
+    end loop;
+
+    while not end_of_file(f) and then couleurPrec /= rouge loop
+      Grille(piece.ligne, piece.colonne) := piece.couleur;
+      Pieces(piece.couleur) := true;
+      couleurPrec := piece.couleur;
+      read(f, piece);
+    end loop;
+
+
 
 
 
