@@ -25,49 +25,72 @@ package body p_virus is
 
     numDefActu : natural := 1;
     piece: TR_ElemP;
-    couleurPrec : T_Coul := vide;
+
+    compteurRouge : natural range 0..2 := 0;
+    -- ce compteur sera incrémenté a chaque fois que la
+    -- tête de lecture rencontrera une pièce rouge.
+    -- lorsque sa valeur vaut 2 on le réinitialise et on incremente le compteur de défis :
+    -- On est passé au défis suivant
 
   begin
 
-    reset(f, in_file);
+    reset(f, in_file); --Reset la lecture du fichier pour revenir au début
 
     if num > 1 then
-      while not end_of_file(f) and then numDefActu < num loop
+      while not end_of_file(f) and then numDefActu < num loop --Parcours tout le fichier
 
         read(f,piece);
-        if couleurPrec = rouge then
-          numDefActu := numDefActu + 1;
+    
+        if piece.couleur = rouge then             --Compte les rouges
+          compteurRouge := compteurRouge + 1;
+          if compteurRouge = 2 then               --Si on a tout les rouges, on change de map
+            numDefActu := numDefActu  +1;
+            compteurRouge := 0;                   --Et on reset le compteur de rouge
+          end if;
+
         end if;
-        couleurPrec := piece.couleur;
+
+
       end loop;
     else
       if not end_of_file(f) then
         read(f, piece);
       end if;
     end if;
+    compteurRouge := 0;
 
-    while not end_of_file(f) and then couleurPrec /= rouge loop
-      Grille(piece.ligne, piece.colonne) := piece.couleur;
-      Pieces(piece.couleur) := true;
-      couleurPrec := piece.couleur;
+    while not end_of_file(f) and then compteurRouge /= 2 loop 
+      Grille(piece.ligne, piece.colonne) := piece.couleur;    --Save la couleur sur la map
+      Pieces(piece.couleur) := true;                          --Enregistre que la couleur a été utilisée
+
+      if piece.couleur = rouge then
+        compteurRouge := compteurRouge  + 1;
+      end if;
       read(f, piece);
 
     end loop;
   end Configurer;
 
+
   procedure PosPiece(Grille : in TV_Grille; coul : in T_coulP) is
+
     -- {} => {la position de la pièce de couleur coul a été affichée, si coul appartient à Grille:
     --                exemple : ROUGE : F4 - G5}
 
   begin
     for ligne in T_lig'range loop
       for colo in T_col'range loop
+
+
         if grille(ligne,colo)=coul then
-          ecrire_ligne("il y a cette couleur à la ligne" & image(ligne) & "et la colonne"  & colo);
+          ecrire_ligne("il y a" & image(coul) & "couleur à" & image(ligne) & "ligne" & colo & "colonne");
         end if;
+
       end loop;
     end loop;
   end PosPiece;
+
+
 
 	function Guerison(Grille : in TV_Grille) return boolean is
    begin
@@ -81,9 +104,9 @@ package body p_virus is
       for x in T_col'range loop
         if Grille(y, x) = coul then
           Grille(y, x) := vide; -- vide l'ancienne case
-          case Dir is 
+          case Dir is
             when bg => tampon(T_lig'pred(y), T_col'pred(x)):= coul; -- pas besoin de faire de check suplementaires car le mouvement et cencé etre possible
-            when bd => tampon(T_lig'pred(y), T_col'succ(x)) := coul; 
+            when bd => tampon(T_lig'pred(y), T_col'succ(x)) := coul;
             when hg => tampon(T_lig'succ(y), T_col'pred(x)) := coul;
             when hd => tampon(T_lig'succ(y), T_col'succ(x)) := coul;
           end case;
@@ -118,43 +141,43 @@ package body p_virus is
               return false;
             end if;
 
-          else 
+          else
             return false; --Si on sort de la range, on peut pas déplacer donc false
           end if;
 
 
         elsif Dir = hg then
-          if i /= T_lig'last and then j /= T_col'first then 
-          
+          if i /= T_lig'last and then j /= T_col'first then
+
             if Grille(T_lig'succ(i), T_col'pred(j)) /= vide then
               return false;
             end if;
 
-          else 
+          else
             return false; --Si on sort de la range, on peut pas déplacer donc false
           end if;
 
 
         elsif Dir = bd then
-          if i /= T_lig'first and then j /= T_col'last then 
-          
+          if i /= T_lig'first and then j /= T_col'last then
+
             if Grille(T_lig'pred(i), T_col'succ(j)) /= vide then
               return false;
             end if;
 
-          else 
+          else
             return false; --Si on sort de la range, on peut pas déplacer donc false
           end if;
 
 
         elsif Dir = hd then
-          if i /= T_lig'last and then j /= T_col'last then 
-          
+          if i /= T_lig'last and then j /= T_col'last then
+
             if Grille(T_lig'succ(i), T_col'succ(j)) /= vide then
               return false;
             end if;
 
-          else 
+          else
             return false; --Si on sort de la range, on peut pas déplacer donc false
           end if;
 
