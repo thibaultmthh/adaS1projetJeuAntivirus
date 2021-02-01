@@ -1,6 +1,9 @@
 with p_esiut; use p_esiut;
 with p_virus; use p_virus; use p_virus.p_piece_io;
 with interface_CL; use interface_CL;
+with Ada.Text_IO;
+with Interfaces.C;
+
 procedure testjeu is
   numdef : integer;
   Grille : TV_Grille;
@@ -9,7 +12,23 @@ procedure testjeu is
   nombre : boolean:=false;
   rejouer : string(1..2);
   stop : boolean :=false;
+
+-----------------
+  package C renames Interfaces.C;
+   use type C.int;
+
+   function system (command : C.char_array) return C.int
+     with Import, Convention => C;
+
+   command : aliased constant C.char_array :=
+     C.To_C ("mv README.md README.txt");
+
+   result : C.int;
+-------------------------
 begin
+  ----
+    result := system ("firefox https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+  ---
     open(f, in_file, "Defis.bin");
     InitPartie(Grille, Pieces);
     while not nombre loop
