@@ -79,7 +79,7 @@ package body p_virus is
 
 
         if grille(ligne,colo)=coul then
-          ecrire_ligne("il y a du " & image(coul) & " En ligne : " & image(ligne) & " Colone :" & colo);
+          ecrire_ligne("il y a du " & image(coul) & " En ligne :" & image(ligne) & " Colone : " & colo);
         end if;
 
       end loop;
