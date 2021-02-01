@@ -7,6 +7,7 @@ procedure testjeu is
   Pieces :TV_Pieces;
   f : p_piece_io.file_type;
   nombre : boolean:=false;
+  coul : T_coul;
 begin
   InitPartie(Grille, Pieces);
   open(f, in_file, "Defis.bin");
@@ -20,5 +21,5 @@ begin
     end if;
   end loop;
   Configurer(f, numdef, Grille, Pieces);
-  pospiece(grille,jaune);
+  pospiece(grille,coul);
 end testjeu;
