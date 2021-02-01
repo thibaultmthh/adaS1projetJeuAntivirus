@@ -36,8 +36,8 @@ package p_virus is
 	-- {} => {Tous les éléments de Grille ont été initialisés avec la couleur VIDE, y compris les cases inutilisables
 	--				Tous les élements de Pieces ont été initialisés à false}
 
-	procedure Configurer(f : in out p_piece_io.file_type; num : in integer;
-											 Grille : in out TV_Grille; Pieces : in out TV_Pieces);
+	-- procedure Configurer(f : in out p_piece_io.file_type; num : in integer;
+	--										 Grille : in out TV_Grille; Pieces : in out TV_Pieces);
 	-- {f ouvert, non vide, num est un numéro de défi
 	--	dans f, un défi est représenté par une suite d'éléments :
 	--	* les éléments d'une même pièce (même couleur) sont stockés consécutivement
@@ -46,21 +46,21 @@ package p_virus is
 	--					Pieces a été mis à jour en fonction des pièces de cette configuration}
 
 	-- pour tester une configuration initiale
-	procedure PosPiece(Grille : in TV_Grille; coul : in T_coulP);
+	-- procedure PosPiece(Grille : in TV_Grille; coul : in T_coulP);
 	-- {} => {la position de la pièce de couleur coul a été affichée, si coul appartient à Grille:
 	--				exemple : ROUGE : F4 - G5}
 
 	--------------- Contrôle du jeu
 
-	function Possible(Grille : in TV_Grille; coul : in T_CoulP; Dir : in T_Direction) return boolean;
+	-- function Possible(Grille : in TV_Grille; coul : in T_CoulP; Dir : in T_Direction) return boolean;
 	-- {coul /= blanc}
 	--	=> {resultat = vrai si la pièce de couleur coul peut être déplacée dans la direction Dir}
 
-	procedure MajGrille(Grille : in out TV_Grille; coul : in T_CoulP; Dir : in T_Direction);
+	-- procedure MajGrille(Grille : in out TV_Grille; coul : in T_CoulP; Dir : in T_Direction);
 	-- {la pièce de couleur coul peut être déplacée dans la direction Dir}
 	--	=> {Grille a été mis à jour suite au deplacement}
 
-	function Guerison(Grille : in TV_Grille) return boolean;
+	 function Guerison(Grille : in TV_Grille) return boolean;
 	-- {} => {résultat = vrai si Grille(1,A) = Grille(2,B) = ROUGE}
 
 	--------------------------------------------------------------------------------------------
@@ -69,18 +69,18 @@ package p_virus is
 	-- Pour gérer les fichiers contenant les configs de la grille de jeu au fil d'une partie
 	package p_Grille_io is new sequential_io(TV_Grille); use p_Grille_io;
 	--------------------------------------------------------------------------------------------
-	function CaseGrille(lig : in T_lig; col : in T_col) return boolean;
+	-- function CaseGrille(lig : in T_lig; col : in T_col) return boolean;
 	--	{} => {résultat = vrai si la case en colonne col et en ligne lig est utisable}
 	--------------------------------------------------------------------------------------------
-	procedure InitMemoG(fg : in out p_grille_io.file_type; G : in out TV_Grille; nbelem : out positive);
+	-- procedure InitMemoG(fg : in out p_grille_io.file_type; G : in out TV_Grille; nbelem : out positive);
 	--{fg ouvert}  =>
 	--		{fg a été resetté en position d'écriture, G a été écrit dans fg, nbelem = 1}
 	--------------------------------------------------------------------------------------------
-	procedure AddMemoG(fg : in out p_grille_io.file_type; G : in out TV_Grille; nbelem : in out positive);
+	-- procedure AddMemoG(fg : in out p_grille_io.file_type; G : in out TV_Grille; nbelem : in out positive);
 	--{fg ouvert, nbelem est le nombre d'éléments de fg}  =>
 	--		{G a été ajouté en fin de fg, nbelem a été incrémenté}
 	--------------------------------------------------------------------------------------------
-	procedure SupMemoG(fg : in out p_grille_io.file_type; G : in out TV_Grille; nbelem : in out positive);
+	-- procedure SupMemoG(fg : in out p_grille_io.file_type; G : in out TV_Grille; nbelem : in out positive);
 	--{fg ouvert, nbelem est le nombre d'éléments de fg, nbelm > 1}  =>
 	--		{G = dernier élement de fg, le dernier élément de fg a été supprimé, nbelem est décrémenté}
 	--------------------------------------------------------------------------------------------
