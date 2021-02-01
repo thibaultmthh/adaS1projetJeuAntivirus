@@ -30,7 +30,6 @@ begin
         pospiece(grille,coul);
       end if;
     end loop;
-
     if Guerison(grille) then
       ecrire_ligne("TU AS GAGNE GG !! veux-tu rejouer? (y ou n)");
       lire(rejouer);
