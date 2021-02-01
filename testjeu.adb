@@ -20,5 +20,9 @@ begin
     end if;
   end loop;
   Configurer(f, numdef, Grille, Pieces);
-  pospiece(grille,jaune);
+  for coul in T_coul'range loop
+    if coul/=vide then
+      pospiece(grille,coul);
+    end if;
+  end loop;
 end testjeu;
