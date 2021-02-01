@@ -75,15 +75,15 @@ package body p_virus is
    end Guerison;
 
 	procedure MajGrille(Grille : in out TV_Grille; coul : in T_CoulP; Dir : in T_Direction) is
-  tampon: TV_Grille := Grille;
+  tampon: TV_Grille := Grille; -- Je sais plus pk il le faut mais pour eviter de deplacer des truc deja deplacés je crois
   begin 
   for y in T_lig'range loop
       for x in T_col'range loop
         if Grille(y, x) = coul then
-          Grille(y, x) := vide;
+          Grille(y, x) := vide; -- vide l'ancienne case
           case Dir is 
-            when bg => tampon(T_lig'pred(y), T_col'pred(x)):= coul;
-            when bd => tampon(T_lig'pred(y), T_col'succ(x)) := coul;
+            when bg => tampon(T_lig'pred(y), T_col'pred(x)):= coul; -- pas besoin de faire de check suplementaires car le mouvement et cencé etre possible
+            when bd => tampon(T_lig'pred(y), T_col'succ(x)) := coul; 
             when hg => tampon(T_lig'succ(y), T_col'pred(x)) := coul;
             when hd => tampon(T_lig'succ(y), T_col'succ(x)) := coul;
           end case;
@@ -93,7 +93,7 @@ package body p_virus is
     for y in T_lig'range loop
       for x in T_col'range loop
         if tampon(y, x) = coul then
-          Grille(y,x) := coul;
+          Grille(y,x) := coul; -- copie les nouveau deplacement dans la grille
         end if;
       end loop;
     end loop;
