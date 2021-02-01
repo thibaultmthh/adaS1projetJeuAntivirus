@@ -3,6 +3,6 @@ p_esiut.ads
 *.ali
 *.o
 tests.adb
-testjeu
-tests
-testjeu
+./testjeu
+./tests
+./testjeu
