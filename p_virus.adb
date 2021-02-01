@@ -40,13 +40,8 @@ package body p_virus is
       while not end_of_file(f) and then numDefActu < num loop --Parcours tout le fichier
 
         read(f,piece);
-<<<<<<< HEAD
-
-        if piece.couleur = rouge then
-=======
     
         if piece.couleur = rouge then             --Compte les rouges
->>>>>>> 6a615ced8597ed489b9a33f617c47430bed9b75b
           compteurRouge := compteurRouge + 1;
           if compteurRouge = 2 then               --Si on a tout les rouges, on change de map
             numDefActu := numDefActu  +1;
