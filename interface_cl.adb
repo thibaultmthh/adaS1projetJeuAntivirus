@@ -15,7 +15,7 @@ begin
         when marron => couleurANSI2 := "52";
         when bleu => couleurANSI2 := "21";
         when vert => couleurANSI2 := "40";
-        when vide => couleurANSI3 := "16";
+        when vide => couleurANSI2 := "16";
     end case;
    
     if couleurANSI3 = "   " then
