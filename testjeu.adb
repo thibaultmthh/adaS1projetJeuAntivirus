@@ -17,7 +17,6 @@ procedure testjeu is
   dir : T_direction;
   couleur : T_coul;
   compteur_mouvement:integer:=0;
-
 -----------------
   package C renames Interfaces.C;
    use type C.int;
@@ -58,37 +57,51 @@ begin
     end loop;
 
     loop
-      ecrire_ligne("Vous voulez bouger dans quelle direction? Tapez (bg, hg, bd ou hd)");
-      lire(dir);
-      ecrire_ligne("quel couleur?");
-      lire(couleur);
-      if couleur=blanc then
-        ecrire_ligne("on ne peut pas bouger les blancs");
-      end if;
-      if possible(grille, couleur, dir) then
-        MajGrille(Grille, couleur, Dir);
-        AfficheGrille(grille);
-        compteur_mouvement := compteur_mouvement + 1;
-      else
-        ecrire("vous ne pouvez pas bouer vers ");
-        ecrire(dir);ecrire(" ! ");a_la_ligne;
-        ecrire(" ressayez une autre direction");
-        AfficheGrille(grille);
-      end if;
+      loop
+        ecrire_ligne("quel couleur?");
+        lire(couleur);
+        if couleur=blanc then
+          ecrire_ligne("on ne peut pas bouger les blancs");
+        elsif not couleurPresente(grille,couleur) then
+          ecrire_ligne("tu essais de jouer avec une couleur pas en jeu essai une autre couleur");
+        else
+          exit;
+        end if;
+      end loop;
+      loop
+        ecrire_ligne("Vous voulez bouger dans quelle direction? Tapez (bg, hg, bd ou hd)");
+        lire(dir);
+        if possible(grille, couleur, dir) then
+          ecrire_ligne("déplacement effectué");
+          MajGrille(Grille, couleur, Dir);
+          AfficheGrille(grille);
+          compteur_mouvement := compteur_mouvement + 1;
+          exit;
+        else
+          ecrire("vous ne pouvez pas bouger vers ");
+          ecrire(dir);ecrire(" ! ");a_la_ligne;
+          ecrire(" ressayez une autre direction");
+          AfficheGrille(grille);
+        end if;
+      end loop;
       exit when guerison(grille);
     end loop;
   
-    if Guerison(grille) then
-      ecrire_ligne("TU AS GAGNE GG !! veux-tu rejouer? (y ou n)");
-      lire(rejouer);
-      if rejouer="y" then
-        ecrire_ligne("c'est reparti");
-      elsif rejouer="n" then
-        ecrire_ligne("j'espère que tu reviendra bientôt");
-        stop:=true;
-      else
-        ecrire_ligne("écris 'y' si tu veux rejouer ou 'n' si tu ne veux pas");
+    loop
+      if Guerison(grille) then
+        ecrire_ligne("TU AS GAGNE GG !! veux-tu rejouer? (y ou n)");
+        lire(rejouer);
+        if rejouer="y" then
+          ecrire_ligne("c'est reparti");
+          exit;
+        elsif rejouer="n" then
+          ecrire_ligne("j'espère que tu reviendra bientôt");
+          stop:=true;
+          exit;
+        else
+          ecrire_ligne("écris 'y' si tu veux rejouer ou 'n' si tu ne veux pas");
+        end if;
       end if;
-    end if;
+    end loop;
   end loop;
 end testjeu;

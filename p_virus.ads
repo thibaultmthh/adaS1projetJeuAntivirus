@@ -84,5 +84,5 @@ package p_virus is
 	--{fg ouvert, nbelem est le nombre d'éléments de fg, nbelm > 1}  =>
 	--		{G = dernier élement de fg, le dernier élément de fg a été supprimé, nbelem est décrémenté}
 	--------------------------------------------------------------------------------------------
-
+	function couleurPresente(grille: TV_Grille; coul :in T_coul) return boolean;
 end p_virus;
