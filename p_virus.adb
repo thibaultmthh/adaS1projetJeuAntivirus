@@ -189,5 +189,19 @@ package body p_virus is
 
   end Possible;
 
+  function couleurPresente(grille: TV_Grille; coul :in T_coul) return boolean is
+    rep : boolean := false;
+  begin
+    for y in T_col'range loop
+        for x in T_lig'range loop
+          if Grille(x,y) = coul then
+            rep := true;
+          end if;
+          exit when rep;
+        end loop;
+        exit when rep;
+    end loop;
+  return rep;
+end couleurPresente;
 
 end p_virus;
