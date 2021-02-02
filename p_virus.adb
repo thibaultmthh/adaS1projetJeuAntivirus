@@ -147,9 +147,6 @@ package body p_virus is
 
       else  -- Si on a trouvé la piece;
 
-
-
-
         loop
           possibleDansGrille := true;
 
@@ -196,7 +193,7 @@ package body p_virus is
             end if;
 
 
-            
+
             nbpieceteste := nbpieceteste + 1;
           end if;
           exit when not possibleDansGrille

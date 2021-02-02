@@ -6,4 +6,7 @@ package p_vuetxt is
 
     procedure AfficheGrille (Grille : in TV_Grille);
 
+    procedure NettoyerTerminal;
+    --{} => {Le terminal est vide}
+
 end p_vuetxt;

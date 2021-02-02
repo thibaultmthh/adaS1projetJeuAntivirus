@@ -138,4 +138,9 @@ package body p_vuetxt is
 
     end AfficheGrille;
 
+    procedure NettoyerTerminal is
+    begin
+      put(ESC & "[2J");
+    end;
+
 end p_vuetxt;
