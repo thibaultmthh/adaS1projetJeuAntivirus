@@ -46,6 +46,7 @@ package p_virus is
 	--					Pieces a été mis à jour en fonction des pièces de cette configuration}
 
 	-- pour tester une configuration initiale
+
 	 procedure PosPiece(Grille : in TV_Grille; coul : in T_coulP);
 	-- {} => {la position de la pièce de couleur coul a été affichée, si coul appartient à Grille:
 	--				exemple : ROUGE : F4 - G5}
@@ -62,6 +63,8 @@ package p_virus is
 
 	 function Guerison(Grille : in TV_Grille) return boolean;
 	-- {} => {résultat = vrai si Grille(1,A) = Grille(2,B) = ROUGE}
+
+
 
 	--------------------------------------------------------------------------------------------
 	-- AJOUTS pour gestion partie et gestion annulations en vue graphique
@@ -85,4 +88,5 @@ package p_virus is
 	--		{G = dernier élement de fg, le dernier élément de fg a été supprimé, nbelem est décrémenté}
 	--------------------------------------------------------------------------------------------
 	function couleurPresente(grille: TV_Grille; coul :in T_coul) return boolean;
+	--{} => {vrai si couleur dans grille}
 end p_virus;

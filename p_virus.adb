@@ -130,87 +130,122 @@ package body p_virus is
 
 
   function Possible(Grille : in TV_Grille; coul : in T_CoulP; Dir : in T_Direction) return boolean is
+    possibleDansGrille : boolean;
+    x : T_lig := T_lig'first;
+    y : T_col := T_col'first;
 
+    xDest : T_lig := T_lig'first;
+    yDest : T_col := T_col'first;
+
+    TAILLEPIECEMAX : integer := 3;
+    nbpieceteste : integer := 0;
   begin
+      -- On vérifie que la couleur est dans la grille
+       --On retourne faux si la couleur n'est pas dans la grille
+      if not couleurPresente(Grille, coul) then
+         return false;
 
-  for i in T_lig'range loop
-    for j in T_col'range loop
+      else  -- Si on a trouvé la piece;
 
-      if Grille(i,j) = coul then
 
-        if Dir = bg then
+      -- On se déplace dans la grille à la recherche de la prochaine pièce de la couleur coul
 
-          if i /= T_lig'first and then j /= T_col'first then --Check si c'est pas les premiers pour sortir de la range
 
-            if Grille(T_lig'pred(i), T_col'pred(j)) /= vide then
-              return false;
+
+
+        loop
+          possibleDansGrille := true;
+
+          loop
+            if x = T_lig'last then  -- On change de colone si on est arrivé au bout de celle ci
+              x := T_lig'first;
+              y := T_col'succ(y);
+            else
+              x := T_lig'succ(x);
             end if;
+          exit when Grille(x,y) = coul or (x = T_lig'last and y = T_col'last);
+          end loop;
 
-          else
-            return false; --Si on sort de la range, on peut pas déplacer donc false
+
+          if dir = bg or dir = hg  then    --Si direction contient gauche
+            if y = T_Col'first then
+              possibleDansGrille := false; --On ne peut pas déplacer vers la gauche
+            else
+              yDest := T_col'pred(y);
+            end if;
+            ecrire_ligne(y);
+          else                                  --Si direction contient droite
+            if y = T_Col'last then
+              possibleDansGrille := false; --On ne peut pas déplacer vers la droite
+            else
+              yDest := T_col'succ(y);
+            end if;
           end if;
 
 
-        elsif Dir = hg then
-          if i /= T_lig'last and then j /= T_col'first then
-
-            if Grille(T_lig'succ(i), T_col'pred(j)) /= vide then
-              return false;
+          if dir = bg or dir = bd then    --Si direction contient bas
+            if x = T_lig'last then
+              possibleDansGrille := false; --On ne peut pas déplacer vers la bas
+            else
+              xDest := T_lig'succ(x);
             end if;
-
-          else
-            return false; --Si on sort de la range, on peut pas déplacer donc false
+          else                                  --Si direction contient haut
+            if x = T_lig'first then
+              possibleDansGrille := false; --On ne peut pas déplacer vers la haut
+            else
+              xDest := T_lig'pred(x);
+            end if;
           end if;
 
 
-        elsif Dir = bd then
-          if i /= T_lig'first and then j /= T_col'last then
 
-            if Grille(T_lig'pred(i), T_col'succ(j)) /= vide then
-              return false;
-            end if;
+          nbpieceteste := nbpieceteste + 1;
+          ecrire(xDest);ecrire(yDest);ecrire("  ");
+          ecrire_ligne(T_coul'image(Grille(xDest, yDest)));
 
-          else
-            return false; --Si on sort de la range, on peut pas déplacer donc false
-          end if;
-
-
-        elsif Dir = hd then
-          if i /= T_lig'last and then j /= T_col'last then
-
-            if Grille(T_lig'succ(i), T_col'succ(j)) /= vide then
-              return false;
-            end if;
-
-          else
-            return false; --Si on sort de la range, on peut pas déplacer donc false
-          end if;
+          exit when not possibleDansGrille
+          or (x = T_lig'last and y = T_col'last)
+          or nbpieceteste = TAILLEPIECEMAX
+          or (Grille(xDest,yDest) /= coul and Grille(xDest,yDest) /= vide);
+          -- On sort si :
+          -- 1 - On ne peut pas bouger la piece en x,y vers xDest, yDest
+          -- 2 - On est arrivé au bout de la grille avec x, y
+          -- 3 - On a deja essayé de déplacer 3 piece (TAILLEPIECEMAX)
+          -- 4 - Si la couleur de la piece de destination n'est ni vide ni de la couleur coul
 
 
-        end if;
+
+        end loop;
       end if;
 
-    end loop;
-  end loop;
 
-  --Si on a verifié les mouvement et que y'a rien qui bloque, on return true
-  return true;
+
+      return possibleDansGrille and
+      (Grille(xDest,yDest) = coul or Grille(xDest,yDest) = vide);
+      -- On retourne vrai si la dernière piece testé a un destination qui :
+      -- 1 - est dans la Grille
+      -- 2 - a pour couleur vide ou coul
+
 
   end Possible;
 
   function couleurPresente(grille: TV_Grille; coul :in T_coul) return boolean is
-    rep : boolean := false;
+    x : T_lig := T_lig'first;
+    y : T_col := T_col'first;
   begin
-    for y in T_col'range loop
-        for x in T_lig'range loop
-          if Grille(x,y) = coul then
-            rep := true;
-          end if;
-          exit when rep;
-        end loop;
-        exit when rep;
+    loop
+    exit when Grille(x,y) = coul or (x = T_lig'last and y = T_col'last);
+
+    if x = T_lig'last then  -- On change de colone si on est arrivé au bout de celle ci
+      x := T_lig'first;
+      y := T_col'succ(y);
+    else
+      x := T_lig'succ(x);
+    end if;
     end loop;
-  return rep;
+
+    return (Grille(x,y) = coul);
+
 end couleurPresente;
 
 end p_virus;
