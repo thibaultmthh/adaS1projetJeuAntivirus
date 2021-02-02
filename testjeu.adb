@@ -78,10 +78,10 @@ begin
       if Guerison(grille) then
         ecrire_ligne("TU AS GAGNE en" & image(compteur_mouvement) &" GG !! veux-tu rejouer? (y ou n)");
         lire(rejouer);
-        if rejouer="y" then
+        if rejouer='y' then
           ecrire_ligne("c'est reparti");
           exit;
-        elsif rejouer="n" then
+        elsif rejouer='n' then
           ecrire_ligne("j'espère que tu reviendra bientôt");
           stop:=true;
           exit;
