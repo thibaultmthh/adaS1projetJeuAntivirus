@@ -21,6 +21,7 @@ begin
 
     open(f, in_file, "Defis.bin");
   while not stop loop
+    nombre:=false;
     compteur_mouvement:=0;
     InitPartie(Grille, Pieces);
 
