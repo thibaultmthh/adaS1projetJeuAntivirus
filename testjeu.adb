@@ -44,7 +44,7 @@ begin
 
     loop
       loop
-        ecrire_ligne("quel couleur voulez-vous déplacer?");
+        ecrire_ligne("quel couleur veux- tu bouger?");
         lire(couleur);
         if couleur=blanc then
           ecrire_ligne("on ne peut pas bouger les blancs");
@@ -75,7 +75,7 @@ begin
 
     loop
       if Guerison(grille) then
-        ecrire_ligne("TU AS GAGNE GG !! veux-tu rejouer? (y ou n)");
+        ecrire_ligne("TU AS GAGNE en" & image(compteur_mouvement) &" GG !! veux-tu rejouer? (y ou n)");
         lire(rejouer);
         if rejouer="y" then
           ecrire_ligne("c'est reparti");
