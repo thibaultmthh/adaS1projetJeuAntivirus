@@ -138,4 +138,79 @@ package body p_vuetxt is
 
     end AfficheGrille;
 
+-- Fin partie graphisme
+
+    procedure InputDefi (numdef : out Integer; cancel : out Boolean) is
+
+    begin
+        loop
+            ECRIRE_LIGNE ("Entrez un numéro de défi entre 1 et 20:");
+            LIRE (numdef);
+            if numdef < 1 or numdef > 20 then
+                ECRIRE_LIGNE ("Numéro incorect, doit être entre 1 et 20");
+            else
+                exit;
+            end if;
+        end loop;
+    end InputDefi;
+
+    procedure InputCouleur
+       (couleur : out T_Coul; Pieces : in TV_Pieces; cancel : out Boolean)
+    is
+    begin
+        loop
+            ECRIRE_LIGNE ("Quel couleur veux- tu bouger?");
+            LIRE (couleur);
+            if couleur = blanc then
+                ECRIRE_LIGNE ("On ne peut pas bouger les blancs.");
+            elsif not Pieces (couleur) then
+                ECRIRE_LIGNE ("Couleur non presente sur le plateau, reesaye.");
+            else
+                exit;
+            end if;
+        end loop;
+    end InputCouleur;
+
+    procedure InputDirection
+       (dir    : out T_Direction; couleur : in T_CoulP; Grille : in TV_Grille;
+        cancel : out Boolean)
+    is
+    begin
+        loop
+            ECRIRE_LIGNE
+               ("Vous voulez bouger dans quelle direction? Tapez (bg, hg, bd ou hd)");
+            LIRE (dir);
+            exit when Possible (Grille, couleur, dir);
+            ECRIRE ("vous ne pouvez pas bouger vers ");
+            ECRIRE (dir);
+            ECRIRE (" ! ");
+            A_LA_LIGNE;
+            ECRIRE_LIGNE (" ressayez une autre direction");
+            AfficheGrille (Grille);
+        end loop;
+    end InputDirection;
+
+    function InputReplay return Boolean is
+    -- Return True quand l'utilisateur veut rejouer, false quand il ne veut pas
+        rejouer : Character;
+        rep     : Boolean;
+    begin
+        loop
+            ECRIRE_LIGNE (" GG !! veux-tu rejouer? (y ou n)");
+            LIRE (rejouer);
+            if rejouer = 'y' then
+                ECRIRE_LIGNE ("c'est reparti");
+                rep := True;
+                exit;
+            elsif rejouer = 'n' then
+                ECRIRE_LIGNE ("Fin du jeu, a bientot.");
+                rep := False;
+                exit;
+            else
+                ECRIRE_LIGNE ("Invalide, reponçe attendue : y ou n");
+            end if;
+        end loop;
+        return rep;
+    end InputReplay;
+
 end p_vuetxt;

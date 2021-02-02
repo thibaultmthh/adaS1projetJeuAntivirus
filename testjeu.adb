@@ -16,6 +16,7 @@ procedure testjeu is
   dir                : T_Direction;
   couleur            : T_Coul;
   compteur_mouvement : Integer := 0;
+  cancel             : Boolean;
 
 begin
 
@@ -25,15 +26,7 @@ begin
     compteur_mouvement := 0;
     InitPartie (Grille, Pieces);
 
-    while not nombre loop
-      ECRIRE_LIGNE ("entrez un numéro de défi entre 1 et 20:");
-      LIRE (numdef);
-      if numdef < 1 or numdef > 20 then
-        ECRIRE_LIGNE ("mettre un nombre entre 1 et 20");
-      else
-        nombre := True;
-      end if;
-    end loop;
+    InputDefi (numdef, cancel);
 
     Configurer (f, numdef, Grille, Pieces);
     AfficheGrille (Grille);
@@ -45,37 +38,11 @@ begin
     end loop;
 
     loop
-      loop
-        ECRIRE_LIGNE ("quel couleur veux- tu bouger?");
-        LIRE (couleur);
-        if couleur = blanc then
-          ECRIRE_LIGNE ("on ne peut pas bouger les blancs");
-        elsif not couleurPresente (Grille, couleur) then
-          ECRIRE_LIGNE
-           ("tu essais de jouer avec une couleur pas en jeu essai une autre couleur");
-        else
-          exit;
-        end if;
-      end loop;
-      loop
-        ECRIRE_LIGNE
-         ("Vous voulez bouger dans quelle direction? Tapez (bg, hg, bd ou hd)");
-        LIRE (dir);
-        if Possible (Grille, couleur, dir) then
-          ECRIRE_LIGNE ("déplacement effectué");
-          MajGrille (Grille, couleur, dir);
-          AfficheGrille (Grille);
-          compteur_mouvement := compteur_mouvement + 1;
-          exit;
-        else
-          ECRIRE ("vous ne pouvez pas bouger vers ");
-          ECRIRE (dir);
-          ECRIRE (" ! ");
-          A_LA_LIGNE;
-          ECRIRE_LIGNE (" ressayez une autre direction");
-          AfficheGrille (Grille);
-        end if;
-      end loop;
+      InputCouleur (couleur, Pieces, cancel);
+      InputDirection (dir, couleur, Grille, cancel);
+      MajGrille (Grille, couleur, dir);
+      AfficheGrille (Grille);
+      compteur_mouvement := compteur_mouvement + 1;
       exit when Guerison (Grille);
     end loop;
 
