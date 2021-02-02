@@ -1,7 +1,8 @@
 with Text_IO;                use Text_IO;
 with Ada.Characters.Latin_1; use Ada.Characters.Latin_1;
-with p_virus;                use p_virus; use p_virus.p_joueur_io;
-with p_esiut;                use p_esiut;
+with p_virus;                use p_virus;
+use p_virus.p_joueur_io;
+with p_esiut; use p_esiut;
 
 package p_vuetxt is
 
@@ -12,7 +13,6 @@ package p_vuetxt is
     use p_coul_io;
 
     procedure AfficheGrille (Grille : in TV_Grille);
-
 
     procedure NettoyerTerminal;
     --{} => {Le terminal est vide}
@@ -26,9 +26,10 @@ package p_vuetxt is
        (dir    : out T_Direction; couleur : in T_CoulP; Grille : in TV_Grille;
         cancel : in out Boolean);
 
-    procedure DisplayStats (f : in out p_joueur_io.file_type);
+    procedure DisplayStats (f : in out p_joueur_io.File_Type);
 
     function InputReplay return Boolean;
 
+    procedure InputPlayerName (name : out String);
 
 end p_vuetxt;
