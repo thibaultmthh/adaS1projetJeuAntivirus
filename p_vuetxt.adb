@@ -227,7 +227,7 @@ package body p_vuetxt is
         return rep;
     end InputReplay;
 
-    
+
 
     procedure DisplayStats (f : in out p_joueur_io.File_Type) is
         elem : TR_Joueur;
@@ -252,6 +252,12 @@ package body p_vuetxt is
             end loop;
         end if;
     end DisplayStats;
+
+    procedure InputPlayerName (name : out String) is
+    begin
+        ECRIRE ("Quel voulez vous vous appeler ?");
+        LIRE (name);
+    end InputPlayerName;
 
 
 end p_vuetxt;
