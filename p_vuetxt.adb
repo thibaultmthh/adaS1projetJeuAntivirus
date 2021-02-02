@@ -203,6 +203,7 @@ package body p_vuetxt is
         end loop;
     end InputDirection;
 
+
     function InputReplay return Boolean is
     -- Return True quand l'utilisateur veut rejouer, false quand il ne veut pas
         rejouer : Character;
@@ -225,6 +226,8 @@ package body p_vuetxt is
         end loop;
         return rep;
     end InputReplay;
+
+
 
     procedure DisplayStats (f : in out p_joueur_io.File_Type) is
         elem : TR_Joueur;
@@ -255,5 +258,6 @@ package body p_vuetxt is
         ECRIRE ("Quel voulez vous vous appeler ?");
         LIRE (name);
     end InputPlayerName;
+
 
 end p_vuetxt;

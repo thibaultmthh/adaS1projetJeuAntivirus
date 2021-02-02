@@ -11,9 +11,12 @@ procedure av_txt is
   couleur            : T_coul;
   dir                : T_Direction;
   compteurMvmt       : natural;
+  --nomJoueur          :String(1..25);
 begin
   Open (f, In_File, "Defis.bin");
   Open (m, In_file, "historiqueMouvement.bin");
+  --inputPlayerName(nomJoueur);
+
   loop
     -- #Initialisation et choix defi
     annuler := false;
@@ -25,6 +28,7 @@ begin
     compteurMvmt := 0;
     Configurer (f, numdef, Grille, Pieces);
     -- # fin init
+
 
     -- Boucle de partie
     loop

@@ -7,3 +7,9 @@ tests.adb
 ./tests
 ./testjeu
 *nfs
+.VS*
+av_txt
+forms*
+p_fenbase.*
+marketing
+marketing.adb
