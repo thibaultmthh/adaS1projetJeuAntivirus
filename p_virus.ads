@@ -30,6 +30,13 @@ package p_virus is
 	type T_Direction is (bg, hg, bd, hd);
 	package p_dir_io is new p_enum(T_Direction); use p_dir_io;
 
+	type TR_mouvements is record
+		couleur:T_coul;
+		direction: T_direction;
+	end record;
+
+	type TV_Mouvement is array(integer) of TR_Mouvements;
+
 	--------------- Primitives d'nitialisation d'une partie
 
 	procedure InitPartie(Grille : in out TV_Grille; Pieces : in out TV_Pieces);
@@ -89,4 +96,7 @@ package p_virus is
 	--------------------------------------------------------------------------------------------
 	function couleurPresente(grille: TV_Grille; coul :in T_coul) return boolean;
 	--{} => {vrai si couleur dans grille}
+
+	procedure memoiremouvements(dir: in T_direction; coul: in T_coul);
+
 end p_virus;
