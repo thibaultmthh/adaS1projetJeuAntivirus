@@ -163,15 +163,12 @@ package body p_virus is
     TAILLEPIECEMAX : Integer := 3;
     nbpieceteste   : Integer := 0;
   begin
-    -- On vérifie que la couleur est dans la grille
-    --On retourne faux si la couleur n'est pas dans la grille
-    if not couleurPresente (Grille, coul) then
-      return False;
+      -- On vérifie que la couleur est dans la grille
+       --On retourne faux si la couleur n'est pas dans la grille
+      if not couleurPresente(Grille, coul) then
+         return false;
 
-    else  -- Si on a trouvé la piece;
-
-      loop
-        possibleDansGrille := True;
+      else  -- Si on a trouvé la piece;
 
         loop
           if x = T_Lig'Last
@@ -201,6 +198,8 @@ package body p_virus is
             else
               yDest := T_Col'Succ (y);
             end if;
+
+            nbpieceteste := nbpieceteste + 1;
           end if;
 
           if Dir = bg or Dir = bd then    --Si direction contient bas

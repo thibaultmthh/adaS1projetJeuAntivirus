@@ -13,17 +13,22 @@ package p_vuetxt is
 
     procedure AfficheGrille (Grille : in TV_Grille);
 
-    procedure InputDefi (numdef : out Integer; cancel : out Boolean);
+
+    procedure NettoyerTerminal;
+    --{} => {Le terminal est vide}
+
+    procedure InputDefi (numdef : out Integer; cancel : in out Boolean);
 
     procedure InputCouleur
-       (couleur : out T_Coul; Pieces : in TV_Pieces; cancel : out Boolean);
+       (couleur : out T_Coul; Pieces : in TV_Pieces; cancel : in out Boolean);
 
     procedure InputDirection
        (dir    : out T_Direction; couleur : in T_CoulP; Grille : in TV_Grille;
-        cancel : out Boolean);
+        cancel : in out Boolean);
 
     procedure DisplayStats (f : in out p_joueur_io.file_type);
 
     function InputReplay return Boolean;
+
 
 end p_vuetxt;
