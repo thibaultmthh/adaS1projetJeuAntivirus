@@ -138,12 +138,12 @@ package body p_vuetxt is
 
     end AfficheGrille;
 
-<<<<<<< HEAD
+
     procedure NettoyerTerminal is
     begin
       put(ESC & "[2J");
     end;
-=======
+
 -- Fin partie graphisme
 
     procedure InputDefi (numdef : out Integer; cancel : out Boolean) is
@@ -218,6 +218,6 @@ package body p_vuetxt is
         end loop;
         return rep;
     end InputReplay;
->>>>>>> b7c1ec6585b0e52c708416a37a32d9c224f20386
+
 
 end p_vuetxt;

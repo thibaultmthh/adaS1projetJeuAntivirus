@@ -1,4 +1,5 @@
-with p_vuetxt, p_virus; use p_vuetxt, p_virus;
+with p_vuetxt, p_virus, p_esiut; use p_vuetxt, p_virus, p_virus.p_piece_io, p_esiut;
+
 
 procedure av_txt is
   numdef : positive range 1..20;
@@ -42,7 +43,7 @@ begin
 
     if Guerison(grille) then
       ecrire_ligne("Felicitaion !! Vous avez réussi en " & image(compteurMvmt) & " coups !");
-
+    end if;
     exit when not InputReplay;
     end loop;
 
