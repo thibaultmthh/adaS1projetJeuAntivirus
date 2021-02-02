@@ -107,7 +107,7 @@ package body p_virus is
       for x in T_col'range loop
         if Grille(y, x) = coul then
           Grille(y, x) := vide; -- vide l'ancienne case
-          ecrire("ok2");
+
           case Dir is
             when bg => tampon(T_lig'succ(y), T_col'pred(x)):= coul; -- pas besoin de faire de check suplementaires car le mouvement et cencé etre possible
             when bd => tampon(T_lig'succ(y), T_col'succ(x)) := coul;
@@ -120,7 +120,7 @@ package body p_virus is
     for y in T_lig'range loop
       for x in T_col'range loop
         if tampon(y, x) = coul then
-          ecrire("ok");
+
           Grille(y,x) := coul; -- copie les nouveau deplacement dans la grille
         end if;
       end loop;
@@ -148,9 +148,6 @@ package body p_virus is
       else  -- Si on a trouvé la piece;
 
 
-      -- On se déplace dans la grille à la recherche de la prochaine pièce de la couleur coul
-
-
 
 
         loop
@@ -173,7 +170,8 @@ package body p_virus is
             else
               yDest := T_col'pred(y);
             end if;
-            ecrire_ligne(y);
+
+
           else                                  --Si direction contient droite
             if y = T_Col'last then
               possibleDansGrille := false; --On ne peut pas déplacer vers la droite
@@ -200,7 +198,7 @@ package body p_virus is
 
 
           nbpieceteste := nbpieceteste + 1;
-          
+
           exit when not possibleDansGrille
           or (x = T_lig'last and y = T_col'last)
           or nbpieceteste = TAILLEPIECEMAX
