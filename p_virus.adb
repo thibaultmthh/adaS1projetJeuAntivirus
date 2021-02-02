@@ -163,42 +163,42 @@ package body p_virus is
           exit when Grille(x,y) = coul or (x = T_lig'last and y = T_col'last);
           end loop;
 
+          if Grille(x,y) = coul then
+            if dir = bg or dir = hg  then    --Si direction contient gauche
+              if y = T_Col'first then
+                possibleDansGrille := false; --On ne peut pas déplacer vers la gauche
+              else
+                yDest := T_col'pred(y);
+              end if;
 
-          if dir = bg or dir = hg  then    --Si direction contient gauche
-            if y = T_Col'first then
-              possibleDansGrille := false; --On ne peut pas déplacer vers la gauche
-            else
-              yDest := T_col'pred(y);
+
+            else                                  --Si direction contient droite
+              if y = T_Col'last then
+                possibleDansGrille := false; --On ne peut pas déplacer vers la droite
+              else
+                yDest := T_col'succ(y);
+              end if;
             end if;
 
 
-          else                                  --Si direction contient droite
-            if y = T_Col'last then
-              possibleDansGrille := false; --On ne peut pas déplacer vers la droite
-            else
-              yDest := T_col'succ(y);
+            if dir = bg or dir = bd then    --Si direction contient bas
+              if x = T_lig'last then
+                possibleDansGrille := false; --On ne peut pas déplacer vers la bas
+              else
+                xDest := T_lig'succ(x);
+              end if;
+            else                                  --Si direction contient haut
+              if x = T_lig'first then
+                possibleDansGrille := false; --On ne peut pas déplacer vers la haut
+              else
+                xDest := T_lig'pred(x);
+              end if;
             end if;
+
+
+            ecrire_ligne(possibleDansGrille);
+            nbpieceteste := nbpieceteste + 1;
           end if;
-
-
-          if dir = bg or dir = bd then    --Si direction contient bas
-            if x = T_lig'last then
-              possibleDansGrille := false; --On ne peut pas déplacer vers la bas
-            else
-              xDest := T_lig'succ(x);
-            end if;
-          else                                  --Si direction contient haut
-            if x = T_lig'first then
-              possibleDansGrille := false; --On ne peut pas déplacer vers la haut
-            else
-              xDest := T_lig'pred(x);
-            end if;
-          end if;
-
-
-
-          nbpieceteste := nbpieceteste + 1;
-
           exit when not possibleDansGrille
           or (x = T_lig'last and y = T_col'last)
           or nbpieceteste = TAILLEPIECEMAX
