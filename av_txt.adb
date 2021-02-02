@@ -13,7 +13,7 @@ procedure av_txt is
   nomJoueur          :String(1..25);
 begin
   Open (f, In_File, "Defis.bin");
-  inputPlayerName(nomJoueur);
+  --inputPlayerName(nomJoueur);
 
   loop
     -- #Initialisation et choix defi
