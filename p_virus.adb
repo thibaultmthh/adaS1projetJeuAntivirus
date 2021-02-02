@@ -160,7 +160,7 @@ package body p_virus is
     xDest : T_Lig := T_Lig'First;
     yDest : T_Col := T_Col'First;
 
-    TAILLEPIECEMAX : Integer := 3;
+    TAILLEPIECEMAX : constant Integer := 3;
     nbpieceteste   : Integer := 0;
   begin
       -- On vérifie que la couleur est dans la grille
