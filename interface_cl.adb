@@ -108,6 +108,8 @@ procedure AfficheGrille(Grille : in TV_Grille) is
             AfficheBord('-', colored);
         end loop;
         AfficheBord('+',colored);
+        put_line(" ");
+
 
     end AfficheGrille;
 
