@@ -1,9 +1,9 @@
 with p_fenbase, forms, p_esiut;
 use  p_fenbase, forms, p_esiut;
 
-package p_fenbase is
-  procedure  is
+package p_vuegraph is
+  procedure InitFenetreprincipale
 
 
 
-end p_fenbase;
+end p_vuegraph;
