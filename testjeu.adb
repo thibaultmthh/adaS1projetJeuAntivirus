@@ -44,7 +44,7 @@ begin
 
     loop
       loop
-        ecrire_ligne("quel couleur?");
+        ecrire_ligne("quel couleur voulez-vous déplacer?");
         lire(couleur);
         if couleur=blanc then
           ecrire_ligne("on ne peut pas bouger les blancs");
