@@ -35,11 +35,15 @@ begin
             end if;
         end if;
 
-        if x = 1 and y = 1 then
-            couleurANSI3 := "243";
-        elsif x = 2 and y = 2 then 
-            couleurANSI3 := "243";
-        end if;
+        if x = 1 and y = 1 and
+               (couleurANSI3 = "   " and couleurANSI2 = "  ")
+            then
+                couleurANSI3 := "243";
+            elsif x = 2 and y = 2 and
+               (couleurANSI3 = "   " and couleurANSI2 = "  ")
+            then
+                couleurANSI3 := "243";
+            end if;
     
         if couleurANSI3 = "   " and couleurANSI2 = "  " then
             Put (ESC & "[48:5:" & couleurANSI2 & "m   " & ESC & "[0m");
