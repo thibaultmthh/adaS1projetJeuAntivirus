@@ -80,7 +80,8 @@ end AfficheBord;
 procedure AfficheGrille(Grille : in TV_Grille) is
     ncol : integer := 0;
     colored: boolean := true;
-    begin 
+    begin
+        put_line(" ");
         AfficheBord('+',colored);
 
         for y in T_col'range loop
