@@ -196,7 +196,7 @@ package body p_virus is
             end if;
 
 
-            ecrire_ligne(possibleDansGrille);
+            
             nbpieceteste := nbpieceteste + 1;
           end if;
           exit when not possibleDansGrille
