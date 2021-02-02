@@ -17,14 +17,14 @@ package p_vuetxt is
     procedure NettoyerTerminal;
     --{} => {Le terminal est vide}
 
-    procedure InputDefi (numdef : out Integer; cancel : out Boolean);
+    procedure InputDefi (numdef : out Integer; cancel : in out Boolean);
 
     procedure InputCouleur
-       (couleur : out T_Coul; Pieces : in TV_Pieces; cancel : out Boolean);
+       (couleur : out T_Coul; Pieces : in TV_Pieces; cancel : in out Boolean);
 
     procedure InputDirection
        (dir    : out T_Direction; couleur : in T_CoulP; Grille : in TV_Grille;
-        cancel : out Boolean);
+        cancel : in out Boolean);
 
     function InputReplay return Boolean;
 

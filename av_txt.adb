@@ -14,9 +14,12 @@ begin
   Open (f, In_File, "Defis.bin");
   loop
     -- #Initialisation et choix defi
+    annuler := false;
     InitPartie(Grille, Pieces);
     InputDefi(numdef, annuler);
+    ecrire_ligne(annuler);
     exit when annuler;
+
     compteurMvmt := 0;
     Configurer (f, numdef, Grille, Pieces);
     -- # fin init
@@ -26,6 +29,7 @@ begin
 
       NettoyerTerminal;
       AfficheGrille(Grille);
+
 
       InputCouleur(couleur,Pieces, annuler);
       exit when annuler;
@@ -42,6 +46,8 @@ begin
     -- Fin de boucle de partie
 
     if Guerison(grille) then
+      NettoyerTerminal;
+      AfficheGrille(Grille);
       ecrire_ligne("Felicitaion !! Vous avez réussi en " & image(compteurMvmt) & " coups !");
     end if;
     exit when not InputReplay;

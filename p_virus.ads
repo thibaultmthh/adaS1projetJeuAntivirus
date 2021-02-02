@@ -97,6 +97,6 @@ package p_virus is
 	function couleurPresente(grille: TV_Grille; coul :in T_coul) return boolean;
 	--{} => {vrai si couleur dans grille}
 
-	procedure memoiremouvements(dir: in T_direction; coul: in T_coul);
+	--procedure memoiremouvements(dir: in T_direction; coul: in T_coul);
 
 end p_virus;

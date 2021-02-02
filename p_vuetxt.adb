@@ -140,13 +140,22 @@ package body p_vuetxt is
 
 
     procedure NettoyerTerminal is
-    begin
-      put(ESC & "[2J");
-    end;
+     Prefixe : constant Character := Character'Val (8#33#); -- '\033'
+     code_nettoyage: constant String    := "[2J";
+     Modecurseur : constant String    := "[;H";
+
+     sequenceTexte: constant String
+       := Prefixe & code_nettoyage &
+          Prefixe & Modecurseur;
+
+  begin
+     Put (sequenceTexte);
+
+  end NettoyerTerminal;
 
 -- Fin partie graphisme
 
-    procedure InputDefi (numdef : out Integer; cancel : out Boolean) is
+    procedure InputDefi (numdef : out Integer; cancel : in out Boolean) is
 
     begin
         loop
@@ -161,7 +170,7 @@ package body p_vuetxt is
     end InputDefi;
 
     procedure InputCouleur
-       (couleur : out T_Coul; Pieces : in TV_Pieces; cancel : out Boolean)
+       (couleur : out T_Coul; Pieces : in TV_Pieces; cancel : in out Boolean)
     is
     begin
         loop
@@ -179,7 +188,7 @@ package body p_vuetxt is
 
     procedure InputDirection
        (dir    : out T_Direction; couleur : in T_CoulP; Grille : in TV_Grille;
-        cancel : out Boolean)
+        cancel : in out Boolean)
     is
     begin
         loop
