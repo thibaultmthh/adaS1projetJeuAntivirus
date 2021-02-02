@@ -169,7 +169,8 @@ package body p_virus is
          return false;
 
       else  -- Si on a trouvé la piece;
-
+      loop
+        possibleDansGrille := True;
         loop
           if x = T_Lig'Last
           then  -- On change de colone si on est arrivé au bout de celle ci
@@ -233,8 +234,7 @@ package body p_virus is
       end loop;
     end if;
 
-    return
-     possibleDansGrille and
+    return possibleDansGrille and
      (Grille (xDest, yDest) = coul or Grille (xDest, yDest) = vide);
     -- On retourne vrai si la dernière piece testé a un destination qui :
     -- 1 - est dans la Grille

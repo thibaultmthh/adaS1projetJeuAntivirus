@@ -232,7 +232,7 @@ package body p_vuetxt is
         Reset (f, In_File);
         Read (f, elem);
         if End_Of_File (f) then
-            ECRIRE ("Pas encors de données stats");
+            ECRIRE ("Pas encore de données stats");
         else
             while not End_Of_File (f) loop
                 ECRIRE_LIGNE (elem.nomJoueur);
