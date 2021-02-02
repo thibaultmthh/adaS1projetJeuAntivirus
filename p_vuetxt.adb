@@ -213,4 +213,28 @@ package body p_vuetxt is
         return rep;
     end InputReplay;
 
+    procedure DisplayStats (f : in out p_joueur_io.File_Type) is
+        elem : TR_Joueur;
+    begin
+        reset (f, in_file);
+        read (f, elem);
+        if end_of_file (f) then
+            ECRIRE ("Pas encors de données stats");
+        else
+            while not end_of_file (f) loop
+                ECRIRE_LIGNE (elem.nomJoueur);
+                ECRIRE_LIGNE ("Possede : ");
+                ECRIRE (elem.points);
+                ECRIRE (" points");
+                ECRIRE (" , à la date : ");
+                ECRIRE (elem.date.jour);
+                ECRIRE (" / ");
+                ECRIRE (elem.date.mois);
+                ECRIRE (" / ");
+                ECRIRE (elem.date.an);
+                read (f, elem);
+            end loop;
+        end if;
+    end DisplayStats;
+
 end p_vuetxt;

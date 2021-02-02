@@ -1,6 +1,6 @@
 with Text_IO;                use Text_IO;
 with Ada.Characters.Latin_1; use Ada.Characters.Latin_1;
-with p_virus;                use p_virus;
+with p_virus;                use p_virus; use p_virus.p_joueur_io;
 with p_esiut;                use p_esiut;
 
 package p_vuetxt is
@@ -21,6 +21,8 @@ package p_vuetxt is
     procedure InputDirection
        (dir    : out T_Direction; couleur : in T_CoulP; Grille : in TV_Grille;
         cancel : out Boolean);
+
+    procedure DisplayStats (f : in out p_joueur_io.file_type);
 
     function InputReplay return Boolean;
 
