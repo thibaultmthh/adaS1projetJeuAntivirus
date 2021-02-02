@@ -200,9 +200,7 @@ package body p_virus is
 
 
           nbpieceteste := nbpieceteste + 1;
-          ecrire(xDest);ecrire(yDest);ecrire("  ");
-          ecrire_ligne(T_coul'image(Grille(xDest, yDest)));
-
+          
           exit when not possibleDansGrille
           or (x = T_lig'last and y = T_col'last)
           or nbpieceteste = TAILLEPIECEMAX
