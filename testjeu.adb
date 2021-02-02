@@ -11,7 +11,7 @@ procedure testjeu is
   Pieces :TV_Pieces;
   f : p_piece_io.file_type;
   nombre : boolean:=false;
-  rejouer : string(1..2);
+  rejouer : character;
   stop : boolean :=false;
   dir : T_direction;
   couleur : T_coul;
