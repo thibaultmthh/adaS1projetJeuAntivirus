@@ -66,7 +66,7 @@ begin
         else
           ecrire("vous ne pouvez pas bouger vers ");
           ecrire(dir);ecrire(" ! ");a_la_ligne;
-          ecrire(" ressayez une autre direction");
+          ecrire_ligne(" ressayez une autre direction");
           AfficheGrille(grille);
         end if;
       end loop;
