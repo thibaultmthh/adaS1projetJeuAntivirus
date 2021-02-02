@@ -10,7 +10,7 @@ procedure av_txt is
   couleur            : T_coul;
   dir                : T_Direction;
   compteurMvmt       : natural;
-  nomJoueur          :String(1..25);
+  --nomJoueur          :String(1..25);
 begin
   Open (f, In_File, "Defis.bin");
   --inputPlayerName(nomJoueur);
