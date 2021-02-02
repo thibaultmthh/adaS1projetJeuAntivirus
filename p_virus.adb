@@ -264,4 +264,17 @@ package body p_virus is
 
   end couleurPresente;
 
+  procedure historiqueMouvement ( m : in out p_mouvement_io.file_type ; direction : in T_direction ; couleur : in T_coulP) is
+    --{ m- contient le mouvement du joueur precedent}
+    -- ==> le nouveau mouvement du joueur a été enregistré dans le fichier
+    --binaire temporaire historiqueMouvement.bin
+    elem: TR_mouvement;
+  begin
+    elem.direction := direction; elem.couleur := couleur;
+    Open(m , append_file, "historiqueMouvement.bin");
+    write( m , elem);
+    close(m);
+
+  end historiqueMouvement;
+
 end p_virus;

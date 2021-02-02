@@ -36,12 +36,12 @@ package p_virus is
     package p_dir_io is new P_ENUM (T_Direction);
     use p_dir_io;
 
-    type TR_mouvements is record
-        couleur   : T_Coul;
-        direction : T_Direction;
-    end record;
+	type TR_mouvement is record
+		direction : T_direction;
+		couleur : T_coulP;
+	end record;
+	package p_mouvement_io is new sequential_io(TR_mouvement); use p_mouvement_io;
 
-    type TV_Mouvement is array (Integer) of TR_mouvements;
 
     -- --- partie stats
     type TR_date is record
@@ -131,6 +131,6 @@ package p_virus is
        (grille : TV_Grille; coul : in T_Coul) return Boolean;
     --{} => {vrai si couleur dans grille}
 
-    -- procedure memoiremouvements (dir : in T_Direction; coul : in T_Coul);
+    procedure historiqueMouvement ( m : in out p_mouvement_io.file_type ; direction : in T_direction ; couleur : in T_coulP);
 
 end p_virus;

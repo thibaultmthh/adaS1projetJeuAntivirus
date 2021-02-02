@@ -1,9 +1,10 @@
-with p_vuetxt, p_virus, p_esiut; use p_vuetxt, p_virus, p_virus.p_piece_io, p_esiut;
+with p_vuetxt, p_virus, p_esiut, sequential_io; use p_vuetxt, p_virus, p_virus.p_piece_io, p_esiut, P_virus.p_mouvement_io;
 
 
 procedure av_txt is
   numdef : positive range 1..20;
   f                  : p_piece_io.File_Type;
+  m                   : p_mouvement_io.file_type;
   Grille             : TV_Grille;
   Pieces             : TV_Pieces;
   annuler             : boolean;
@@ -12,6 +13,7 @@ procedure av_txt is
   compteurMvmt       : natural;
 begin
   Open (f, In_File, "Defis.bin");
+  Open (m, In_file, "historiqueMouvement.bin");
   loop
     -- #Initialisation et choix defi
     annuler := false;
