@@ -17,7 +17,7 @@ begin -- av_graph
     ecrire_ligne("bouton appuyé : " & Bouton);
 
   end;
-  
+  --test
   ecrire_ligne(ConsulterTimer(fprincipale,"Chronometre"));        --nom de la fenêtreNomElement : inString      )
   CacherFenetre(fprincipale);
 
