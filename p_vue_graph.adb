@@ -86,7 +86,7 @@ package body p_vue_graph is
 
 
           --ecrire_ligne(nombouton);
-          AjouterBoutonRond(fenetre,nombouton , "",posX, posY, tailleBoutton  );
+          AjouterBouton(fenetre,nombouton , "",posX, posY, tailleBoutton, tailleBoutton  );
           if ((intnumcol mod 2) = 0 and (j mod 2) = 0) or ((intnumcol mod 2) = 1 and (j mod 2) = 1) then
             ChangerCouleurFond(fenetre, nombouton, FL_RIGHT_BCOL);
           else
