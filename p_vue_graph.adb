@@ -51,6 +51,8 @@ package body p_vue_graph is
     --ajouterGrille(fenetre, "grille", 0,0, 100);
 
     ajouterBtnDeplacement (fenetre, "", 150, 350, 350, 435);
+    ajouterGrille (fenetre, "Grille", 100, 150, 200);
+
     FinFenetre (fenetre);
   end InitFenetreprincipale;
 
@@ -137,7 +139,7 @@ package body p_vue_graph is
       for x in 1 .. 2 loop
         ECRIRE_LIGNE (T_Direction'Image (btnList (y, x)));
         AjouterBouton
-         (fenetre, T_Direction'Image (btnList (y, x)),
+         (fenetre, "D"&T_Direction'Image (btnList (y, x)),
           T_Direction'Image (btnList (y, x)), actX, actY, xButton, yButton);
 
         ECRIRE (actX);
