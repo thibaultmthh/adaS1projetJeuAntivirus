@@ -11,11 +11,16 @@ procedure av_txt is
   couleur      : T_Coul;
   dir          : T_Direction;
   compteurMvmt : Natural;
+  modeCouleur  : boolean;
+
   --nomJoueur          :String(1..25);
 begin
   Open (f, In_File, "Defis.bin");
   Open (m, In_file, "historiqueMouvement.bin");
   --inputPlayerName(nomJoueur);
+
+
+  InputModeCouleur(modeCouleur);
 
   loop
     -- #Initialisation et choix defi
@@ -33,7 +38,7 @@ begin
     loop
 
       NettoyerTerminal;
-      AfficheGrille (Grille);
+      AfficheGrille (Grille, modeCouleur);
 
       InputCouleur (couleur, Pieces, annuler);
       exit when annuler;
@@ -51,7 +56,7 @@ begin
 
     if Guerison (Grille) then
       NettoyerTerminal;
-      AfficheGrille (Grille);
+      AfficheGrille (Grille, modeCouleur);
       ECRIRE_LIGNE
        ("Felicitaion !! Vous avez réussi en " & IMAGE (compteurMvmt) &
         " coups !");

@@ -105,9 +105,9 @@ package body p_vuetxt is
 
     end AfficheBord;
 
-    procedure AfficheGrille (Grille : in TV_Grille) is
+    procedure AfficheGrille (Grille : in TV_Grille; colored : in boolean := true) is
         ncol    : Integer := 0;
-        colored : Boolean := True;
+
     begin
         Put_Line (" ");
         AfficheBord ('+', colored);
@@ -257,9 +257,18 @@ package body p_vuetxt is
 
     procedure InputPlayerName (name : out String) is
     begin
-        ECRIRE ("Quel voulez vous vous appeler ?");
+        ECRIRE ("Comment voulez vous vous appeler ?");
         LIRE (name);
     end InputPlayerName;
+
+    procedure InputModeCouleur(couleurfonctionnelle : out boolean) is
+      entreeUtilisateur : Character;
+    begin
+      ecrire("Voyez vous un carré rouge (y ou n (défaut N))? ");
+      Put_line(ESC & "[48:5:196m   " & ESC & "[0m");
+      lire(entreeUtilisateur);
+      couleurfonctionnelle := entreeUtilisateur = 'y';
+    end InputModeCouleur;
 
 
 end p_vuetxt;

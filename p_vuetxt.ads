@@ -12,7 +12,7 @@ package p_vuetxt is
     package p_coul_io is new P_ENUM (T_CoulP);
     use p_coul_io;
 
-    procedure AfficheGrille (Grille : in TV_Grille);
+    procedure AfficheGrille (Grille : in TV_Grille; colored : in boolean := true);
 
     procedure NettoyerTerminal;
     --{} => {Le terminal est vide}
@@ -31,5 +31,7 @@ package p_vuetxt is
     function InputReplay return Boolean;
 
     procedure InputPlayerName (name : out String);
+
+    procedure InputModeCouleur(couleurfonctionnelle : out boolean);
 
 end p_vuetxt;
