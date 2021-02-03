@@ -25,9 +25,13 @@ begin -- av_graph
         CacherFenetre(fpseudo);
         InitFenetreprincipale(fprincipale, pseudo);
         MontrerFenetre(fprincipale);
-        if Attendrebouton(fprincipale) = "quitter" then
-          CacherFenetre(fprincipale);
-        end if;
+        declare
+          Bouton : String := (Attendrebouton(fprincipale));
+        begin
+          if bouton = "quitter" then
+            CacherFenetre(fprincipale);
+          end if;
+        end;
       end if;
     end;
 
