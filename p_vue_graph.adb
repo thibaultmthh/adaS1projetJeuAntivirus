@@ -75,7 +75,7 @@ package body p_vue_graph is
 
     AjouterTexte( fenetre, "Bienvenue" , "Bienvenue au Jeu ANTI VIRUS!!" , 200, 20, 200, 50);
     AjouterImage ( fenetre , "imageAntiVirus" , "antivirusimage.xpm" ,"jeu" , 200 , 150, 200 , 200 );
-    AjouterImage ( fenetre , "imageTousAntiCovid" , "anticovid.xpm" , "covid" , 0 , 400 , 121,231) ;
+    AjouterImage ( fenetre , "imageTousAntiCovid" , "anticovid.xpm" , "covid" , 0 , 428 , 121,231) ;
 
     FinFenetre(fenetre);
   end initfenetrepseudo;
