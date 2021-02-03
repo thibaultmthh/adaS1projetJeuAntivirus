@@ -134,8 +134,7 @@ package body p_vue_graph is
             when others =>
                 COULEUR_BOUTTON := FL_TOP_BCOL;
         end case;
-        ecrire_ligne(T_Coul'image(Grille(x,y)));
-        ecrire_ligne(FL_PD_COL'image(COULEUR_BOUTTON));
+
         if not (COULEUR_BOUTTON = FL_TOP_BCOL) then
           ChangerCouleurFond(fenetre, nombouton, COULEUR_BOUTTON);
         end if;
