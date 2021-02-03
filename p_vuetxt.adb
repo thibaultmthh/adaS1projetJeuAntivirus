@@ -1,5 +1,7 @@
 package body p_vuetxt is
 
+--Loic
+
     procedure AfficheCase
        (coul : in T_Coul; x : in Integer; y : in Integer; colored : in Boolean)
     is
