@@ -10,13 +10,16 @@ begin -- av_graph
   InitFenetreprincipale(fprincipale, "EggManPlayer");
 
   MontrerFenetre(fprincipale);
+  RepriseTimer(fprincipale, "Chronometre");
   declare
-    Bouton : String := (Attendrebouton(ftest));
+    Bouton : String := (Attendrebouton(fprincipale));
   begin
     ecrire_ligne("bouton appuyé : " & Bouton);
-  end;
 
-  CacherFenetre(ftest);
+  end;
+  
+  ecrire_ligne(ConsulterTimer(fprincipale,"Chronometre"));        --nom de la fenêtreNomElement : inString      )
+  CacherFenetre(fprincipale);
 
 
 
