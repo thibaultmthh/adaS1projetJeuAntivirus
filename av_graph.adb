@@ -43,7 +43,7 @@ begin -- av_graph
 
       loop
         afficherGrille (fprincipale, "grille", Grille);
-
+        afficherBtnDeplacements(fprincipale, violet, Grille );
         colorSet := True;
         declare
           Bouton : String := (Attendrebouton (fprincipale));
@@ -60,6 +60,7 @@ begin -- av_graph
             -- if c'est une couleur
           elsif Bouton (1 .. 1) = "G" then
             ECRIRE ("Couleur");
+
             colorSet := True;
 
             -- if c'est un deplacement
@@ -69,6 +70,7 @@ begin -- av_graph
             MajGrille (Grille, violet, dir);
 
           end if;
+
           ECRIRE_LIGNE (Bouton);
         end;
       end loop;

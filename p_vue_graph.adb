@@ -183,13 +183,12 @@ package body p_vue_graph is
     x, y, x2, y2 : in     Natural)
   is
 
-    type Tv_btn is array (1 .. 2, 1 .. 2) of T_Direction;
 
     yButton : constant Positive := (y2 - y) / 2;
     xButton : constant Positive := (x2 - x) / 2;
     actX    : Positive;
     actY    : Positive          := y;
-    btnList : Tv_btn            := ((hg, hd), (bg, bd));
+        
   begin
 
     for y in 1 .. 2 loop
@@ -212,5 +211,21 @@ package body p_vue_graph is
     end loop;
 
   end ajouterBtnDeplacement;
+
+  procedure afficherBtnDeplacements(fenetre : in out TR_Fenetre; coul:in T_coul; grille: in TV_Grille) is
+  begin
+
+    for y in 1 .. 2 loop
+      for x in 1 .. 2 loop
+      ecrire("oke");
+        if Possible(Grille, coul,btnList (y, x)) then
+          MontrerElem(fenetre, "D" & T_Direction'Image (btnList (y, x)));
+        else 
+          CacherElem(fenetre, "D" & T_Direction'Image (btnList (y, x)));
+        end if;
+      end loop;
+    end loop;
+  end afficherBtnDeplacements;
+
 
 end p_vue_graph;
