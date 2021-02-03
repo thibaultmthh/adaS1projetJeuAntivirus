@@ -15,6 +15,20 @@ package body p_vue_graph is
     BHAUTEUR            : constant integer := 30;
     ybouttoninf         : constant integer := FHAUTEUR - (FESPACEMENT + BHAUTEUR);
 
+    function min (a,b : in integer) return integer is
+    begin
+      if a < b then
+        return a;
+      else
+        return b;
+      end if;
+    end min;
+
+
+
+    yGrille             : constant integer := FESPACEMENT * 2 + TEXTEHAUTEUR;
+    TAILLEGRILLE        : constant integer :=
+
   begin
 
     fenetre:=DebutFenetre("Virus",FLARGEUR,FHAUTEUR);
@@ -49,7 +63,7 @@ package body p_vue_graph is
      (fenetre, "Quitter", "QUITTER", FESPACEMENT * 3 + BLARGEUR * 2,
       ybouttoninf, BLARGEUR, BHAUTEUR);
 
-    ajouterGrille(fenetre, "grille", 0,0, 200);
+    ajouterGrille(fenetre, "grille", 0, yGrille, 200);
 
     ajouterBtnDeplacement (fenetre, "", 150, 350, 350, 435);
 
