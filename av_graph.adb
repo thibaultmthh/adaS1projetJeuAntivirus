@@ -1,14 +1,22 @@
-with p_fenbase, forms, p_esiut, p_vue_graph;
-use p_fenbase, forms, p_esiut, p_vue_graph;
+with p_fenbase, forms, p_esiut, p_vue_graph, p_virus;
+use p_fenbase, forms, p_esiut, p_vue_graph, p_virus, p_virus.p_piece_io;
 
 procedure av_graph is
   fprincipale : TR_Fenetre;
   fpseudo     : TR_Fenetre;
+  f            : p_piece_io.File_Type;
   continue    : Character;
   pseudo      : String (1 .. 3);
+  Pieces      : TV_Pieces;
+  Grille      : TV_Grille;
 begin -- av_graph
   InitialiserFenetres;
   initfenetrepseudo (fpseudo);
+
+  Open (f, In_File, "Defis.bin");
+  InitPartie (Grille, Pieces);
+  Configurer (f, 3, Grille, Pieces);
+  afficherGrille(fprincipale, "Grille", Grille);
 
   MontrerFenetre (fpseudo);
   ChangerTempsMinuteur (fprincipale, "Chronometre", 200_000.0);

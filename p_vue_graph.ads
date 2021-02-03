@@ -22,4 +22,6 @@ package p_vue_graph is
   procedure initfenetrepseudo (fenetre : out TR_Fenetre);
   --procédure première fenètre de pseudo
 
+  procedure afficherGrille(fenetre : in out TR_Fenetre; NomGrille : in String; Grille : in TV_Grille);
+
 end p_vue_graph;
