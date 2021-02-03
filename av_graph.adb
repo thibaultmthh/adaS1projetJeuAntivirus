@@ -10,24 +10,18 @@ procedure av_graph is
 begin -- av_graph
   InitialiserFenetres;
   initfenetrepseudo(fpseudo, pseudo);
-  InitFenetreprincipale(fprincipale, pseudo);
 
   MontrerFenetre(fpseudo);
-  MontrerFenetre(fprincipale);
   ChangerTempsMinuteur(fprincipale, "Chronometre", 200000.0);
   -- ChangerMinuteurEnChrono(fprincipale, "Chronometre");
-  declare
-    Bouton : String := (Attendrebouton(fprincipale));
-  begin
-    ecrire_ligne("bouton appuyé : " & Bouton);
-
-  end;
-    declare
-    Bouton : String := (Attendrebouton(fpseudo));
-  begin
-    ecrire_ligne("bouton appuyé : " & Bouton);
-
-  end;
+  if Attendrebouton(fpseudo) = "jouer" then
+    FinFenetre(fpseudo);
+    InitFenetreprincipale(fprincipale, pseudo);
+    MontrerFenetre(fprincipale);
+  end if;
+   if Attendrebouton(fprincipale) = "quitter" then
+    FinFenetre(fprincipale);
+  end if;
 
   ecrire_ligne(ConsulterTimer(fprincipale,"Chronometre"));        --nom de la fenêtreNomElement : inString      )
   CacherFenetre(fprincipale);
