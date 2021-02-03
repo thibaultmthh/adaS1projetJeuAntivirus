@@ -4,7 +4,6 @@ use p_fenbase, forms, p_esiut, p_vue_graph, p_virus, p_virus.p_mouvement_io,  p_
 procedure av_graph is
   fprincipale : TR_Fenetre;
   fpseudo     : TR_Fenetre;
-  f            : p_piece_io.File_Type;
   continue    : Character;
   pseudo      : String (1 .. 3);
 
@@ -27,9 +26,6 @@ begin -- av_graph
   InitialiserFenetres;
   initfenetrepseudo (fpseudo);
 
-  Open (f, In_File, "Defis.bin");
-  InitPartie (Grille, Pieces);
-  Configurer (f, 3, Grille, Pieces);
   afficherGrille(fprincipale, "Grille", Grille);
 
   MontrerFenetre (fpseudo);
