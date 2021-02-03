@@ -56,9 +56,9 @@ package body p_vue_graph is
     FinFenetre (fenetre);
   end InitFenetreprincipale;
 
-  procedure initfenetrepseudo(fenetre: out TR_Fenetre; joueur: out string) is
-    FLARGEUR            : constant integer := 300;
-    FHAUTEUR            : constant integer := 300;
+  procedure initfenetrepseudo(fenetre: out TR_Fenetre) is
+    FLARGEUR            : constant integer := 600;
+    FHAUTEUR            : constant integer := 600;
 
     NBTEXTE             : constant integer := 3;
     TEXTELARGEUR        : constant integer := (FLARGEUR - FESPACEMENT * (NBTEXTE+1) ) / NBTEXTE;
@@ -72,17 +72,16 @@ package body p_vue_graph is
     ybouttoninf : constant Integer := FHAUTEUR - (FESPACEMENT + BHAUTEUR);
 
   begin
-    fenetre := DebutFenetre ("pseudo", Flargeur, Fhauteur);
-    ChangerCouleurFond (fenetre, "fond", COULEURPRINCIPALE);
+    fenetre:=DebutFenetre("pseudo", Flargeur, Fhauteur);
+    ChangerCouleurFond(fenetre, "fond", COULEURPRINCIPALE);
+    
+    AjouterChamp(fenetre,"pseudo","Votre pseudo","ton", 300 - 75 ,400,150,30);
+    AjouterBouton(fenetre,"jouer","JOUER", 300 - 75 ,450,70,30);
+    AjouterBouton(fenetre,"quitter","Quitter",305,450,70,30);
 
-    AjouterTexte
-     (fenetre, "NomJoueur", "Quel est ton nom?", FESPACEMENT, FESPACEMENT,
-      TEXTELARGEUR, TEXTEHAUTEUR);
-
-    AjouterChamp
-     (fenetre, "pseudo", "Votre pseudo", "EggMan", 100, 10, 280, 30);
-    AjouterBouton (fenetre, "jouer", "JOUER", 100, 50, 70, 30);
-    AjouterBouton (fenetre, "BoutonAnnuler", "Quitter", 180, 50, 70, 30);
+    AjouterTexte( fenetre, "Bienvenue" , "Bienvenue au Jeu ANTI VIRUS!!" , 200, 20, 200, 50);
+    AjouterImage ( fenetre , "imageAntiVirus" , "antivirusimage.xpm" ,"" , 200 , 150, 200 , 200 );
+    AjouterImage ( fenetre , "imageTousAntiCovid" , "anticovid.xpm" , "" , 0 , 428 , 77,231) ;
 
     FinFenetre (fenetre);
   end initfenetrepseudo;
