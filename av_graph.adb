@@ -14,17 +14,22 @@ begin -- av_graph
   MontrerFenetre(fpseudo);
   ChangerTempsMinuteur(fprincipale, "Chronometre", 200000.0);
   -- ChangerMinuteurEnChrono(fprincipale, "Chronometre");
-  if Attendrebouton(fpseudo) = "quitter" then
-    CacherFenetre(fpseudo);
-  elsif Attendrebouton(fpseudo) = "jouer" then
-    pseudo:=Consultercontenu(fpseudo,"pseudo");
-    CacherFenetre(fpseudo);
-    InitFenetreprincipale(fprincipale, pseudo);
-    MontrerFenetre(fprincipale);
-    if Attendrebouton(fprincipale) = "quitter" then
-      CacherFenetre(fprincipale);
-    end if;
-  end if;
+
+  declare
+    Bouton : String := (Attendrebouton(fpseudo));
+    begin
+      if bouton = "quitter" then
+        CacherFenetre(fpseudo);
+      elsif bouton = "jouer" then
+        pseudo:=Consultercontenu(fpseudo,"pseudo");
+        CacherFenetre(fpseudo);
+        InitFenetreprincipale(fprincipale, pseudo);
+        MontrerFenetre(fprincipale);
+        if Attendrebouton(fprincipale) = "quitter" then
+          CacherFenetre(fprincipale);
+        end if;
+      end if;
+    end;
 
   ecrire_ligne(ConsulterTimer(fprincipale,"Chronometre"));        --nom de la fenêtreNomElement : inString      )
   ecrire_ligne("fin");
