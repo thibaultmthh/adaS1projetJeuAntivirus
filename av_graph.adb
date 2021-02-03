@@ -4,10 +4,14 @@ use p_fenbase, forms, p_esiut, p_vue_graph, p_virus, p_virus.p_mouvement_io,  p_
 procedure av_graph is
   fprincipale : TR_Fenetre;
   fpseudo     : TR_Fenetre;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0000702816e76e1d85ef1dca991cc6f1d1114d50
   continue    : Character;
   pseudo      : String (1 .. 3);
 
--- Partie jeu 
+-- Partie jeu
   numdef       : Positive range 1 .. 20;
   colorSet     : Boolean := false;
   Grille       : TV_Grille;
@@ -17,7 +21,7 @@ procedure av_graph is
   m            : p_mouvement_io.file_type;
 
 
-  
+
 
 
 
@@ -25,9 +29,6 @@ procedure av_graph is
 begin -- av_graph
   InitialiserFenetres;
   initfenetrepseudo (fpseudo);
-
-  afficherGrille(fprincipale, "Grille", Grille);
-
   MontrerFenetre (fpseudo);
   ChangerTempsMinuteur (fprincipale, "Chronometre", 200_000.0);
   -- ChangerMinuteurEnChrono(fprincipale, "Chronometre");
@@ -48,9 +49,10 @@ begin -- av_graph
       InitPartie (Grille, Pieces);
       numdef := 1;
       Configurer (f, numdef, Grille, Pieces);
+      afficherGrille(fprincipale, "grille", Grille);
 
-      
-       
+
+
         loop
           colorSet := false;
           declare
@@ -70,7 +72,7 @@ begin -- av_graph
               ecrire("Couleur");
               colorSet := true;
 
-            -- if c'est un deplacement 
+            -- if c'est un deplacement
             elsif bouton(1..1) = "D" and colorSet then
               ecrire("Deplacement");
 
