@@ -4,11 +4,15 @@ use  p_fenbase, forms, p_esiut, p_vue_graph;
 
 procedure av_graph is
   fprincipale : TR_Fenetre;
+  fpseudo : TR_Fenetre;
   continue : Character;
+  pseudo : string(1..5);
 begin -- av_graph
   InitialiserFenetres;
-  InitFenetreprincipale(fprincipale, "EggManPlayer");
+  initfenetrepseudo(fpseudo, pseudo);
+  InitFenetreprincipale(fprincipale, pseudo);
 
+  MontrerFenetre(fpseudo);
   MontrerFenetre(fprincipale);
   RepriseTimer(fprincipale, "Chronometre");
   declare
@@ -17,10 +21,16 @@ begin -- av_graph
     ecrire_ligne("bouton appuyé : " & Bouton);
 
   end;
-  --test
-  --test2
+    declare
+    Bouton : String := (Attendrebouton(fpseudo));
+  begin
+    ecrire_ligne("bouton appuyé : " & Bouton);
+
+  end;
+
   ecrire_ligne(ConsulterTimer(fprincipale,"Chronometre"));        --nom de la fenêtreNomElement : inString      )
   CacherFenetre(fprincipale);
+  CacherFenetre(fpseudo);
 
 
 

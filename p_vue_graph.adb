@@ -2,11 +2,10 @@ with p_fenbase, forms, p_esiut;
 use  p_fenbase, forms, p_esiut;
 
 package body p_vue_graph is
+  
   procedure InitFenetreprincipale(fenetre : out TR_Fenetre; joueur : in string) is
     FLARGEUR            : constant integer := 500;
     FHAUTEUR            : constant integer := 500;
-    FESPACEMENT         : constant integer := 10; --padding
-    COULEURPRINCIPALE   : constant FL_PD_COL := FL_TOP_BCOL;
 
     NBTEXTE             : constant integer := 3;
     TEXTELARGEUR        : constant integer := (FLARGEUR - FESPACEMENT * (NBTEXTE+1) ) / NBTEXTE;
@@ -48,5 +47,27 @@ package body p_vue_graph is
     AjouterBouton(fenetre, "Quitter", "QUITTER",  FESPACEMENT * 3 + BLARGEUR * 2, ybouttoninf, BLARGEUR,BHAUTEUR);
     FinFenetre(fenetre);
   end InitFenetreprincipale;
+
+  procedure initfenetrepseudo(fenetre: out TR_Fenetre; joueur: out string) is
+    FLARGEUR            : constant integer := 300;
+    FHAUTEUR            : constant integer := 300;
+
+    NBTEXTE             : constant integer := 3;
+    TEXTELARGEUR        : constant integer := (FLARGEUR - FESPACEMENT * (NBTEXTE+1) ) / NBTEXTE;
+
+    TEXTEHAUTEUR        : constant integer := 30;
+
+    NBBOUTTON           : constant integer := 2;
+    BLARGEUR            : constant integer := (FLARGEUR - FESPACEMENT * (NBBOUTTON+1) ) / NBBOUTTON;
+    --On calcule la taille d'un bouton par rapport à la taille de la fenetre, au nombre de bouton et a la taille de l'espacement.
+    BHAUTEUR            : constant integer := 30;
+    ybouttoninf         : constant integer := FHAUTEUR - (FESPACEMENT + BHAUTEUR);
+
+  begin
+    fenetre:=DebutFenetre("pseudo", Flargeur, Fhauteur);
+    ChangerCouleurFond(fenetre, "fond", COULEURPRINCIPALE);
+    
+    FinFenetre(fenetre);
+  end initfenetrepseudo;
 
 end p_vue_graph;
