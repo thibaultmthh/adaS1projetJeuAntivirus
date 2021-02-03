@@ -16,14 +16,13 @@ begin -- av_graph
   -- ChangerMinuteurEnChrono(fprincipale, "Chronometre");
   if Attendrebouton(fpseudo) = "quitter" then
     CacherFenetre(fpseudo);
-  end if;
-  if Attendrebouton(fpseudo) = "jouer" then
+  elsif Attendrebouton(fpseudo) = "jouer" then
     CacherFenetre(fpseudo);
     InitFenetreprincipale(fprincipale, pseudo);
     MontrerFenetre(fprincipale);
-  end if;
-  if Attendrebouton(fprincipale) = "quitter" then
-    CacherFenetre(fprincipale);
+    if Attendrebouton(fprincipale) = "quitter" then
+      CacherFenetre(fprincipale);
+    end if;
   end if;
 
   ecrire_ligne(ConsulterTimer(fprincipale,"Chronometre"));        --nom de la fenêtreNomElement : inString      )
