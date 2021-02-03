@@ -18,6 +18,7 @@ begin -- av_graph
 
   end;
   --test
+  --test2
   ecrire_ligne(ConsulterTimer(fprincipale,"Chronometre"));        --nom de la fenêtreNomElement : inString      )
   CacherFenetre(fprincipale);
 
