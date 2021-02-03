@@ -40,10 +40,11 @@ begin -- av_graph
       InitPartie (Grille, Pieces);
       numdef := 1;
       Configurer (f, numdef, Grille, Pieces);
-      afficherGrille (fprincipale, "grille", Grille);
 
       loop
-        colorSet := False;
+        afficherGrille (fprincipale, "grille", Grille);
+
+        colorSet := True;
         declare
           Bouton : String := (Attendrebouton (fprincipale));
         begin
@@ -64,9 +65,11 @@ begin -- av_graph
             -- if c'est un deplacement
           elsif Bouton (1 .. 1) = "D" and colorSet then
             ECRIRE ("Deplacement");
+            dir := T_Direction'Value (Bouton (2 .. 3));
+            MajGrille (Grille, violet, dir);
 
           end if;
-
+          ECRIRE_LIGNE (Bouton);
         end;
       end loop;
     end if;
