@@ -194,7 +194,7 @@ package body p_vuetxt is
     begin
         loop
             ECRIRE_LIGNE
-               ("Vous voulez bouger dans quelle direction? Tapez (bg, hg, bd ou hd)");
+               ("Vous voulez bouger dans quelle direction? Tapez (bg(bas gauche), hg(hautgauche), bd(bas droit) ou hd(haut droit))");
             LIRE (dir);
             exit when Possible (Grille, couleur, dir);
             ECRIRE ("vous ne pouvez pas bouger vers ");
