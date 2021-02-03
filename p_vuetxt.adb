@@ -269,7 +269,26 @@ package body p_vuetxt is
       Put_line(ESC & "[48:5:196m   " & ESC & "[0m");
       lire(entreeUtilisateur);
       couleurfonctionnelle := entreeUtilisateur = 'y';
+      if not couleurfonctionnelle then
+        ecrire_ligne("Pour un confort de jeu optimal il est recommandé d'utiliser un autre terminal (le jeu va se lancer sans le mode couleur)");
+      end if;
     end InputModeCouleur;
+
+    procedure afficheLegende is
+    begin
+      ecrire_ligne("1 : Rouge");
+      ecrire_ligne("2 : Orange");
+      ecrire_ligne("3 : Rose");
+      ecrire_ligne("4 : Violet");
+      ecrire_ligne("5 : Jaune");
+      ecrire_ligne("6 : Blanc");
+      ecrire_ligne("7 : Turquoise");
+      ecrire_ligne("8 : Marron");
+      ecrire_ligne("9 : Bleu");
+      ecrire_ligne("0 : Vert");
+      ecrire_ligne(". : Vide");
+
+    end afficheLegende;
 
 
 end p_vuetxt;
