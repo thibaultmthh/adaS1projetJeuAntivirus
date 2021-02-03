@@ -27,10 +27,9 @@ begin -- av_graph
   InitialiserFenetres;
   initfenetrepseudo (fpseudo);
 
-  Open (f, In_File, "Defis.bin");
-  InitPartie (Grille, Pieces);
-  Configurer (f, 3, Grille, Pieces);
-  afficherGrille(fprincipale, "grille", Grille);
+
+
+
 
   MontrerFenetre (fpseudo);
   ChangerTempsMinuteur (fprincipale, "Chronometre", 200_000.0);
@@ -52,6 +51,7 @@ begin -- av_graph
       InitPartie (Grille, Pieces);
       numdef := 1;
       Configurer (f, numdef, Grille, Pieces);
+      afficherGrille(fprincipale, "grille", Grille);
 
 
 
