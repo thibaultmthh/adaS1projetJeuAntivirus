@@ -34,16 +34,6 @@ begin -- av_graph
       end if;
     end;
 
-    end if;
-  end;
-  declare
-    Bouton : String := (Attendrebouton (fprincipale));
-  begin
-    if Bouton = "quitter" then
-      CacherFenetre (fprincipale);
-    end if;
-  end;
-
   ecrire_ligne
    (ConsulterTimer
      (fprincipale,
