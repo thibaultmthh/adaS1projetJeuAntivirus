@@ -1,5 +1,5 @@
-with p_fenbase, forms, p_esiut, p_vue_graph;
-use p_fenbase, forms, p_esiut, p_vue_graph;
+with p_fenbase, forms, p_esiut, p_vue_graph, p_virus, Sequential_IO;
+use p_fenbase, forms, p_esiut, p_vue_graph, p_virus, p_virus.p_mouvement_io,  p_virus.p_piece_io;
 
 procedure av_graph is
   fprincipale : TR_Fenetre;
@@ -7,7 +7,16 @@ procedure av_graph is
   continue    : Character;
   pseudo      : String (1 .. 3);
 
-  colorSet    : Boolean := false;
+-- Partie jeu 
+  numdef       : Positive range 1 .. 20;
+  colorSet     : Boolean := false;
+  Grille       : TV_Grille;
+  Pieces       : TV_Pieces;
+  dir          : T_Direction;
+  f            : p_piece_io.File_Type;
+  m            : p_mouvement_io.file_type;
+
+
   
 
 
@@ -30,6 +39,15 @@ begin -- av_graph
       CacherFenetre (fpseudo);
       InitFenetreprincipale (fprincipale, pseudo);
       MontrerFenetre (fprincipale);
+
+      Open (f, In_File, "Defis.bin");
+      Open (m, In_file, "historiqueMouvement.bin");
+      InitPartie (Grille, Pieces);
+      numdef := 1;
+      Configurer (f, numdef, Grille, Pieces);
+
+      
+       
         loop
           colorSet := false;
           declare
@@ -51,7 +69,7 @@ begin -- av_graph
                
 
             -- if c'est un deplacement 
-            elsif bouton(1..1) = "D" and  then
+            elsif bouton(1..1) = "D" and colorSet then
               ecrire("Deplacement");
                
 
