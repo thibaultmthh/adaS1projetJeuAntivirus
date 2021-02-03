@@ -1,5 +1,5 @@
-with p_fenbase, forms, p_esiut;
-use p_fenbase, forms, p_esiut;
+with p_fenbase, forms, p_esiut, p_virus;
+use  p_fenbase, forms, p_esiut, p_virus;
 
 package p_vue_graph is
 
@@ -11,10 +11,9 @@ package p_vue_graph is
 
   --procedure ajouterGrille(fenetre : in out TR_Fenetre, NomElement : in String; grille : in TV_Grille);
 
-  --procedure ajouterBtnDeplacement(
-  --  fenetre : in out TR_Fenetre;
-  -- NomElement : in String;
-  -- x,y : in natural);
+  procedure ajouterBtnDeplacement
+   (fenetre : in out TR_Fenetre; NomElement : in String; x, y ,x2,y2: in Natural);
+
   procedure initfenetrepseudo (fenetre : out TR_Fenetre; joueur : out String);
   --procédure première fenètre de pseudo
 
