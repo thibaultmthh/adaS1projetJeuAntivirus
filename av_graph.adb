@@ -4,10 +4,6 @@ use p_fenbase, forms, p_esiut, p_vue_graph, p_virus, p_virus.p_mouvement_io,  p_
 procedure av_graph is
   fprincipale : TR_Fenetre;
   fpseudo     : TR_Fenetre;
-<<<<<<< HEAD
-=======
-
->>>>>>> 0000702816e76e1d85ef1dca991cc6f1d1114d50
   continue    : Character;
   pseudo      : String (1 .. 3);
 
