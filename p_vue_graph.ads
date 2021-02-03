@@ -10,7 +10,7 @@ package p_vue_graph is
 
   --procedure ajouterGrille(fenetre : in out TR_Fenetre, NomElement : in String; grille : in TV_Grille);
 
-    procedure initfenetrepseudo(fenetre: out TR_Fenetre; joueur: out string);
+    procedure initfenetrepseudo(fenetre: out TR_Fenetre);
       --procédure première fenètre de pseudo
 
 end p_vue_graph;

@@ -50,7 +50,7 @@ package body p_vue_graph is
     FinFenetre(fenetre);
   end InitFenetreprincipale;
 
-  procedure initfenetrepseudo(fenetre: out TR_Fenetre; joueur: out string) is
+  procedure initfenetrepseudo(fenetre: out TR_Fenetre) is
     FLARGEUR            : constant integer := 600;
     FHAUTEUR            : constant integer := 600;
 
@@ -74,8 +74,8 @@ package body p_vue_graph is
     AjouterBouton(fenetre,"quitter","Quitter",305,450,70,30);
 
     AjouterTexte( fenetre, "Bienvenue" , "Bienvenue au Jeu ANTI VIRUS!!" , 200, 20, 200, 50);
-    AjouterImage ( fenetre , "imageAntiVirus" , "antivirusimage.xpm" ," affa" , 200 , 150, 200 , 200 );
-    AjouterImage ( fenetre , "imageTousAntiCovid" , "anticovid.xpm" , "covid" , 0 , 400 , 100,100) ;
+    AjouterImage ( fenetre , "imageAntiVirus" , "antivirusimage.xpm" ,"jeu" , 200 , 150, 200 , 200 );
+    AjouterImage ( fenetre , "imageTousAntiCovid" , "anticovid.xpm" , "covid" , 0 , 400 , 121,231) ;
 
     FinFenetre(fenetre);
   end initfenetrepseudo;

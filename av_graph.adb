@@ -9,7 +9,7 @@ procedure av_graph is
   pseudo : string(1..3);
 begin -- av_graph
   InitialiserFenetres;
-  initfenetrepseudo(fpseudo, pseudo);
+  initfenetrepseudo(fpseudo);
 
   MontrerFenetre(fpseudo);
   ChangerTempsMinuteur(fprincipale, "Chronometre", 200000.0);
