@@ -65,7 +65,7 @@ package body p_vue_graph is
      (fenetre, "Quitter", "QUITTER", FESPACEMENT * 3 + BLARGEUR * 2,
       yboutoninf, BLARGEUR, BHAUTEUR);
 
-    ajouterGrille(fenetre, "grille", 0, yGrille, 200);
+    ajouterGrille(fenetre, "Grille", 0, yGrille, 200);
 
     ajouterBtnDeplacement (fenetre, "", 150, 350, 350, 435);
 
@@ -245,6 +245,24 @@ package body p_vue_graph is
       end loop;
     end loop;
   end afficherBtnDeplacements;
+
+    procedure masquerBtnDeplacements(fenetre : in out TR_Fenetre) is
+    begin 
+    for y in 1 .. 2 loop
+      for x in 1 .. 2 loop
+          CacherElem(fenetre, "D" & T_Direction'Image (btnList (y, x)));
+      end loop;
+    end loop;
+    end masquerBtnDeplacements;
+
+  function getCouleurCase(nomCase: String; grille : TV_Grille) return T_coul is
+
+  begin
+  ecrire_ligne("coucou");
+  ecrire_ligne(nomCase(7..7));
+  ecrire_ligne(nomCase(8..8)); 
+  return grille(T_lig'value(nomCase(8..8)) ,  nomCase(7) );
+  end getCouleurCase;
 
 
 end p_vue_graph;

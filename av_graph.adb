@@ -11,6 +11,7 @@ procedure av_graph is
 -- Partie jeu
   numdef   : Positive range 1 .. 20;
   colorSet : Boolean := False;
+  colorSel : T_coul;
   Grille   : TV_Grille;
   Pieces   : TV_Pieces;
   dir      : T_Direction;
@@ -33,6 +34,8 @@ begin -- av_graph
       pseudo := Consultercontenu (fpseudo, "pseudo");
       CacherFenetre (fpseudo);
       InitFenetreprincipale (fprincipale, pseudo);
+      masquerBtnDeplacements(fprincipale);
+
       MontrerFenetre (fprincipale);
 
       Open (f, In_File, "Defis.bin");
@@ -40,11 +43,11 @@ begin -- av_graph
       InitPartie (Grille, Pieces);
       numdef := 1;
       Configurer (f, numdef, Grille, Pieces);
+      colorSet := False;
+
 
       loop
-        afficherGrille (fprincipale, "grille", Grille);
-        afficherBtnDeplacements(fprincipale, violet, Grille );
-        colorSet := True;
+        afficherGrille (fprincipale, "Grille", Grille);
         declare
           Bouton : String := (Attendrebouton (fprincipale));
         begin
@@ -60,14 +63,21 @@ begin -- av_graph
             -- if c'est une couleur
           elsif Bouton (1 .. 1) = "G" then
             ECRIRE ("Couleur");
-
+            
+            colorSel := getCouleurCase(bouton, grille);
             colorSet := True;
+            if colorSel /= vide and colorSel /= blanc then
+              afficherBtnDeplacements(fprincipale, colorSel, Grille );
+            end if;
+
 
             -- if c'est un deplacement
           elsif Bouton (1 .. 1) = "D" and colorSet then
             ECRIRE ("Deplacement");
             dir := T_Direction'Value (Bouton (2 .. 3));
-            MajGrille (Grille, violet, dir);
+            MajGrille (Grille, colorSel, dir);
+            masquerBtnDeplacements(fprincipale);
+            colorSet := False;
 
           end if;
 
