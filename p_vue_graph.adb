@@ -51,7 +51,7 @@ package body p_vue_graph is
     --ajouterGrille(fenetre, "grille", 0,0, 100);
 
     ajouterBtnDeplacement (fenetre, "", 150, 350, 350, 435);
-    ajouterGrille (fenetre, "Grille", 100, 150, 200);
+    ajouterGrille (fenetre, "Grille", 110, 70, 250);
 
     FinFenetre (fenetre);
   end InitFenetreprincipale;

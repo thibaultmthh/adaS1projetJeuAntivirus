@@ -8,6 +8,7 @@ procedure av_graph is
   pseudo      : String (1 .. 3);
 
   colorSet    : Boolean := false;
+  
 
 
 
@@ -44,13 +45,13 @@ begin -- av_graph
               ecrire_ligne("stats");
 
             -- if c'est une couleur
-            elsif bouton(0) = 'G' then
+            elsif bouton(1..1) = "G" then
               ecrire("Couleur");
               colorSet := true;
                
 
             -- if c'est un deplacement 
-            elsif bouton(0) = 'D' then
+            elsif bouton(1..1) = "D" and  then
               ecrire("Deplacement");
                
 
