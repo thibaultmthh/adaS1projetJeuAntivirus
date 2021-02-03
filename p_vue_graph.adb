@@ -154,8 +154,7 @@ package body p_vue_graph is
                 COULEUR_BOUTON := FL_BOTTOM_BCOL;
               end if;
         end case;
-        ecrire_ligne(T_Coul'image(Grille(x,y)));
-        ecrire_ligne(FL_PD_COL'image(COULEUR_BOUTON));
+        
         if not (COULEUR_BOUTON = FL_TOP_BCOL) then
           ChangerCouleurFond(fenetre, nombouton, COULEUR_BOUTON);
         end if;
