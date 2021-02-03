@@ -101,13 +101,15 @@ package body p_vue_graph is
 
   begin
     fenetre:=DebutFenetre("pseudo", Flargeur, Fhauteur);
-    ChangerCouleurFond(fenetre, "fond", COULEURPRINCIPALE);
+    ChangerCouleurFond(fenetre, "fond",  COULEURPRINCIPALE);
 
     AjouterChamp(fenetre,"pseudo","Votre pseudo","ton", 300 - 75 ,400,150,30);
     AjouterBouton(fenetre,"jouer","JOUER", 300 - 75 ,450,70,30);
     AjouterBouton(fenetre,"quitter","Quitter",305,450,70,30);
 
     AjouterTexte( fenetre, "Bienvenue" , "Bienvenue au Jeu ANTI VIRUS!!" , 200, 20, 200, 50);
+    ChangerCouleurTexte (fenetre, "Bienvenue", FL_WHITE);
+    changercouleurfond(fenetre, "Bienvenue", FL_black);
     AjouterImage ( fenetre , "imageAntiVirus" , "antivirusimage.xpm" ,"" , 200 , 150, 200 , 200 );
     AjouterImage ( fenetre , "imageTousAntiCovid" , "anticovid.xpm" , "" , 0 , 407 , 107,231) ;
 
