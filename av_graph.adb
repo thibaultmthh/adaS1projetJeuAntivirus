@@ -4,11 +4,11 @@ use p_fenbase, forms, p_esiut, p_vue_graph, p_virus, p_virus.p_mouvement_io,  p_
 procedure av_graph is
   fprincipale : TR_Fenetre;
   fpseudo     : TR_Fenetre;
-  f            : p_piece_io.File_Type;
+
   continue    : Character;
   pseudo      : String (1 .. 3);
 
--- Partie jeu 
+-- Partie jeu
   numdef       : Positive range 1 .. 20;
   colorSet     : Boolean := false;
   Grille       : TV_Grille;
@@ -18,7 +18,7 @@ procedure av_graph is
   m            : p_mouvement_io.file_type;
 
 
-  
+
 
 
 
@@ -53,8 +53,8 @@ begin -- av_graph
       numdef := 1;
       Configurer (f, numdef, Grille, Pieces);
 
-      
-       
+
+
         loop
           colorSet := false;
           declare
@@ -74,7 +74,7 @@ begin -- av_graph
               ecrire("Couleur");
               colorSet := true;
 
-            -- if c'est un deplacement 
+            -- if c'est un deplacement
             elsif bouton(1..1) = "D" and colorSet then
               ecrire("Deplacement");
 
