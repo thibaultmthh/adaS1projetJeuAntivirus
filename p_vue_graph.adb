@@ -19,7 +19,6 @@ package body p_vue_graph is
     BHAUTEUR            : constant integer := 30;
     ybouttoninf         : constant integer := FHAUTEUR - (FESPACEMENT + BHAUTEUR);
 
-
   begin
 
     fenetre:=DebutFenetre("Virus",FLARGEUR,FHAUTEUR);
@@ -28,16 +27,19 @@ package body p_vue_graph is
     AjouterTexte(fenetre, "NomJoueur", "joueur : " & joueur, FESPACEMENT, FESPACEMENT, TEXTELARGEUR, TEXTEHAUTEUR);
     ChangerAlignementTexte(fenetre,"NomJoueur",FL_ALIGN_CENTER);
 
-    AjouterChrono(fenetre, "Chronometre", "",FESPACEMENT*2 + TEXTELARGEUR, FESPACEMENT, TEXTELARGEUR, TEXTEHAUTEUR);
-    ChangerAlignementTexte(fenetre,"Chronometre",FL_ALIGN_CENTER);
-    ChangerCouleurFond(fenetre, "Chronometre", COULEURPRINCIPALE);
-    ChangerStyleTexte(fenetre, "Chronometre", FL_BOLD_Style);
-    ChangerCouleurTexte(fenetre, "Chronometre", FL_RED);
+    AjouterChrono
+     (fenetre, "Chronometre", "", FESPACEMENT * 2 + TEXTELARGEUR, FESPACEMENT,
+      TEXTELARGEUR, TEXTEHAUTEUR);
+    ChangerAlignementTexte (fenetre, "Chronometre", FL_ALIGN_CENTER);
+    ChangerCouleurFond (fenetre, "Chronometre", COULEURPRINCIPALE);
+    ChangerStyleTexte (fenetre, "Chronometre", FL_BOLD_Style);
+    ChangerCouleurTexte (fenetre, "Chronometre", FL_DARKVIOLET);
 
-
-    AjouterTexte(fenetre, "NumeroDefi", "Pas de defi selectionne", FESPACEMENT*3 + TEXTELARGEUR*2, FESPACEMENT, TEXTELARGEUR, TEXTEHAUTEUR);
-    ChangerAlignementTexte(fenetre,"NumeroDefi",FL_ALIGN_CENTER);
-
+    AjouterTexte
+     (fenetre, "NumeroDefi", "Pas de defi selectionne",
+      FESPACEMENT * 3 + TEXTELARGEUR * 2, FESPACEMENT, TEXTELARGEUR,
+      TEXTEHAUTEUR);
+    ChangerAlignementTexte (fenetre, "NumeroDefi", FL_ALIGN_CENTER);
 
     --ChangerStyleTexte(fenetre, "NomJoueur", FL_BOLD_Style);
     --ChangerTailleTexte(fenetre, "NomJoueur", 500);
