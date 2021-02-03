@@ -15,7 +15,7 @@ package p_vue_graph is
    (fenetre      : in out TR_Fenetre; NomElement : in String;
     x, y, x2, y2 : in     Natural);
 
-  procedure initfenetrepseudo (fenetre : out TR_Fenetre; joueur : out String);
+  procedure initfenetrepseudo (fenetre : out TR_Fenetre);
   --procédure première fenètre de pseudo
 
 end p_vue_graph;
