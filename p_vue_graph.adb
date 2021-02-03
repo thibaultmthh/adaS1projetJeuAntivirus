@@ -217,7 +217,6 @@ package body p_vue_graph is
 
     for y in 1 .. 2 loop
       for x in 1 .. 2 loop
-      ecrire("oke");
         if Possible(Grille, coul,btnList (y, x)) then
           MontrerElem(fenetre, "D" & T_Direction'Image (btnList (y, x)));
         else 
