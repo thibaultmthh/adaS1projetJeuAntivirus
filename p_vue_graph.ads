@@ -5,6 +5,7 @@ package p_vue_graph is
 
   COULEURPRINCIPALE : constant FL_PD_COL := FL_TOP_BCOL;
   FESPACEMENT       : constant Integer   := 10; --padding
+  NBELEMGRILLE      : constant integer   := 7;
 
   procedure InitFenetreprincipale
    (fenetre : out TR_Fenetre; joueur : in String);
@@ -17,7 +18,7 @@ package p_vue_graph is
 
   procedure ajouterBtnDeplacement
    (fenetre      : in out TR_Fenetre; NomElement : in String;
-    x, y, x2, y2 : in     Natural);
+    x, y, x2, y2, padding : in     Natural);
 
   procedure initfenetrepseudo (fenetre : out TR_Fenetre);
   --procédure première fenètre de pseudo

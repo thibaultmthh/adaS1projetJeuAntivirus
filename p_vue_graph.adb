@@ -9,29 +9,43 @@ package body p_vue_graph is
 
     TEXTEHAUTEUR        : constant integer := 50;
 
-    NBBOUTON           : constant integer := 3;
+    NBBOUTON            : constant integer := 3;
     BLARGEUR            : constant integer := (FLARGEUR - FESPACEMENT * (NBBOUTON+1) ) / NBBOUTON;
     --On calcule la taille d'un bouton par rapport à la taille de la fenetre, au nombre de bouton et a la taille de l'espacement.
     BHAUTEUR            : constant integer := 30;
-    yboutoninf         : constant integer := FHAUTEUR - (FESPACEMENT + BHAUTEUR);
+    yboutoninf          : constant integer := FHAUTEUR - (FESPACEMENT + BHAUTEUR);
+
+    HAUTEURBOUTONDEP    : constant integer := 85;
+    LARGEURBOUTONDEP    : constant integer := 200;
 
 
+    XBOUTONDEP          : constant integer := (FLARGEUR / 2) - (LARGEURBOUTONDEP / 2);
+    YBOUTONDEP          : constant integer := FHAUTEUR - ((2 * FESPACEMENT) + BHAUTEUR + HAUTEURBOUTONDEP);
 
 
-
-    yGrille             : constant integer := FESPACEMENT * 2 + TEXTEHAUTEUR;
-    TAILLEGRILLE        : constant integer := 3;
     function min (a,b : in integer) return integer is
 
       begin
+        ecrire_ligne(a);
+        ecrire_ligne(b);
         if a < b then
+
           return a;
         else
           return b;
         end if;
     end min;
 
+
+    yGrille             : constant integer := FESPACEMENT * 2 + TEXTEHAUTEUR;
+    XDispo              : constant integer := FHAUTEUR - ( FESPACEMENT * 5 ) - TEXTEHAUTEUR - HAUTEURBOUTONDEP - BHAUTEUR;
+    YDispo              : constant integer := FLARGEUR - 2 * FESPACEMENT;
+
+    TAILLEGRILLE        : constant integer := min(XDispo,YDispo);
+
+
   begin
+
 
     fenetre:=DebutFenetre("Virus",FLARGEUR,FHAUTEUR);
     ChangerCouleurFond(fenetre, "fond", COULEURPRINCIPALE);
@@ -65,9 +79,9 @@ package body p_vue_graph is
      (fenetre, "Quitter", "QUITTER", FESPACEMENT * 3 + BLARGEUR * 2,
       yboutoninf, BLARGEUR, BHAUTEUR);
 
-    ajouterGrille(fenetre, "grille", 0, yGrille, 200);
+    ajouterGrille(fenetre, "grille", (FLARGEUR / 2) - (TAILLEGRILLE/2) , yGrille, TAILLEGRILLE);
 
-    ajouterBtnDeplacement (fenetre, "", 150, 350, 350, 435);
+    ajouterBtnDeplacement (fenetre, "", XBOUTONDEP, YBOUTONDEP, XBOUTONDEP+LARGEURBOUTONDEP, YBOUTONDEP+HAUTEURBOUTONDEP, FESPACEMENT);
 
 
     FinFenetre (fenetre);
@@ -79,7 +93,7 @@ package body p_vue_graph is
   x,y : in natural;
   largeur: in positive) is
 
-      tailleBouton : constant positive := largeur  / TAILLEGRILLE;
+      tailleBouton : constant positive := largeur  / NBELEMGRILLE;
       posX, posY : natural;
       stnumligne : String(1..2);
       intnumcol  : positive;
@@ -87,6 +101,8 @@ package body p_vue_graph is
       nombouton : String(1..NomElement'length+2);
 
     begin
+
+
       ecrire_ligne(tailleBouton);
       for i in T_col'Range loop
         for j in T_lig'range loop
@@ -154,7 +170,7 @@ package body p_vue_graph is
                 COULEUR_BOUTON := FL_BOTTOM_BCOL;
               end if;
         end case;
-        
+
         if not (COULEUR_BOUTON = FL_TOP_BCOL) then
           ChangerCouleurFond(fenetre, nombouton, COULEUR_BOUTON);
         end if;
@@ -200,13 +216,13 @@ package body p_vue_graph is
 
   procedure ajouterBtnDeplacement
    (fenetre      : in out TR_Fenetre; NomElement : in String;
-    x, y, x2, y2 : in     Natural)
+    x, y, x2, y2, padding : in     Natural)
   is
 
     type Tv_btn is array (1 .. 2, 1 .. 2) of T_Direction;
 
-    yButton : constant Positive := (y2 - y) / 2;
-    xButton : constant Positive := (x2 - x) / 2;
+    yButton : constant Positive := (y2 - y - padding) / 2;
+    xButton : constant Positive := (x2 - x - padding) / 2;
     actX    : Positive;
     actY    : Positive          := y;
     btnList : Tv_btn            := ((hg, hd), (bg, bd));
