@@ -6,6 +6,9 @@ package p_vue_graph is
 
   --procedure ajouterGrille(fenetre : in out TR_Fenetre, NomElement : in String; grille : in TV_Grille);
 
-
+  --procedure ajouterBtnDeplacement(
+  --  fenetre : in out TR_Fenetre;
+   -- NomElement : in String;
+   -- x,y : in natural);
 
 end p_vue_graph;
