@@ -35,4 +35,6 @@ package p_vuetxt is
 
     procedure InputModeCouleur(couleurfonctionnelle : out boolean);
 
+    procedure afficheLegende;
+
 end p_vuetxt;

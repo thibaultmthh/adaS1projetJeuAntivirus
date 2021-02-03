@@ -39,6 +39,9 @@ begin
 
       NettoyerTerminal;
       AfficheGrille (Grille, modeCouleur);
+      if not modeCouleur then
+        afficheLegende;
+      end if;
 
       InputCouleur (couleur, Pieces, annuler);
       exit when annuler;
@@ -57,6 +60,9 @@ begin
     if Guerison (Grille) then
       NettoyerTerminal;
       AfficheGrille (Grille, modeCouleur);
+      if not modeCouleur then
+        afficheLegende;
+      end if;
       ECRIRE_LIGNE
        ("Felicitaion !! Vous avez réussi en " & IMAGE (compteurMvmt) &
         " coups !");
