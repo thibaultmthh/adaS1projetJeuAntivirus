@@ -51,8 +51,8 @@ package body p_vue_graph is
   end InitFenetreprincipale;
 
   procedure initfenetrepseudo(fenetre: out TR_Fenetre; joueur: out string) is
-    FLARGEUR            : constant integer := 500;
-    FHAUTEUR            : constant integer := 500;
+    FLARGEUR            : constant integer := 400;
+    FHAUTEUR            : constant integer := 300;
 
     NBTEXTE             : constant integer := 3;
     TEXTELARGEUR        : constant integer := (FLARGEUR - FESPACEMENT * (NBTEXTE+1) ) / NBTEXTE;
@@ -70,9 +70,10 @@ package body p_vue_graph is
     ChangerCouleurFond(fenetre, "fond", COULEURPRINCIPALE);
     
     AjouterChamp(fenetre,"pseudo","Votre pseudo","ton",100,10,280,30);
+
     AjouterBouton(fenetre,"jouer","JOUER",100,50,70,30);
     AjouterBouton(fenetre,"quitter","Quitter",180,50,70,30);
-    joueur:=Consultercontenu(fenetre,"pseudo");
+
     FinFenetre(fenetre);
   end initfenetrepseudo;
 

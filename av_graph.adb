@@ -17,6 +17,7 @@ begin -- av_graph
   if Attendrebouton(fpseudo) = "quitter" then
     CacherFenetre(fpseudo);
   elsif Attendrebouton(fpseudo) = "jouer" then
+    pseudo:=Consultercontenu(fpseudo,"pseudo");
     CacherFenetre(fpseudo);
     InitFenetreprincipale(fprincipale, pseudo);
     MontrerFenetre(fprincipale);
