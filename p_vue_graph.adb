@@ -48,7 +48,8 @@ package body p_vue_graph is
     AjouterBouton
      (fenetre, "Quitter", "QUITTER", FESPACEMENT * 3 + BLARGEUR * 2,
       ybouttoninf, BLARGEUR, BHAUTEUR);
-    --ajouterGrille(fenetre, "grille", 0,0, 100);
+
+    ajouterGrille(fenetre, "grille", 0,0, 200);
 
     ajouterBtnDeplacement (fenetre, "", 150, 350, 350, 435);
     ajouterGrille (fenetre, "Grille", 110, 70, 250);
@@ -64,7 +65,8 @@ package body p_vue_graph is
 
       tailleBoutton : constant positive := largeur  / TAILLEGRILLE;
       posX, posY : natural;
-      numligne : String(1..2);
+      stnumligne : String(1..2);
+      intnumcol  : positive;
 
       nombouton : String(1..NomElement'length+2);
 
@@ -73,18 +75,74 @@ package body p_vue_graph is
       for i in T_col'Range loop
         for j in T_lig'range loop
 
-          posX        := x + (T_Col'Pos(i) - 65) * tailleBoutton; -- -(1 + 64) avec 64 corresodnant à la valeur de A
-          posY        := y + (j - 1) * tailleBoutton;
-          numligne    := positive'image(j);
-          nombouton   := NomElement& i & numligne(2..2);
+          intnumcol   := T_Col'Pos(i) - 64; --64 corresodnant à la valeur de A on considère a comme le point 1
+          stnumligne  := positive'image(j);
+          nombouton   := NomElement& i & stnumligne(2..2);
 
-          ecrire_ligne(nombouton);
+          posX        := x + (intnumcol - 1) * tailleBoutton;
+          posY        := y + (j - 1) * tailleBoutton;
+
+
+
+
+          --ecrire_ligne(nombouton);
           AjouterBoutonRond(fenetre,nombouton , "",posX, posY, tailleBoutton  );
+          if ((intnumcol mod 2) = 0 and (j mod 2) = 0) or ((intnumcol mod 2) = 1 and (j mod 2) = 1) then
+            ChangerCouleurFond(fenetre, nombouton, FL_RIGHT_BCOL);
+          else
+            ChangerCouleurFond(fenetre, nombouton, FL_BOTTOM_BCOL);
+          end if;
 
         end loop;
 
       end loop;
   end ajouterGrille;
+
+  procedure afficherGrille(fenetre : in out TR_Fenetre; NomGrille : in String; Grille : in TV_Grille) is
+    COULEUR_BOUTTON : FL_PD_COL := FL_TOP_BCOL;
+    stnumligne : String(1..2);
+    nombouton : String(1..NomGrille'length+2);
+
+  begin
+    for x in T_lig loop
+      for y in T_Col loop
+
+        stnumligne  := positive'image(x);
+        nombouton   := NomGrille& y & stnumligne(2..2);
+
+        case Grille(x,y) is
+            when rouge =>
+                COULEUR_BOUTTON := FL_RED;
+            when orange =>
+                COULEUR_BOUTTON := FL_DARKORANGE;
+            when rose =>
+                COULEUR_BOUTTON := FL_DEEPPINK;
+            when violet =>
+                COULEUR_BOUTTON := FL_DARKVIOLET;
+            when jaune =>
+                COULEUR_BOUTTON := FL_YELLOW;
+            when blanc =>
+                COULEUR_BOUTTON := FL_WHITE;
+            when turquoise =>
+                COULEUR_BOUTTON := FL_CYAN;
+            when marron =>
+                COULEUR_BOUTTON := FL_DARKTOMATO;
+            when bleu =>
+                COULEUR_BOUTTON := FL_BLUE;
+            when vert =>
+                COULEUR_BOUTTON := FL_GREEN;
+            when others =>
+                null;
+        end case;
+        ecrire_ligne(FL_PD_COL'image(COULEUR_BOUTTON));
+        if not (COULEUR_BOUTTON = FL_TOP_BCOL) then
+          ChangerCouleurFond(fenetre, nombouton, COULEUR_BOUTTON);
+        end if;
+      end loop;
+    end loop;
+
+
+  end afficherGrille;
 
   procedure initfenetrepseudo(fenetre: out TR_Fenetre) is
     FLARGEUR            : constant integer := 600;
@@ -103,14 +161,16 @@ package body p_vue_graph is
 
   begin
     fenetre:=DebutFenetre("pseudo", Flargeur, Fhauteur);
-    ChangerCouleurFond(fenetre, "fond", COULEURPRINCIPALE);
+    ChangerCouleurFond(fenetre, "fond",  COULEURPRINCIPALE);
 
     AjouterChamp(fenetre,"pseudo","Votre pseudo","ton", 300 - 75 ,400,150,30);
     AjouterBouton(fenetre,"jouer","JOUER", 300 - 75 ,450,70,30);
     AjouterBouton(fenetre,"quitter","Quitter",305,450,70,30);
 
     AjouterTexte( fenetre, "Bienvenue" , "Bienvenue au Jeu ANTI VIRUS!!" , 200, 20, 200, 50);
-    AjouterImage ( fenetre , "imageAntiVirus" , "antivirusimage.xpm" ,"" , 200 , 150, 200 , 200 );
+    ChangerCouleurTexte (fenetre, "Bienvenue", FL_WHITE);
+    changercouleurfond(fenetre, "Bienvenue", FL_black);
+    AjouterImage ( fenetre , "imagebite" , "imagebite.xpm" ,"" , 200 , 150, 200 , 200 );
     AjouterImage ( fenetre , "imageTousAntiCovid" , "anticovid.xpm" , "" , 0 , 407 , 107,231) ;
 
     FinFenetre (fenetre);
