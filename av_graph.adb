@@ -1,26 +1,21 @@
 with p_fenbase, forms, p_esiut, p_vue_graph, p_virus, Sequential_IO;
-use p_fenbase, forms, p_esiut, p_vue_graph, p_virus, p_virus.p_mouvement_io,  p_virus.p_piece_io;
+use p_fenbase, forms, p_esiut, p_vue_graph, p_virus, p_virus.p_mouvement_io,
+ p_virus.p_piece_io;
 
 procedure av_graph is
   fprincipale, fpseudo : TR_Fenetre;
 
-  continue    : Character;
-  pseudo      : String (1 .. 3);
+  continue : Character;
+  pseudo   : String (1 .. 3);
 
 -- Partie jeu
-  numdef       : Positive range 1 .. 20;
-  colorSet     : Boolean := false;
-  Grille       : TV_Grille;
-  Pieces       : TV_Pieces;
-  dir          : T_Direction;
-  f            : p_piece_io.File_Type;
-  m            : p_mouvement_io.file_type;
-
-
-
-
-
-
+  numdef   : Positive range 1 .. 20;
+  colorSet : Boolean := False;
+  Grille   : TV_Grille;
+  Pieces   : TV_Pieces;
+  dir      : T_Direction;
+  f        : p_piece_io.File_Type;
+  m        : p_mouvement_io.File_Type;
 
 begin -- av_graph
   InitialiserFenetres;
@@ -41,43 +36,39 @@ begin -- av_graph
       MontrerFenetre (fprincipale);
 
       Open (f, In_File, "Defis.bin");
-      Open (m, In_file, "historiqueMouvement.bin");
+      Open (m, In_File, "historiqueMouvement.bin");
       InitPartie (Grille, Pieces);
       numdef := 1;
       Configurer (f, numdef, Grille, Pieces);
-      afficherGrille(fprincipale, "grille", Grille);
+      afficherGrille (fprincipale, "grille", Grille);
 
-
-
-        loop
-          colorSet := false;
-          declare
-            Bouton : String := (Attendrebouton (fprincipale));
-          begin
-            -- if c'st un bouton
-            if Bouton = "Quitter" then
-              CacherFenetre (fprincipale);
-              exit;
-            elsif bouton = "Rejouer" then
-              ecrire_ligne("rejouer");
-            elsif bouton = "Stats" then
-              ecrire_ligne("stats");
+      loop
+        colorSet := False;
+        declare
+          Bouton : String := (Attendrebouton (fprincipale));
+        begin
+          -- if c'st un bouton
+          if Bouton = "Quitter" then
+            CacherFenetre (fprincipale);
+            exit;
+          elsif Bouton = "Rejouer" then
+            ECRIRE_LIGNE ("rejouer");
+          elsif Bouton = "Stats" then
+            ECRIRE_LIGNE ("stats");
 
             -- if c'est une couleur
-            elsif bouton(1..1) = "G" then
-              ecrire("Couleur");
-              colorSet := true;
+          elsif Bouton (1 .. 1) = "G" then
+            ECRIRE ("Couleur");
+            colorSet := True;
 
             -- if c'est un deplacement
-            elsif bouton(1..1) = "D" and colorSet then
-              ecrire("Deplacement");
+          elsif Bouton (1 .. 1) = "D" and colorSet then
+            ECRIRE ("Deplacement");
 
+          end if;
 
-
-            end if;
-
-          end;
-        end loop;
+        end;
+      end loop;
     end if;
   end;
 
