@@ -14,7 +14,8 @@ begin -- av_graph
 
   MontrerFenetre(fpseudo);
   MontrerFenetre(fprincipale);
-  RepriseTimer(fprincipale, "Chronometre");
+  ChangerTempsMinuteur(fprincipale, "Chronometre", 200000.0);
+  -- ChangerMinuteurEnChrono(fprincipale, "Chronometre");
   declare
     Bouton : String := (Attendrebouton(fprincipale));
   begin
