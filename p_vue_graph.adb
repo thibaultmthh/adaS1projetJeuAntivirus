@@ -48,6 +48,7 @@ package body p_vue_graph is
     AjouterBouton
      (fenetre, "Quitter", "QUITTER", FESPACEMENT * 3 + BLARGEUR * 2,
       ybouttoninf, BLARGEUR, BHAUTEUR);
+    --ajouterGrille(fenetre, "grille", 0,0, 100);
 
     ajouterBtnDeplacement (fenetre, "", 150, 350, 350, 435);
     FinFenetre (fenetre);
@@ -62,7 +63,8 @@ package body p_vue_graph is
       tailleBoutton : constant positive := largeur  / TAILLEGRILLE;
       posX, posY : natural;
       numligne : String(1..2);
-      nombouton : String(1..NomElement'length+3);
+
+      nombouton : String(1..NomElement'length+2);
 
     begin
       ecrire_ligne(tailleBoutton);
@@ -72,7 +74,7 @@ package body p_vue_graph is
           posX        := x + (T_Col'Pos(i) - 65) * tailleBoutton; -- -(1 + 64) avec 64 corresodnant à la valeur de A
           posY        := y + (j - 1) * tailleBoutton;
           numligne    := positive'image(j);
-          nombouton   := NomElement& i & numligne(1);
+          nombouton   := NomElement& i & numligne(2..2);
 
           ecrire_ligne(nombouton);
           AjouterBoutonRond(fenetre,nombouton , "",posX, posY, tailleBoutton  );
