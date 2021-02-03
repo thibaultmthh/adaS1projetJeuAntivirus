@@ -1,28 +1,53 @@
 with p_fenbase, forms, p_esiut, p_vue_graph;
-use  p_fenbase, forms, p_esiut, p_vue_graph;
-
+use p_fenbase, forms, p_esiut, p_vue_graph;
 
 procedure av_graph is
   fprincipale : TR_Fenetre;
-  continue : Character;
+  fpseudo     : TR_Fenetre;
+  continue    : Character;
+  pseudo      : String (1 .. 3);
 begin -- av_graph
   InitialiserFenetres;
-  InitFenetreprincipale(fprincipale, "EggManPlayer");
+  initfenetrepseudo (fpseudo);
 
-  MontrerFenetre(fprincipale);
-  RepriseTimer(fprincipale, "Chronometre");
+  MontrerFenetre (fpseudo);
+  ChangerTempsMinuteur (fprincipale, "Chronometre", 200_000.0);
+  -- ChangerMinuteurEnChrono(fprincipale, "Chronometre");
+
   declare
-    Bouton : String := (Attendrebouton(fprincipale));
-  begin
-    ecrire_ligne("bouton appuyé : " & Bouton);
+    Bouton : String := (Attendrebouton(fpseudo));
+    begin
+      if bouton = "quitter" then
+        CacherFenetre(fpseudo);
+      elsif bouton = "jouer" then
+        pseudo :=Consultercontenu(fpseudo,"pseudo");
+        CacherFenetre(fpseudo);
+        InitFenetreprincipale(fprincipale, pseudo);
+        MontrerFenetre(fprincipale);
+        declare
+          Bouton : String := (Attendrebouton(fprincipale));
+        begin
+          if bouton = "quitter" then
+            CacherFenetre(fprincipale);
+          end if;
+        end;
+      end if;
+    end;
 
+    end if;
   end;
-  --test
-  --test2
-  ecrire_ligne(ConsulterTimer(fprincipale,"Chronometre"));        --nom de la fenêtreNomElement : inString      )
-  CacherFenetre(fprincipale);
+  declare
+    Bouton : String := (Attendrebouton (fprincipale));
+  begin
+    if Bouton = "quitter" then
+      CacherFenetre (fprincipale);
+    end if;
+  end;
 
-
-
+  ecrire_ligne
+   (ConsulterTimer
+     (fprincipale,
+      "Chronometre"));        --nom de la fenêtreNomElement : inString      )
+  ECRIRE_LIGNE ("fin");
 
 end av_graph;

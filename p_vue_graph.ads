@@ -1,8 +1,13 @@
 with p_fenbase, forms, p_esiut, p_virus;
-use  p_fenbase, forms, p_esiut, p_virus;
+use p_fenbase, forms, p_esiut, p_virus;
 
 package p_vue_graph is
-  procedure InitFenetreprincipale(fenetre : out TR_Fenetre; joueur : in string);
+
+  COULEURPRINCIPALE : constant FL_PD_COL := FL_TOP_BCOL;
+  FESPACEMENT       : constant Integer   := 10; --padding
+
+  procedure InitFenetreprincipale
+   (fenetre : out TR_Fenetre; joueur : in String);
 
   procedure ajouterGrille(
   fenetre : in out TR_Fenetre;
@@ -10,6 +15,11 @@ package p_vue_graph is
   x,y : in natural;
   largeur: in positive);
 
+  procedure ajouterBtnDeplacement
+   (fenetre      : in out TR_Fenetre; NomElement : in String;
+    x, y, x2, y2 : in     Natural);
 
+  procedure initfenetrepseudo (fenetre : out TR_Fenetre);
+  --procédure première fenètre de pseudo
 
 end p_vue_graph;
