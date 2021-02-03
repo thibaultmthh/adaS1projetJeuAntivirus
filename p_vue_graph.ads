@@ -9,7 +9,11 @@ package p_vue_graph is
   procedure InitFenetreprincipale
    (fenetre : out TR_Fenetre; joueur : in String);
 
-  --procedure ajouterGrille(fenetre : in out TR_Fenetre, NomElement : in String; grille : in TV_Grille);
+  procedure ajouterGrille(
+  fenetre : in out TR_Fenetre;
+  NomElement : in String;
+  x,y : in natural;
+  largeur: in positive);
 
   procedure ajouterBtnDeplacement
    (fenetre      : in out TR_Fenetre; NomElement : in String;

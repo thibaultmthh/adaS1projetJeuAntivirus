@@ -1,8 +1,5 @@
-with p_fenbase, forms, p_esiut;
-use p_fenbase, forms, p_esiut;
-
 package body p_vue_graph is
-  
+
   procedure InitFenetreprincipale(fenetre : out TR_Fenetre; joueur : in string) is
     FLARGEUR            : constant integer := 500;
     FHAUTEUR            : constant integer := 500;
@@ -40,8 +37,8 @@ package body p_vue_graph is
       TEXTEHAUTEUR);
     ChangerAlignementTexte (fenetre, "NumeroDefi", FL_ALIGN_CENTER);
 
-    --ChangerStyleTexte(fenetre, "NomJoueur", FL_BOLD_Style);
-    --ChangerTailleTexte(fenetre, "NomJoueur", 500);
+    ChangerStyleTexte(fenetre, "NomJoueur", FL_BOLD_Style);
+    ChangerTailleTexte(fenetre, "NomJoueur", 500);
 
     AjouterBouton
      (fenetre, "Stats", "STATS", FESPACEMENT, ybouttoninf, BLARGEUR, BHAUTEUR);
@@ -55,6 +52,35 @@ package body p_vue_graph is
     ajouterBtnDeplacement (fenetre, "", 150, 350, 350, 435);
     FinFenetre (fenetre);
   end InitFenetreprincipale;
+
+  procedure ajouterGrille(
+  fenetre : in out TR_Fenetre;
+  NomElement : in String;
+  x,y : in natural;
+  largeur: in positive) is
+
+      tailleBoutton : constant positive := largeur  / TAILLEGRILLE;
+      posX, posY : natural;
+      numligne : String(1..2);
+      nombouton : String(1..NomElement'length+3);
+
+    begin
+      ecrire_ligne(tailleBoutton);
+      for i in T_col'Range loop
+        for j in T_lig'range loop
+
+          posX        := x + (T_Col'Pos(i) - 65) * tailleBoutton; -- -(1 + 64) avec 64 corresodnant à la valeur de A
+          posY        := y + (j - 1) * tailleBoutton;
+          numligne    := positive'image(j);
+          nombouton   := NomElement& i & numligne(1);
+
+          ecrire_ligne(nombouton);
+          AjouterBoutonRond(fenetre,nombouton , "",posX, posY, tailleBoutton  );
+
+        end loop;
+
+      end loop;
+  end ajouterGrille;
 
   procedure initfenetrepseudo(fenetre: out TR_Fenetre) is
     FLARGEUR            : constant integer := 600;
@@ -74,7 +100,7 @@ package body p_vue_graph is
   begin
     fenetre:=DebutFenetre("pseudo", Flargeur, Fhauteur);
     ChangerCouleurFond(fenetre, "fond", COULEURPRINCIPALE);
-    
+
     AjouterChamp(fenetre,"pseudo","Votre pseudo","ton", 300 - 75 ,400,150,30);
     AjouterBouton(fenetre,"jouer","JOUER", 300 - 75 ,450,70,30);
     AjouterBouton(fenetre,"quitter","Quitter",305,450,70,30);

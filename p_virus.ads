@@ -2,7 +2,7 @@ with Sequential_IO;
 with p_esiut; use p_esiut;
 
 package p_virus is
-
+    TAILLEGRILLE : constant positive := 6;
     --------------- Types pour representer la grille de jeu
     subtype T_Col is Character range 'A' .. 'G';
     subtype T_Lig is Integer range 1 .. 7;
