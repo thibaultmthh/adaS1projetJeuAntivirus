@@ -79,7 +79,7 @@ package body p_vue_graph is
      (fenetre, "Quitter", "QUITTER", FESPACEMENT * 3 + BLARGEUR * 2,
       yboutoninf, BLARGEUR, BHAUTEUR);
 
-    ajouterGrille(fenetre, "grille", (FLARGEUR / 2) - (TAILLEGRILLE/2) , yGrille, TAILLEGRILLE);
+    ajouterGrille(fenetre, "Grille", (FLARGEUR / 2) - (TAILLEGRILLE/2) , yGrille, TAILLEGRILLE);
 
     ajouterBtnDeplacement (fenetre, "", XBOUTONDEP, YBOUTONDEP, XBOUTONDEP+LARGEURBOUTONDEP, YBOUTONDEP+HAUTEURBOUTONDEP, FESPACEMENT);
 
@@ -135,6 +135,7 @@ package body p_vue_graph is
     stnumligne : String(1..2);
     nombouton : String(1..NomGrille'length+2);
     intnumcol : integer;
+
   begin
     for x in T_lig loop
       for y in T_Col loop

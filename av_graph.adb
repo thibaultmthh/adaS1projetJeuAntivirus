@@ -63,7 +63,7 @@ begin -- av_graph
             -- if c'est une couleur
           elsif Bouton (1 .. 1) = "G" then
             ECRIRE ("Couleur");
-            
+
             colorSel := getCouleurCase(bouton, grille);
             colorSet := True;
             if colorSel /= vide and colorSel /= blanc then
