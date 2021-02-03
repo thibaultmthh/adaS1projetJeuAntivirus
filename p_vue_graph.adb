@@ -68,7 +68,14 @@ package body p_vue_graph is
   begin
     fenetre:=DebutFenetre("pseudo", Flargeur, Fhauteur);
     ChangerCouleurFond(fenetre, "fond", COULEURPRINCIPALE);
+
+    AjouterTexte(fenetre, "NomJoueur", "Quel est ton nom?", FESPACEMENT, FESPACEMENT, TEXTELARGEUR, TEXTEHAUTEUR);
     
+    AjouterChamp(fenetre,"pseudo","Votre pseudo","EggMan",100,10,280,30);
+    AjouterBouton(fenetre,"jouer","JOUER",100,50,70,30);
+    AjouterBouton(fenetre,"BoutonAnnuler","Quitter",180,50,70,30);
+  
+
     FinFenetre(fenetre);
   end initfenetrepseudo;
 
