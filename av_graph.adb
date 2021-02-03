@@ -6,7 +6,7 @@ procedure av_graph is
   fprincipale : TR_Fenetre;
   fpseudo : TR_Fenetre;
   continue : Character;
-  pseudo : string(1..5);
+  pseudo : string(1..3);
 begin -- av_graph
   InitialiserFenetres;
   initfenetrepseudo(fpseudo, pseudo);
@@ -14,20 +14,20 @@ begin -- av_graph
   MontrerFenetre(fpseudo);
   ChangerTempsMinuteur(fprincipale, "Chronometre", 200000.0);
   -- ChangerMinuteurEnChrono(fprincipale, "Chronometre");
+  if Attendrebouton(fpseudo) = "quitter" then
+    CacherFenetre(fpseudo);
+  end if;
   if Attendrebouton(fpseudo) = "jouer" then
-    FinFenetre(fpseudo);
+    CacherFenetre(fpseudo);
     InitFenetreprincipale(fprincipale, pseudo);
     MontrerFenetre(fprincipale);
   end if;
-   if Attendrebouton(fprincipale) = "quitter" then
-    FinFenetre(fprincipale);
+  if Attendrebouton(fprincipale) = "quitter" then
+    CacherFenetre(fprincipale);
   end if;
 
   ecrire_ligne(ConsulterTimer(fprincipale,"Chronometre"));        --nom de la fenêtreNomElement : inString      )
-  CacherFenetre(fprincipale);
-  CacherFenetre(fpseudo);
-
-
+  ecrire_ligne("fin");
 
 
 end av_graph;
