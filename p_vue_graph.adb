@@ -52,7 +52,7 @@ package body p_vue_graph is
     ajouterGrille(fenetre, "grille", 0,0, 200);
 
     ajouterBtnDeplacement (fenetre, "", 150, 350, 350, 435);
-    
+
 
     FinFenetre (fenetre);
   end InitFenetreprincipale;
@@ -132,8 +132,9 @@ package body p_vue_graph is
             when vert =>
                 COULEUR_BOUTTON := FL_GREEN;
             when others =>
-                null;
+                COULEUR_BOUTTON := FL_TOP_BCOL;
         end case;
+        ecrire_ligne(T_Coul'image(Grille(x,y)));
         ecrire_ligne(FL_PD_COL'image(COULEUR_BOUTTON));
         if not (COULEUR_BOUTTON = FL_TOP_BCOL) then
           ChangerCouleurFond(fenetre, nombouton, COULEUR_BOUTTON);
