@@ -43,7 +43,7 @@ begin
       InputCouleur (couleur, Pieces, annuler);
       exit when annuler;
 
-      InputDirection (dir, couleur, Grille, annuler);
+      InputDirection (dir, couleur, Grille, annuler, modeCouleur);
       if not annuler then -- Si on ne souhaite pas changer de couleur
 
         MajGrille (Grille, couleur, dir);

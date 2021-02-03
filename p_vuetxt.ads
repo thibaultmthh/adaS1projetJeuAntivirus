@@ -24,7 +24,8 @@ package p_vuetxt is
 
     procedure InputDirection
        (dir    : out T_Direction; couleur : in T_CoulP; Grille : in TV_Grille;
-        cancel : in out Boolean);
+        cancel : in out Boolean;
+        modeCouleur : in boolean := true);
 
     procedure DisplayStats (f : in out p_joueur_io.File_Type);
 
