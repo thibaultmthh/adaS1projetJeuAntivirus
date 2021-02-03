@@ -7,8 +7,16 @@ procedure av_graph is
   f            : p_piece_io.File_Type;
   continue    : Character;
   pseudo      : String (1 .. 3);
+
   Pieces      : TV_Pieces;
   Grille      : TV_Grille;
+
+
+  colorSet    : Boolean := false;
+
+
+
+
 begin -- av_graph
   InitialiserFenetres;
   initfenetrepseudo (fpseudo);
@@ -33,9 +41,11 @@ begin -- av_graph
       InitFenetreprincipale (fprincipale, pseudo);
       MontrerFenetre (fprincipale);
         loop
+          colorSet := false;
           declare
             Bouton : String := (Attendrebouton (fprincipale));
           begin
+            -- if c'st un bouton
             if Bouton = "Quitter" then
               CacherFenetre (fprincipale);
               exit;
@@ -43,7 +53,21 @@ begin -- av_graph
               ecrire_ligne("rejouer");
             elsif bouton = "Stats" then
               ecrire_ligne("stats");
+
+            -- if c'est une couleur
+            elsif bouton(0) = 'G' then
+              ecrire("Couleur");
+              colorSet := true;
+
+
+            -- if c'est un deplacement
+            elsif bouton(0) = 'D' then
+              ecrire("Deplacement");
+
+
+
             end if;
+
           end;
         end loop;
     end if;

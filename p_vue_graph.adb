@@ -52,6 +52,8 @@ package body p_vue_graph is
     ajouterGrille(fenetre, "grille", 0,0, 200);
 
     ajouterBtnDeplacement (fenetre, "", 150, 350, 350, 435);
+    ajouterGrille (fenetre, "Grille", 100, 150, 200);
+
     FinFenetre (fenetre);
   end InitFenetreprincipale;
 
@@ -159,14 +161,16 @@ package body p_vue_graph is
 
   begin
     fenetre:=DebutFenetre("pseudo", Flargeur, Fhauteur);
-    ChangerCouleurFond(fenetre, "fond", COULEURPRINCIPALE);
+    ChangerCouleurFond(fenetre, "fond",  COULEURPRINCIPALE);
 
     AjouterChamp(fenetre,"pseudo","Votre pseudo","ton", 300 - 75 ,400,150,30);
     AjouterBouton(fenetre,"jouer","JOUER", 300 - 75 ,450,70,30);
     AjouterBouton(fenetre,"quitter","Quitter",305,450,70,30);
 
     AjouterTexte( fenetre, "Bienvenue" , "Bienvenue au Jeu ANTI VIRUS!!" , 200, 20, 200, 50);
-    AjouterImage ( fenetre , "imageAntiVirus" , "antivirusimage.xpm" ,"" , 200 , 150, 200 , 200 );
+    ChangerCouleurTexte (fenetre, "Bienvenue", FL_WHITE);
+    changercouleurfond(fenetre, "Bienvenue", FL_black);
+    AjouterImage ( fenetre , "imagebite" , "imagebite.xpm" ,"" , 200 , 150, 200 , 200 );
     AjouterImage ( fenetre , "imageTousAntiCovid" , "anticovid.xpm" , "" , 0 , 407 , 107,231) ;
 
     FinFenetre (fenetre);
@@ -193,7 +197,7 @@ package body p_vue_graph is
       for x in 1 .. 2 loop
         ECRIRE_LIGNE (T_Direction'Image (btnList (y, x)));
         AjouterBouton
-         (fenetre, T_Direction'Image (btnList (y, x)),
+         (fenetre, "D"&T_Direction'Image (btnList (y, x)),
           T_Direction'Image (btnList (y, x)), actX, actY, xButton, yButton);
 
         ECRIRE (actX);
