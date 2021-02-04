@@ -1,8 +1,10 @@
 with Sequential_IO;
-with p_esiut; use p_esiut;
+with p_esiut;               use p_esiut;
+with Ada.Calendar;          use Ada.Calendar;
+with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
 
 package p_virus is
-    TAILLEGRILLE : constant positive := 6;
+    TAILLEGRILLE : constant Positive := 6;
     --------------- Types pour representer la grille de jeu
     subtype T_Col is Character range 'A' .. 'G';
     subtype T_Lig is Integer range 1 .. 7;
@@ -36,35 +38,28 @@ package p_virus is
     package p_dir_io is new P_ENUM (T_Direction);
     use p_dir_io;
 
-	type TR_mouvement is record
-		direction : T_direction;
-		couleur : T_coulP;
-	end record;
-	package p_mouvement_io is new sequential_io(TR_mouvement); use p_mouvement_io;
-
+    type TR_mouvement is record
+        direction : T_Direction;
+        couleur   : T_CoulP;
+    end record;
+    package p_mouvement_io is new Sequential_IO (TR_mouvement);
+    use p_mouvement_io;
 
     -- --- partie stats
-    type TR_date is record
-        jour : Natural;
-        mois : Natural;
-        an   : Natural;
+    type TR_Stats is record
+        nomJoueur   : Unbounded_String; --son nom
+        points      : Natural;     -- nb de points selon le compteur_mouvement
+        date        : Time;      -- la date qu'il a joué
+        temps       : Float;
+        numeroDefis : Natural;
     end record;
-
-    type TR_Joueur is record
-        nomJoueur      : String (1 .. 25); --son nom
-        nomNiveau      : String (1 .. 20);    -- nom du niveau
-        points : Natural;     -- nb de points selon le compteur_mouvement
-        date           : TR_date;      -- la date qu'il a joué
-        timestampdebut : Integer;
-        timestampFin   : Integer;
-        nbCoups        : Integer;
-        numeroDefis    : Natural;
-    end record;
-    package p_joueur_io is new Sequential_IO (TR_Joueur);
+    package p_joueur_io is new Sequential_IO (TR_Stats);
     use p_joueur_io;
 
     procedure SaveANewStat
-       (s : in out p_joueur_io.File_Type; Joueur : TR_Joueur);
+       (s : in out p_joueur_io.File_Type; nomJoueur : in Unbounded_String;
+        temps      : in     Float; numeroNiveau : in Positive;
+        nombrecoup : in     Positive);
 
     --------------- Primitives d'nitialisation d'une partie
 
@@ -131,6 +126,8 @@ package p_virus is
        (grille : TV_Grille; coul : in T_Coul) return Boolean;
     --{} => {vrai si couleur dans grille}
 
-    procedure historiqueMouvement ( m : in out p_mouvement_io.file_type ; direction : in T_direction ; couleur : in T_coulP);
+    procedure historiqueMouvement
+       (m       : in out p_mouvement_io.File_Type; direction : in T_Direction;
+        couleur : in     T_CoulP);
 
 end p_virus;

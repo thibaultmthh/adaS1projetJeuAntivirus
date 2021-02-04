@@ -1,7 +1,5 @@
 package body p_vuetxt is
 
-
-
     procedure AfficheCase
        (coul : in T_Coul; x : in Integer; y : in Integer; colored : in Boolean)
     is
@@ -105,8 +103,10 @@ package body p_vuetxt is
 
     end AfficheBord;
 
-    procedure AfficheGrille (Grille : in TV_Grille; colored : in boolean := true) is
-        ncol    : Integer := 0;
+    procedure AfficheGrille
+       (Grille : in TV_Grille; colored : in Boolean := True)
+    is
+        ncol : Integer := 0;
 
     begin
         Put_Line (" ");
@@ -179,7 +179,8 @@ package body p_vuetxt is
             if couleur = blanc then
                 ECRIRE_LIGNE ("On ne peut pas bouger les blancs.");
             elsif not Pieces (couleur) then
-                ECRIRE_LIGNE ("Couleur non presente sur le plateau, reesayez.");
+                ECRIRE_LIGNE
+                   ("Couleur non presente sur le plateau, reesayez.");
             else
                 exit;
             end if;
@@ -188,8 +189,7 @@ package body p_vuetxt is
 
     procedure InputDirection
        (dir    : out T_Direction; couleur : in T_CoulP; Grille : in TV_Grille;
-        cancel : in out Boolean;
-        modeCouleur : in boolean := true)
+        cancel : in out Boolean; modeCouleur : in Boolean := True)
     is
     begin
         loop
@@ -206,14 +206,14 @@ package body p_vuetxt is
         end loop;
     end InputDirection;
 
-
     function InputReplay return Boolean is
     -- Return True quand l'utilisateur veut rejouer, false quand il ne veut pas
         rejouer : Character;
         rep     : Boolean;
     begin
         loop
-            ECRIRE_LIGNE (" Bravo vous avez gagné, une autre partie ? (y ou n)");
+            ECRIRE_LIGNE
+               (" Bravo vous avez gagné, une autre partie ? (y ou n)");
             LIRE (rejouer);
             if rejouer = 'y' then
                 ECRIRE_LIGNE ("c'est reparti");
@@ -230,10 +230,8 @@ package body p_vuetxt is
         return rep;
     end InputReplay;
 
-
-
     procedure DisplayStats (f : in out p_joueur_io.File_Type) is
-        elem : TR_Joueur;
+        elem : TR_Stats;
     begin
         Reset (f, In_File);
         Read (f, elem);
@@ -262,72 +260,74 @@ package body p_vuetxt is
         LIRE (name);
     end InputPlayerName;
 
-    procedure InputModeCouleur(couleurfonctionnelle : out boolean) is
-      entreeUtilisateur : Character;
+    procedure InputModeCouleur (couleurfonctionnelle : out Boolean) is
+        entreeUtilisateur : Character;
     begin
-      ecrire("Voyez vous un carré rouge (y ou n (défaut N))? ");
-      Put_line(ESC & "[48:5:196m   " & ESC & "[0m");
-      lire(entreeUtilisateur);
-      couleurfonctionnelle := entreeUtilisateur = 'y';
-      if not couleurfonctionnelle then
-        ecrire_ligne("Pour un confort de jeu optimal il est recommandé d'utiliser un autre terminal (le jeu va se lancer sans le mode couleur)");
-      end if;
+        ECRIRE ("Voyez vous un carré rouge (y ou n (défaut N))? ");
+        Put_Line (ESC & "[48:5:196m   " & ESC & "[0m");
+        LIRE (entreeUtilisateur);
+        couleurfonctionnelle := entreeUtilisateur = 'y';
+        if not couleurfonctionnelle then
+            ECRIRE_LIGNE
+               ("Pour un confort de jeu optimal il est recommandé d'utiliser un autre terminal (le jeu va se lancer sans le mode couleur)");
+        end if;
     end InputModeCouleur;
 
     procedure afficheLegende is
     begin
-      ecrire_ligne("1 : Rouge");
-      ecrire_ligne("2 : Orange");
-      ecrire_ligne("3 : Rose");
-      ecrire_ligne("4 : Violet");
-      ecrire_ligne("5 : Jaune");
-      ecrire_ligne("6 : Blanc");
-      ecrire_ligne("7 : Turquoise");
-      ecrire_ligne("8 : Marron");
-      ecrire_ligne("9 : Bleu");
-      ecrire_ligne("0 : Vert");
-      ecrire_ligne(". : Vide");
+        ECRIRE_LIGNE ("1 : Rouge");
+        ECRIRE_LIGNE ("2 : Orange");
+        ECRIRE_LIGNE ("3 : Rose");
+        ECRIRE_LIGNE ("4 : Violet");
+        ECRIRE_LIGNE ("5 : Jaune");
+        ECRIRE_LIGNE ("6 : Blanc");
+        ECRIRE_LIGNE ("7 : Turquoise");
+        ECRIRE_LIGNE ("8 : Marron");
+        ECRIRE_LIGNE ("9 : Bleu");
+        ECRIRE_LIGNE ("0 : Vert");
+        ECRIRE_LIGNE (". : Vide");
 
     end afficheLegende;
 
-   -- procedure historiqueMouvement ( m : in out p_mouvement_io.file_type ; direction : in T_direction ; couleur : in T_coulP) is
+    -- procedure historiqueMouvement ( m : in out p_mouvement_io.file_type ; direction : in T_direction ; couleur : in T_coulP) is
     --{ m- contient le mouvement du joueur precedent}
     -- ==> le nouveau mouvement du joueur a été enregistré dans le fichier
     --binaire temporaire historiqueMouvement.bin
-        --elem: TR_mouvement;
+    --elem: TR_mouvement;
     --begin
-     --   elem.direction := direction; elem.couleur := couleur;
-     --   Open(m , append_file, "historiqueMouvement.bin");
-     --   write( m , elem);
-            --close(m);
+    --   elem.direction := direction; elem.couleur := couleur;
+    --   Open(m , append_file, "historiqueMouvement.bin");
+    --   write( m , elem);
+    --close(m);
 
-  --  end historiqueMouvemen;
+    --  end historiqueMouvemen;
 
-  --procedure retournerMouvement ( m : in out p_mouvement_io.file_type) is
-        --elem: TR_mouvement;
-       -- mouvementPrecedent : TR_mouvement;
-   -- begin
+    --procedure retournerMouvement ( m : in out p_mouvement_io.file_type) is
+    --elem: TR_mouvement;
+    -- mouvementPrecedent : TR_mouvement;
+    -- begin
     --    reset( m , in_file);
-        --read(m , elem);
+    --read(m , elem);
     --    if end_of_file(m) then
-     --   ecrire("Pas possible de retourner le mouvement!");
+    --   ecrire("Pas possible de retourner le mouvement!");
     --    else
-      --  loop
-        --read(m,elem);
-        --exit when end_of_file(m);
-        --end loop;
-        --end if;
-        --mouvementPrecedent := elem;
+    --  loop
+    --read(m,elem);
+    --exit when end_of_file(m);
+    --end loop;
+    --end if;
+    --mouvementPrecedent := elem;
     --end retournermouvement;
 
-    function RepEstCoulP (reponse : in T_reponse) return boolean is
-      coul : T_CoulP := T_CoulP'first;
+    function RepEstCoulP (reponse : in T_reponse) return Boolean is
+        coul : T_CoulP := T_CoulP'First;
     begin
-      while not (coul = T_CoulP'last) and then T_reponse'image(reponse) /= T_CoulP'image(coul) loop
-        coul := T_CoulP'succ(coul);
-      end loop;
-      return T_reponse'image(reponse) = T_CoulP'image(coul);
+        while not (coul = T_CoulP'Last)
+           and then T_reponse'Image (reponse) /= T_CoulP'Image (coul)
+        loop
+            coul := T_CoulP'Succ (coul);
+        end loop;
+        return T_reponse'Image (reponse) = T_CoulP'Image (coul);
     end RepEstCoulP;
-
 
 end p_vuetxt;
