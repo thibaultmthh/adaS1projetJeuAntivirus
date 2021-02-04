@@ -9,6 +9,7 @@ package p_vue_graph is
 
 
   type Tv_btn is array (1 .. 2, 1 .. 2) of T_Direction;
+  subtype T_defi is Integer range 1 .. 20;
 
   btnList : Tv_btn            := ((hg, hd), (bg, bd));
 
@@ -33,5 +34,6 @@ package p_vue_graph is
   procedure afficherBtnDeplacements(fenetre : in out TR_Fenetre;  coul:in T_coul; grille: TV_Grille);
   procedure masquerBtnDeplacements(fenetre : in out TR_Fenetre);
   function getCouleurCase(nomCase: String; grille : TV_Grille)  return T_coul;
+  function InputDefi(fenetre: in TR_Fenetre) return integer;
 
 end p_vue_graph;
