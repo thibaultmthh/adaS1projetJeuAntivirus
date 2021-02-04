@@ -273,11 +273,11 @@ package body p_vue_graph is
   return grille(T_lig'value(nomCase(8..8)) ,  nomCase(7) );
   end getCouleurCase;
 
-  procedure choixdefi(numdefi: out integer) is 
-  begin
-    loop 
-      AjouterBouton
-  end choixdefi;
+  --procedure choixdefi(numdefi: out integer) is 
+  ---begin
+  --  loop 
+  --    AjouterBouton
+  --end choixdefi;
 
 
 end p_vue_graph;
