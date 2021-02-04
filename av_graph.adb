@@ -105,9 +105,12 @@ begin -- av_graph
 
         if Guerison(Grille) then
           InitwinVictoire(FenetreWin);
+          MontrerFenetre(FenetreWin);
+          if Attendrebouton(FenetreWin)= "ok" then
+            cacherfenetre(FenetreWin);
+          end if;
           ecrire_ligne (ConsulterTimer (fprincipale, "Chronometre"));
           afficherGrille(fprincipale, "Grille", Grille);
-          MontrerFenetre(FenetreWin);
           ecrire_ligne("Vous avez gagné");
         end if;
     end loop; -- loop principale jusqu'a quiter
