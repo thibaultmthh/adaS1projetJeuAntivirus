@@ -94,10 +94,8 @@ begin -- av_graph
           MajGrille (Grille, colorSel, dir);
           masquerBtnDeplacements (fprincipale);
           colorSet := False;
-          if Guerison (Grille) then
-            exit;
-          end if;
 
+          exit when Guerison (Grille);
 
         end if;
 
@@ -105,6 +103,11 @@ begin -- av_graph
 
       end loop; -- loop principale d'une partie
 
+        if Guerison(Grille) then
+          ecrire_ligne (ConsulterTimer (fprincipale, "Chronometre"));
+          afficherGrille(fprincipale, "Grille", Grille);
+          ecrire_ligne("Vous avez gagné");
+        end if;
     end loop; -- loop principale jusqu'a quiter
   end if;
 
