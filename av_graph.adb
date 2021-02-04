@@ -41,10 +41,6 @@ procedure av_graph is
     end if;
   end basicButtonAcction;
 
-
-
-
-
 begin -- av_graph
   InitialiserFenetres;
   initfenetrepseudo (fpseudo);
@@ -52,8 +48,8 @@ begin -- av_graph
   -- ChangerMinuteurEnChrono(fprincipale, "Chronometre");
 
   loop
-  Bouton := To_Unbounded_String(Attendrebouton(fpseudo));
-  exit when Bouton /= "pseudo";
+    Bouton := To_Unbounded_String (Attendrebouton (fpseudo));
+    exit when bouton /= "pseudo";
   end loop;
 
   if bouton = "quitter" then
@@ -68,32 +64,24 @@ begin -- av_graph
     nombrecoup := 0;
     Open (f, In_File, "Defis.bin");
     Open (m, In_File, "historiqueMouvement.bin");
-<<<<<<< HEAD
-
-=======
     Open (s, In_File, "stats.bin");
->>>>>>> 24ef946e3fea70fc911c30ecbd7c38c9ae31908f
     while not exitall loop  -- loop principale jusqu'a quiter
 
       InitPartie (Grille, Pieces);
       afficherGrille (fprincipale, "Grille", Grille);
-      CacherElem(fprincipale, "Rejouer");
-
+      CacherElem (fprincipale, "Rejouer");
 
       --Choix du defi
 
       loop
         Bouton := To_Unbounded_String (Attendrebouton (fprincipale));
-        exit when Bouton /= "Stats";
+        exit when bouton /= "Stats";
       end loop;
-      if Bouton = "Quitter" then
-        exitall := true;
-      elsif Bouton = "facile" then
-        AfficherDef(fprincipale, 1);
+      if bouton = "Quitter" then
+        exitall := True;
+      elsif bouton = "facile" then
+        AfficherDef (fprincipale, 1);
       end if;
-
-
-
 
       Configurer (f, numdef, Grille, Pieces);
       colorSet := False;
