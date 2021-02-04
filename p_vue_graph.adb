@@ -5,8 +5,7 @@ package body p_vue_graph is
     function min (a,b : in integer) return integer is
 
       begin
-        ecrire_ligne(a);
-        ecrire_ligne(b);
+      
         if a < b then
 
           return a;
@@ -105,7 +104,7 @@ package body p_vue_graph is
     begin
 
 
-      ecrire_ligne(tailleBouton);
+
       for i in T_col'Range loop
         for j in T_lig'range loop
 
@@ -223,15 +222,11 @@ package body p_vue_graph is
     for y in 1 .. 2 loop
       actX := x;
       for x in 1 .. 2 loop
-        ECRIRE_LIGNE (T_Direction'Image (btnList (y, x)));
         AjouterBouton
          (fenetre, "D"&T_Direction'Image (btnList (y, x)),
           T_Direction'Image (btnList (y, x)), actX, actY, xButton, yButton);
 
-        ECRIRE (actX);
-        ECRIRE (actY);
-        ECRIRE (xButton);
-        ECRIRE_LIGNE (yButton);
+
         actX := actX + xButton + 10;
 
       end loop;
@@ -267,15 +262,13 @@ package body p_vue_graph is
   function getCouleurCase(nomCase: String; grille : TV_Grille) return T_coul is
 
   begin
-  ecrire_ligne("coucou");
-  ecrire_ligne(nomCase(7..7));
-  ecrire_ligne(nomCase(8..8));
+
   return grille(T_lig'value(nomCase(8..8)) ,  nomCase(7) );
   end getCouleurCase;
 
-  --procedure choixdefi(numdefi: out integer) is 
+  --procedure choixdefi(numdefi: out integer) is
   ---begin
-  --  loop 
+  --  loop
   --    AjouterBouton
   --end choixdefi;
 
