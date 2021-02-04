@@ -294,18 +294,24 @@ package body p_vue_graph is
   procedure InitwinVictoire (FenetreWin : in out TR_Fenetre) is
 
     begin
-      FenetreWin:=DebutFenetre("Victoire", 280, 107);
+      FenetreWin:=DebutFenetre("Victoire", 300, 300);
       AjouterTexte(FenetreWin, "Bravo", "Bravo, vous avez terminé ce niveau",
-                  11,
-                  10,
-                  259,
-                  13);
+                    20,
+                    10,
+                    259,
+                    13);
 
       AjouterBouton(FenetreWin,"ok","Ok",
-                    116,
+                    126,
                     49,
                     48,
                     30);
+
+      AjouterImage(fenetre , "Stonks" , "Stonks.xpm" ,"" ,
+                    0,
+                    132,
+                    300,
+                    168);
 
       FinFenetre(FenetreWin);
 
