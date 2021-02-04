@@ -1,6 +1,6 @@
 package body p_vuetxt is
 
---Loic
+
 
     procedure AfficheCase
        (coul : in T_Coul; x : in Integer; y : in Integer; colored : in Boolean)
@@ -174,12 +174,12 @@ package body p_vuetxt is
     is
     begin
         loop
-            ECRIRE_LIGNE ("Quel couleur veux- tu bouger?");
+            ECRIRE_LIGNE ("Quelle couleur souhaitez vous déplacer?");
             LIRE (couleur);
             if couleur = blanc then
                 ECRIRE_LIGNE ("On ne peut pas bouger les blancs.");
             elsif not Pieces (couleur) then
-                ECRIRE_LIGNE ("Couleur non presente sur le plateau, reesaye.");
+                ECRIRE_LIGNE ("Couleur non presente sur le plateau, reesayez.");
             else
                 exit;
             end if;
@@ -194,7 +194,7 @@ package body p_vuetxt is
     begin
         loop
             ECRIRE_LIGNE
-               ("Vous voulez bouger dans quelle direction? Tapez (bg(bas gauche), hg(hautgauche), bd(bas droit) ou hd(haut droit))");
+               ("Dans quelle direction souhaitez vous vous déplacer ? Tapez (bg(bas gauche), hg(hautgauche), bd(bas droit) ou hd(haut droit))");
             LIRE (dir);
             exit when Possible (Grille, couleur, dir);
             ECRIRE ("vous ne pouvez pas bouger vers ");
@@ -213,7 +213,7 @@ package body p_vuetxt is
         rep     : Boolean;
     begin
         loop
-            ECRIRE_LIGNE (" GG !! veux-tu rejouer? (y ou n)");
+            ECRIRE_LIGNE (" Bravo vous avez gagné, une autre partie ? (y ou n)");
             LIRE (rejouer);
             if rejouer = 'y' then
                 ECRIRE_LIGNE ("c'est reparti");
@@ -302,7 +302,7 @@ package body p_vuetxt is
             --close(m);
 
   --  end historiqueMouvemen;
-  
+
   --procedure retournerMouvement ( m : in out p_mouvement_io.file_type) is
         --elem: TR_mouvement;
        -- mouvementPrecedent : TR_mouvement;
@@ -319,6 +319,15 @@ package body p_vuetxt is
         --end if;
         --mouvementPrecedent := elem;
     --end retournermouvement;
+
+    function RepEstCoulP (reponse : in T_reponse) return boolean is
+      coul : T_CoulP := T_CoulP'first;
+    begin
+      while not (coul = T_CoulP'last) and then T_reponse'image(reponse) /= T_CoulP'image(coul) loop
+        coul := T_CoulP'succ(coul);
+      end loop;
+      return T_reponse'image(reponse) = T_CoulP'image(coul);
+    end RepEstCoulP;
 
 
 end p_vuetxt;
