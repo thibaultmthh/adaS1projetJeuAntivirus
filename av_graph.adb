@@ -8,6 +8,7 @@ procedure av_graph is
   continue : Character;
   pseudo   : String (1 .. 3);
   exitall  : Boolean := False;
+  exitgame : Boolean := False;
   defi     : Integer;
 
 -- Partie jeu
@@ -19,6 +20,22 @@ procedure av_graph is
   dir      : T_Direction;
   f        : p_piece_io.File_Type;
   m        : p_mouvement_io.File_Type;
+
+  procedure basicButtonAcction
+   (Button : in String; exitall : out Boolean; exitgame : out Boolean)
+  is
+  begin
+    if Bouton = "Quitter" then
+      CacherFenetre (fprincipale);
+      exitall := True;
+
+    elsif Bouton = "Rejouer" then
+      changertexte (fprincipale, "Rejouer", "Rejouer");
+      exitgame := True;
+    elsif Bouton = "Stats" then
+      ECRIRE_LIGNE ("stats");
+    end if;
+  end basicButtonAcction;
 
 begin -- av_graph
   InitialiserFenetres;
@@ -40,6 +57,7 @@ begin -- av_graph
       MontrerFenetre (fprincipale);
       Open (f, In_File, "Defis.bin");
       Open (m, In_File, "historiqueMouvement.bin");
+      
       while not exitall loop  -- loop principale jusqu'a quiter
         InitPartie (Grille, Pieces);
         ChangerTempsMinuteur (fprincipale, "Chronometre", 200_000.0);
@@ -47,23 +65,16 @@ begin -- av_graph
         numdef := 1;
         Configurer (f, numdef, Grille, Pieces);
         colorSet := False;
-        loop -- loop d'une game
+        exitgame := fales;
+        while not exitgame and not exitall loop -- loop d'une game
           afficherGrille (fprincipale, "Grille", Grille);
           declare
             Bouton : String := (Attendrebouton (fprincipale));
           begin
             -- if c'st un bouton
-            if Bouton = "Quitter" then
-              CacherFenetre (fprincipale);
-              exitall := True;
-              exit;
-            elsif Bouton = "Rejouer" then
-              changertexte (fprincipale, "Rejouer", "Rejouer");
-            elsif Bouton = "Stats" then
-              ECRIRE_LIGNE ("stats");
-
-              -- if c'est une couleur
-            elsif Bouton (1 .. 1) = "G" then
+            basicButtonAcction (Button, exitall, exitgame);
+            -- if c'est une couleur
+            if Bouton (1 .. 1) = "G" then
               ECRIRE ("Couleur");
 
               colorSel := getCouleurCase (Bouton, Grille);
