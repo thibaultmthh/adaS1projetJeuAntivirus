@@ -5,7 +5,7 @@ package body p_vue_graph is
     function min (a,b : in integer) return integer is
 
       begin
-
+      
         if a < b then
 
           return a;
@@ -275,9 +275,9 @@ package body p_vue_graph is
     ajoutertexte(fenetre,"choixdefi","cliquer sur un bouton de difficulte:",130,460,240,40);
     ChangerAlignementTexte (fenetre, "choixdefi", FL_ALIGN_CENTER);
     AjouterBouton(fenetre,"facile","facile", x,y ,largeur, hauteur);
-    AjouterBouton(fenetre,"moyen","moyen", x+largeur+espace,y ,largeur, hauteur);
-    AjouterBouton(fenetre,"difficile","difficile", x+2*(largeur+espace),y ,largeur, hauteur);
-    AjouterBouton(fenetre,"compliqué","complique", x+3*(largeur+espace),y ,largeur, hauteur);
+    AjouterBouton(fenetre,"moyen","moyen", x+largeur+espace,y ,largeur, hauteur);  
+    AjouterBouton(fenetre,"difficile","difficile", x+2*(largeur+espace),y ,largeur, hauteur);  
+    AjouterBouton(fenetre,"compliqué","complique", x+3*(largeur+espace),y ,largeur, hauteur);    
   end choixdefi;
 
   procedure cacherdefi(fenetre: in out TR_fenetre)is
@@ -307,7 +307,7 @@ package body p_vue_graph is
                     48,
                     30);
 
-      AjouterImage(FenetreWin , "Stonks" , "Stonks.xpm" ,"" ,
+      AjouterImage(FenetreWin, "Stonks" , "Stonks.xpm" ,"" ,
                     0,
                     132,
                     300,
