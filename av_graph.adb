@@ -40,7 +40,6 @@ procedure av_graph is
   end basicButtonAcction;
 
 begin -- av_graph
-  InitwinVictoire(FenetreWin);
   InitialiserFenetres;
   initfenetrepseudo (fpseudo);
   MontrerFenetre (fpseudo);
@@ -104,6 +103,7 @@ begin -- av_graph
       end loop; -- loop principale d'une partie
 
         if Guerison(Grille) then
+          InitwinVictoire(FenetreWin);
           ecrire_ligne (ConsulterTimer (fprincipale, "Chronometre"));
           afficherGrille(fprincipale, "Grille", Grille);
           MontrerFenetre(FenetreWin);
