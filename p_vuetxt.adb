@@ -193,16 +193,19 @@ package body p_vuetxt is
     is
     begin
         loop
+
             ECRIRE_LIGNE
                ("Dans quelle direction souhaitez vous vous déplacer ? Tapez (bg(bas gauche), hg(hautgauche), bd(bas droit) ou hd(haut droit))");
             LIRE (dir);
             exit when Possible (Grille, couleur, dir);
+            NettoyerTerminal;
+            AfficheGrille (Grille, modeCouleur);
             ECRIRE ("vous ne pouvez pas bouger vers ");
             ECRIRE (dir);
             ECRIRE (" ! ");
             A_LA_LIGNE;
             ECRIRE_LIGNE (" ressayez une autre direction");
-            AfficheGrille (Grille, modeCouleur);
+
         end loop;
     end InputDirection;
 
@@ -239,17 +242,17 @@ package body p_vuetxt is
             ECRIRE ("Pas encore de données stats");
         else
             while not End_Of_File (f) loop
-                ECRIRE_LIGNE (elem.nomJoueur);
-                ECRIRE_LIGNE ("Possede : ");
-                ECRIRE (elem.points);
-                ECRIRE (" points");
-                ECRIRE (" , à la date : ");
-                ECRIRE (elem.date.jour);
-                ECRIRE (" / ");
-                ECRIRE (elem.date.mois);
-                ECRIRE (" / ");
-                ECRIRE (elem.date.an);
-                Read (f, elem);
+              ECRIRE_LIGNE (To_String(elem.nomJoueur));
+              ECRIRE_LIGNE ("Possede : ");
+              ECRIRE (elem.points);
+              ECRIRE (" points");
+              --ECRIRE (" , à la date : ");
+              --ECRIRE (elem.date.day);
+              --ECRIRE (" / ");
+              --ECRIRE (elem.date.mois);
+              --ECRIRE (" / ");
+              --ECRIRE (elem.date.an);
+              Read (f, elem);
             end loop;
         end if;
     end DisplayStats;
