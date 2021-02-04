@@ -23,17 +23,17 @@ procedure av_graph is
   pseudo, bouton : Unbounded_String;
 
   procedure basicButtonAcction
-   (Button : in String; exitall : out Boolean; exitgame : out Boolean)
+   (Bouton : in String; exitall : out Boolean; exitgame : out Boolean)
   is
   begin
-    if bouton = "Quitter" then
+    if Bouton = "Quitter" then
       CacherFenetre (fprincipale);
       exitall := True;
 
-    elsif bouton = "Rejouer" then
+    elsif Bouton = "Rejouer" then
       changertexte (fprincipale, "Rejouer", "Rejouer");
       exitgame := True;
-    elsif bouton = "Stats" then
+    elsif Bouton = "Stats" then
       ECRIRE_LIGNE ("stats");
     end if;
   end basicButtonAcction;
@@ -68,7 +68,8 @@ begin -- av_graph
       numdef := 1;
       Configurer (f, numdef, Grille, Pieces);
       colorSet := False;
-      loop -- loop d'une game
+      exitgame := False;
+      while not exitgame and not exitall loop -- loop d'une game
         afficherGrille (fprincipale, "Grille", Grille);
         declare
           Bouton : String := (Attendrebouton (fprincipale));
