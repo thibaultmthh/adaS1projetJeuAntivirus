@@ -61,6 +61,7 @@ begin -- av_graph
 
     masquerBtnDeplacements (fprincipale);
     MontrerFenetre (fprincipale);
+
     nombrecoup := 0;
     Open (f, In_File, "Defis.bin");
     Open (m, In_File, "historiqueMouvement.bin");
@@ -72,8 +73,10 @@ begin -- av_graph
       CacherElem (fprincipale, "Rejouer");
 
       --Choix du defi
-
+      cacherdefi (fprincipale);
+      numdef := 1;
       loop
+        exit;
         Bouton := To_Unbounded_String (Attendrebouton (fprincipale));
         exit when bouton /= "Stats";
       end loop;
