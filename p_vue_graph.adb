@@ -5,7 +5,7 @@ package body p_vue_graph is
     function min (a,b : in integer) return integer is
 
       begin
-      
+
         if a < b then
 
           return a;
@@ -42,6 +42,9 @@ package body p_vue_graph is
     YDispo              : constant integer := FLARGEUR - 2 * FESPACEMENT;
     yGrille             : constant integer := FESPACEMENT * 2 + TEXTEHAUTEUR;
     TAILLEGRILLE        : constant integer := min(XDispo,YDispo);
+
+    LARGEURBOUTONDEFS    : constant integer := FLARGEUR - 2*FESPACEMENT;
+    LARGEURBOUTONRETDEF  : constant integer := (LARGEURBOUTONDEFS - 5*FESPACEMENT) / 6;
   begin
 
 
@@ -81,6 +84,11 @@ package body p_vue_graph is
     ajouterGrille(fenetre, "Grille", (FLARGEUR / 2) - (TAILLEGRILLE/2) , yGrille, TAILLEGRILLE);
 
     ajouterBtnDeplacement (fenetre, "", XBOUTONDEP, YBOUTONDEP, XBOUTONDEP+LARGEURBOUTONDEP, YBOUTONDEP+HAUTEURBOUTONDEP, FESPACEMENT);
+
+    AjouterBoutonChoixDef(fenetre, FESPACEMENT, YBOUTONDEP, HAUTEURBOUTONDEP, LARGEURBOUTONDEFS );
+    AjouterBouton(fenetre, "RetourDef", "Retour", 6*FESPACEMENT  + 5*LARGEURBOUTONRETDEF,YBOUTONDEP, LARGEURBOUTONRETDEF, HAUTEURBOUTONDEP);
+    CacherElem(fenetre, "RetourDef");
+
     choixdefi(fenetre,defi);
 
     FinFenetre (fenetre);
@@ -88,10 +96,10 @@ package body p_vue_graph is
 
 
   procedure ajouterGrille(
-  fenetre : in out TR_Fenetre;
-  NomElement : in String;
-  x,y : in natural;
-  largeur: in positive) is
+      fenetre : in out TR_Fenetre;
+      NomElement : in String;
+      x,y : in natural;
+      largeur: in positive) is
 
       tailleBouton : constant positive := largeur  / NBELEMGRILLE;
       posX, posY : natural;
@@ -135,8 +143,7 @@ package body p_vue_graph is
     stnumligne : String(1..2);
     nombouton : String(1..NomGrille'length+2);
     intnumcol : integer;
-
-  begin
+    begin
     for x in T_lig loop
       for y in T_Col loop
         intnumcol   := T_Col'Pos(y) - 64;
@@ -180,6 +187,25 @@ package body p_vue_graph is
 
 
   end afficherGrille;
+
+  procedure AjouterBoutonChoixDef(fenetre : in out Tr_Fenetre; x, y, hauteur, largeur : in positive) is
+  largeur_bouton  : constant integer := (largeur - 5*FESPACEMENT) / 6;
+  numdefi : integer := 1;
+  begin
+  while not (numdefi > 20) loop
+    for i in 1..5 loop
+      AjouterBouton(fenetre, "Defi" & integer'image(numdefi), integer'image(numdefi), x +  (largeur_bouton+FESPACEMENT)*(i-1), y    , largeur_bouton,     hauteur);
+      CacherElem(fenetre, "Defi" & integer'image(numdefi));
+
+      numdefi := numdefi + 1;
+    end loop;
+
+  end loop;
+  end AjouterBoutonChoixDef;
+
+
+
+
 
   procedure initfenetrepseudo(fenetre: out TR_Fenetre) is
     FLARGEUR            : constant integer := 600;
@@ -275,12 +301,12 @@ package body p_vue_graph is
     ajoutertexte(fenetre,"choixdefi","cliquer sur un bouton de difficulte:",130,460,240,40);
     ChangerAlignementTexte (fenetre, "choixdefi", FL_ALIGN_CENTER);
     AjouterBouton(fenetre,"facile","facile", x,y ,largeur, hauteur);
-    AjouterBouton(fenetre,"moyen","moyen", x+largeur+espace,y ,largeur, hauteur);  
-    AjouterBouton(fenetre,"difficile","difficile", x+2*(largeur+espace),y ,largeur, hauteur);  
+    AjouterBouton(fenetre,"moyen","moyen", x+largeur+espace,y ,largeur, hauteur);
+    AjouterBouton(fenetre,"difficile","difficile", x+2*(largeur+espace),y ,largeur, hauteur);
     AjouterBouton(fenetre,"compliqué","complique", x+3*(largeur+espace),y ,largeur, hauteur);
 
-    Attendrebouton(fenetre);
-    
+    --Attendrebouton(fenetre);
+
   end choixdefi;
 
 

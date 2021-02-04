@@ -30,7 +30,7 @@ package p_vue_graph is
   --procédure première fenètre de pseudo
 
   procedure afficherGrille(fenetre : in out TR_Fenetre; NomGrille : in String; Grille : in TV_Grille);
-
+  procedure AjouterBoutonChoixDef(fenetre : in out Tr_Fenetre; x, y, hauteur, largeur : in positive);
   procedure afficherBtnDeplacements(fenetre : in out TR_Fenetre;  coul:in T_coul; grille: TV_Grille);
   procedure masquerBtnDeplacements(fenetre : in out TR_Fenetre);
   function getCouleurCase(nomCase: String; grille : TV_Grille)  return T_coul;
