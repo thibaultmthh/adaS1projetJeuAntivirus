@@ -76,7 +76,7 @@ begin -- av_graph
         basicButtonAcction(To_string(Bouton), exitall, exitgame);
 
           -- if c'est un bouton de la grille
-        elsif To_string(Bouton)(1..1) = "G" then
+        if To_string(Bouton)(1..1) = "G" then
 
 
           colorSel := getCouleurCase (To_string(Bouton), Grille);
