@@ -16,6 +16,7 @@ package body p_vue_graph is
 
     FLARGEUR            : constant integer := 500;
     FHAUTEUR            : constant integer := 600;
+    defi:integer;
 
     -- Texte superieur et horloge
     NBTEXTE             : constant integer := 3;
@@ -41,8 +42,6 @@ package body p_vue_graph is
     YDispo              : constant integer := FLARGEUR - 2 * FESPACEMENT;
     yGrille             : constant integer := FESPACEMENT * 2 + TEXTEHAUTEUR;
     TAILLEGRILLE        : constant integer := min(XDispo,YDispo);
-
-
   begin
 
 
@@ -67,8 +66,8 @@ package body p_vue_graph is
     ChangerStyleTexte(fenetre, "NomJoueur", FL_BOLD_Style);
     ChangerTailleTexte(fenetre, "NomJoueur", 500);
 
-    AjouterTexte(fenetre, "NumeroDefi", "Pas de defi selectionne",
-      XBOUTONDEP, YBOUTONDEP, 200, TEXTEHAUTEUR);
+    --AjouterTexte(fenetre, "NumeroDefi", "Pas de defi selectionne",
+      --XBOUTONDEP, YBOUTONDEP, 200, TEXTEHAUTEUR);
 
     AjouterBouton
      (fenetre, "Stats", "STATS", FESPACEMENT, yboutoninf, BLARGEUR, BHAUTEUR);
@@ -82,7 +81,7 @@ package body p_vue_graph is
     ajouterGrille(fenetre, "Grille", (FLARGEUR / 2) - (TAILLEGRILLE/2) , yGrille, TAILLEGRILLE);
 
     ajouterBtnDeplacement (fenetre, "", XBOUTONDEP, YBOUTONDEP, XBOUTONDEP+LARGEURBOUTONDEP, YBOUTONDEP+HAUTEURBOUTONDEP, FESPACEMENT);
-
+    choixdefi(fenetre,defi);
 
     FinFenetre (fenetre);
   end InitFenetreprincipale;
@@ -266,11 +265,18 @@ package body p_vue_graph is
   return grille(T_lig'value(nomCase(8..8)) ,  nomCase(7) );
   end getCouleurCase;
 
-  --procedure choixdefi(numdefi: out integer) is
-  ---begin
-  --  loop
-  --    AjouterBouton
-  --end choixdefi;
+  procedure choixdefi(fenetre: in out TR_fenetre; numdefi: out integer)is
+    hauteur    : constant integer := 85;
+    largeur    : constant integer := 200;
+    x:constant integer:=150;
+    y: constant integer := 465;
+  begin
+    ecrire_ligne("defi");
+    AjouterBouton(fenetre,"facile","facile", x,y ,largeur, hauteur);
+    AjouterBouton(fenetre,"moyen","moyen", x,y ,largeur, hauteur);  
+    AjouterBouton(fenetre,"difficile","difficile", x,y ,largeur, hauteur);  
+    AjouterBouton(fenetre,"compliqué","complique", x,y ,largeur, hauteur);  
+  end choixdefi;
 
 
 end p_vue_graph;

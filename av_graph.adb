@@ -57,7 +57,6 @@ begin -- av_graph
     CacherFenetre (fpseudo);
     InitFenetreprincipale (fprincipale, To_string (pseudo));
     masquerBtnDeplacements (fprincipale);
-
     MontrerFenetre (fprincipale);
 
     Open (f, In_File, "Defis.bin");
