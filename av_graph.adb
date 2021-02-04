@@ -1,26 +1,42 @@
-with p_fenbase, forms, p_esiut, p_vue_graph, p_virus, Sequential_IO, Ada.Strings.Unbounded;
-use p_fenbase, forms, p_esiut, p_vue_graph, p_virus, p_virus.p_mouvement_io, Ada.Strings.Unbounded,
- p_virus.p_piece_io;
+with p_fenbase, forms, p_esiut, p_vue_graph, p_virus, Sequential_IO, Ada
+ .Strings
+ .Unbounded;
+use p_fenbase, forms, p_esiut, p_vue_graph, p_virus, p_virus.p_mouvement_io,
+ Ada.Strings.Unbounded, p_virus.p_piece_io;
 
 procedure av_graph is
   fprincipale, fpseudo : TR_Fenetre;
 
-
-
   exitall  : Boolean := False;
-  defi     : Integer :=0;
+  exitgame : Boolean := False;
+  defi     : Integer;
 
 -- Partie jeu
-  numdef   : Positive range 1 .. 20;
-  colorSet : Boolean := False;
-  colorSel : T_Coul;
-  Grille   : TV_Grille;
-  Pieces   : TV_Pieces;
-  dir      : T_Direction;
-  f        : p_piece_io.File_Type;
-  m        : p_mouvement_io.File_Type;
+  numdef         : Positive range 1 .. 20;
+  colorSet       : Boolean := False;
+  colorSel       : T_Coul;
+  Grille         : TV_Grille;
+  Pieces         : TV_Pieces;
+  dir            : T_Direction;
+  f              : p_piece_io.File_Type;
+  m              : p_mouvement_io.File_Type;
   pseudo, bouton : Unbounded_String;
 
+  procedure basicButtonAcction
+   (Button : in String; exitall : out Boolean; exitgame : out Boolean)
+  is
+  begin
+    if bouton = "Quitter" then
+      CacherFenetre (fprincipale);
+      exitall := True;
+
+    elsif bouton = "Rejouer" then
+      changertexte (fprincipale, "Rejouer", "Rejouer");
+      exitgame := True;
+    elsif bouton = "Stats" then
+      ECRIRE_LIGNE ("stats");
+    end if;
+  end basicButtonAcction;
 
 begin -- av_graph
   InitialiserFenetres;
@@ -28,20 +44,18 @@ begin -- av_graph
   MontrerFenetre (fpseudo);
   -- ChangerMinuteurEnChrono(fprincipale, "Chronometre");
 
-
   loop
-  Bouton := To_Unbounded_String(Attendrebouton(fpseudo));
-  exit when Bouton /= "pseudo";
+    Bouton := To_Unbounded_String (Attendrebouton (fpseudo));
+    exit when bouton /= "pseudo";
   end loop;
 
-
-  if Bouton = "quitter" then
+  if bouton = "quitter" then
     CacherFenetre (fpseudo);
-  elsif Bouton = "jouer" then
-    pseudo := To_Unbounded_String(Consultercontenu(fpseudo, "pseudo"));
+  elsif bouton = "jouer" then
+    pseudo := To_Unbounded_String (Consultercontenu (fpseudo, "pseudo"));
     CacherFenetre (fpseudo);
-    InitFenetreprincipale (fprincipale, To_string(pseudo));
-    masquerBtnDeplacements(fprincipale);
+    InitFenetreprincipale (fprincipale, To_string (pseudo));
+    masquerBtnDeplacements (fprincipale);
 
     MontrerFenetre (fprincipale);
 
@@ -59,15 +73,7 @@ begin -- av_graph
         Bouton := To_Unbounded_String(Attendrebouton (fprincipale));
 
        -- if c'st un bouton
-        if Bouton = "Quitter" then
-          CacherFenetre (fprincipale);
-          exitall := True;
-          exit;
-        elsif Bouton = "Rejouer" then
-          changertexte (fprincipale, "Rejouer", "Rejouer");
-          CacherElem (fprincipale,"NumeroDefi");
-        elsif Bouton = "Stats" then
-          ecrire_ligne("stat");
+        basicButtonAcction(To_string(Bouton), exitall, exitgame);
 
           -- if c'est un bouton de la grille
         elsif To_string(Bouton)(1..1) = "G" then
@@ -98,8 +104,7 @@ begin -- av_graph
       end loop; -- loop principale d'une partie
 
     end loop; -- loop principale jusqu'a quiter
-    end if;
-
+  end if;
 
   ecrire_ligne (ConsulterTimer (fprincipale, "Chronometre"));
 
