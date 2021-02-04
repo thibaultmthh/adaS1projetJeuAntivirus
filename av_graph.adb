@@ -56,6 +56,7 @@ begin -- av_graph
     pseudo := To_Unbounded_String (Consultercontenu (fpseudo, "pseudo"));
     CacherFenetre (fpseudo);
     InitFenetreprincipale (fprincipale, To_string (pseudo));
+    cacherdefi(fprincipale);
     masquerBtnDeplacements (fprincipale);
     MontrerFenetre (fprincipale);
 

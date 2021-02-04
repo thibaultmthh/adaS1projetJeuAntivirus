@@ -280,5 +280,14 @@ package body p_vue_graph is
     AjouterBouton(fenetre,"compliqué","complique", x+3*(largeur+espace),y ,largeur, hauteur);    
   end choixdefi;
 
+  procedure cacherdefi(fenetre: in out TR_fenetre)is
+  begin
+    CacherElem(fenetre,"choixdefi");
+    CacherElem(fenetre,"facile");
+    cacherelem(fenetre,"moyen");
+    cacherelem(fenetre, "difficile");
+    cacherelem(fenetre,"compliqué");
+  end cacherdefi;
+
 
 end p_vue_graph;
