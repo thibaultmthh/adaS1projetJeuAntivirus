@@ -35,7 +35,7 @@ package p_vue_graph is
   procedure masquerBtnDeplacements(fenetre : in out TR_Fenetre);
   function getCouleurCase(nomCase: String; grille : TV_Grille)  return T_coul;
   procedure choixdefi(fenetre: in out TR_fenetre; numdefi: out integer);
-  procedure cacherdefi(fenetre: in out TR_fenetre);
+  --procedure cacherdefi(fenetre: in out TR_fenetre);
 
 
   procedure InitwinVictoire (FenetreWin : in out TR_Fenetre);
