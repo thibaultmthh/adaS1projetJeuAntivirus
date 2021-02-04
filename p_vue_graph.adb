@@ -265,7 +265,6 @@ package body p_vue_graph is
   return grille(T_lig'value(nomCase(8..8)) ,  nomCase(7) );
   end getCouleurCase;
 
-<<<<<<< HEAD
   procedure choixdefi(fenetre: in out TR_fenetre; numdefi: out integer)is
     hauteur    : constant integer := 85;
     largeur    : constant integer := 200;
@@ -278,13 +277,6 @@ package body p_vue_graph is
     AjouterBouton(fenetre,"difficile","difficile", x,y ,largeur, hauteur);  
     AjouterBouton(fenetre,"compliqué","complique", x,y ,largeur, hauteur);  
   end choixdefi;
-=======
-  --procedure choixdefi(numdefi: out integer) is
-  ---begin
-  --  loop
-  --    AjouterBouton
-  --end choixdefi;
->>>>>>> 8f922a5d282edc58efdfd1ec2ade3ebfa7ceaf24
 
 
 end p_vue_graph;
