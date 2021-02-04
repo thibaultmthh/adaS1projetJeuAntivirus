@@ -42,6 +42,9 @@ package body p_vue_graph is
     YDispo              : constant integer := FLARGEUR - 2 * FESPACEMENT;
     yGrille             : constant integer := FESPACEMENT * 2 + TEXTEHAUTEUR;
     TAILLEGRILLE        : constant integer := min(XDispo,YDispo);
+
+    LARGEURBOUTONDEFS    : constant integer := FLARGEUR - 2*FESPACEMENT;
+    LARGEURBOUTONRETDEF  : constant integer := (LARGEURBOUTONDEFS - 5*FESPACEMENT) / 6;
   begin
 
 
@@ -82,6 +85,10 @@ package body p_vue_graph is
 
     ajouterBtnDeplacement (fenetre, "", XBOUTONDEP, YBOUTONDEP, XBOUTONDEP+LARGEURBOUTONDEP, YBOUTONDEP+HAUTEURBOUTONDEP, FESPACEMENT);
     choixdefi(fenetre,defi);
+
+    AjouterBoutonChoixDef(fenetre, FESPACEMENT, YBOUTONDEP, HAUTEURBOUTONDEP, LARGEURBOUTONDEFS );
+    AjouterBouton(fenetre, "RetourDef", "Retour", 6*FESPACEMENT  + 5*LARGEURBOUTONRETDEF,YBOUTONDEP, LARGEURBOUTONRETDEF, HAUTEURBOUTONDEP);
+    CacherElem(fenetre, "RetourDef");
 
     FinFenetre (fenetre);
   end InitFenetreprincipale;
@@ -182,72 +189,70 @@ package body p_vue_graph is
   end afficherGrille;
 
   procedure initfenetrepseudo(fenetre: out TR_Fenetre) is
-    FLARGEUR            : constant integer := 600;
-    FHAUTEUR            : constant integer := 600;
+      FLARGEUR            : constant integer := 600;
+      FHAUTEUR            : constant integer := 600;
 
 
-  begin
-    fenetre:=DebutFenetre("fpseudo", Flargeur, Fhauteur);
-    ChangerCouleurFond(fenetre, "fond",  COULEURPRINCIPALE);
+    begin
+      fenetre:=DebutFenetre("fpseudo", Flargeur, Fhauteur);
+      ChangerCouleurFond(fenetre, "fond",  COULEURPRINCIPALE);
 
-    AjouterChamp(fenetre,"pseudo","Votre pseudo","", 225 ,400,150,30);
-    AjouterBouton(fenetre,"jouer","JOUER", 225 ,450,70,30);
-    AjouterBouton(fenetre,"quitter","Quitter",305,450,70,30);
+      AjouterChamp(fenetre,"pseudo","Votre pseudo","", 225 ,400,150,30);
+      AjouterBouton(fenetre,"jouer","JOUER", 225 ,450,70,30);
+      AjouterBouton(fenetre,"quitter","Quitter",305,450,70,30);
 
-    AjouterTexte( fenetre, "Bienvenue" , "Bienvenue au Jeu ANTI VIRUS!!" , 200, 20, 200, 50);
-    ChangerCouleurTexte (fenetre, "Bienvenue", FL_WHITE);
-    changercouleurfond(fenetre, "Bienvenue", FL_black);
-    AjouterImage ( fenetre , "imageAntiVirus" , "antivirusimage.xpm" ,"" , 200 , 150, 200 , 200 );
-    AjouterImage ( fenetre , "imageTousAntiCovid" , "anticovid.xpm" , "" , 0 , 407 , 107,231) ;
+      AjouterTexte( fenetre, "Bienvenue" , "Bienvenue au Jeu ANTI VIRUS!!" , 200, 20, 200, 50);
+      ChangerCouleurTexte (fenetre, "Bienvenue", FL_WHITE);
+      changercouleurfond(fenetre, "Bienvenue", FL_black);
+      AjouterImage ( fenetre , "imageAntiVirus" , "antivirusimage.xpm" ,"" , 200 , 150, 200 , 200 );
+      AjouterImage ( fenetre , "imageTousAntiCovid" , "anticovid.xpm" , "" , 0 , 407 , 107,231) ;
 
-    FinFenetre (fenetre);
-  end initfenetrepseudo;
-
-
+      FinFenetre (fenetre);
+    end initfenetrepseudo;
 
   procedure ajouterBtnDeplacement
-   (fenetre      : in out TR_Fenetre; NomElement : in String;
-    x, y, x2, y2, padding : in     Natural)
-  is
+     (fenetre      : in out TR_Fenetre; NomElement : in String;
+      x, y, x2, y2, padding : in     Natural)
+    is
 
 
-    yButton : constant Positive := (y2 - y - padding) / 2;
-    xButton : constant Positive := (x2 - x - padding) / 2;
-    actX    : Positive;
-    actY    : Positive          := y;
+      yButton : constant Positive := (y2 - y - padding) / 2;
+      xButton : constant Positive := (x2 - x - padding) / 2;
+      actX    : Positive;
+      actY    : Positive          := y;
 
-  begin
+    begin
 
-    for y in 1 .. 2 loop
-      actX := x;
-      for x in 1 .. 2 loop
-        AjouterBouton
-         (fenetre, "D"&T_Direction'Image (btnList (y, x)),
-          T_Direction'Image (btnList (y, x)), actX, actY, xButton, yButton);
+      for y in 1 .. 2 loop
+        actX := x;
+        for x in 1 .. 2 loop
+          AjouterBouton
+           (fenetre, "D"&T_Direction'Image (btnList (y, x)),
+            T_Direction'Image (btnList (y, x)), actX, actY, xButton, yButton);
 
 
-        actX := actX + xButton + 10;
+          actX := actX + xButton + 10;
+
+        end loop;
+        actY := actY + yButton + 10;
 
       end loop;
-      actY := actY + yButton + 10;
 
-    end loop;
-
-  end ajouterBtnDeplacement;
+    end ajouterBtnDeplacement;
 
   procedure afficherBtnDeplacements(fenetre : in out TR_Fenetre; coul:in T_coul; grille: in TV_Grille) is
-  begin
+    begin
 
-    for y in 1 .. 2 loop
-      for x in 1 .. 2 loop
-        if Possible(Grille, coul,btnList (y, x)) then
-          MontrerElem(fenetre, "D" & T_Direction'Image (btnList (y, x)));
-        else
-          CacherElem(fenetre, "D" & T_Direction'Image (btnList (y, x)));
-        end if;
+      for y in 1 .. 2 loop
+        for x in 1 .. 2 loop
+          if Possible(Grille, coul,btnList (y, x)) then
+            MontrerElem(fenetre, "D" & T_Direction'Image (btnList (y, x)));
+          else
+            CacherElem(fenetre, "D" & T_Direction'Image (btnList (y, x)));
+          end if;
+        end loop;
       end loop;
-    end loop;
-  end afficherBtnDeplacements;
+    end afficherBtnDeplacements;
 
     procedure masquerBtnDeplacements(fenetre : in out TR_Fenetre) is
     begin
@@ -260,10 +265,10 @@ package body p_vue_graph is
 
   function getCouleurCase(nomCase: String; grille : TV_Grille) return T_coul is
 
-  begin
+    begin
 
-  return grille(T_lig'value(nomCase(8..8)) ,  nomCase(7) );
-  end getCouleurCase;
+    return grille(T_lig'value(nomCase(8..8)) ,  nomCase(7) );
+    end getCouleurCase;
 
   procedure choixdefi(fenetre: in out TR_fenetre; numdefi: out integer)is
     hauteur    : constant integer := 42;
@@ -288,6 +293,15 @@ package body p_vue_graph is
     cacherelem(fenetre, "difficile");
     cacherelem(fenetre,"compliqué");
   end cacherdefi;
+
+  procedure montrerdefi(fenetre: in out TR_fenetre)is
+  begin
+    CacherElem(fenetre,"choixdefi");
+    CacherElem(fenetre,"facile");
+    cacherelem(fenetre,"moyen");
+    cacherelem(fenetre, "difficile");
+    cacherelem(fenetre,"compliqué");
+  end montrerdefi;
 
 
 
@@ -331,5 +345,34 @@ package body p_vue_graph is
 
     end loop;
     end AjouterBoutonChoixDef;
+
+    procedure CacherDef(fenetre : in out TR_Fenetre; numdefinf : in positive) is
+
+    begin
+      for i in numdefinf..numdefinf+4 loop
+        CacherElem(fenetre, "Defi" & integer'image(i));
+      end loop;
+      CacherElem(fenetre, "RetourDef");
+    end CacherDef;
+
+    procedure AfficherDef(fenetre : in out TR_Fenetre; numdefinf : in positive) is
+
+    begin
+      for i in numdefinf..numdefinf+4 loop
+        MontrerElem(fenetre, "Defi" & integer'image(i));
+      end loop;
+      MontrerElem(fenetre, "RetourDef");
+    end AfficherDef;
+
+    function estDefi(nombouton : in string) return Boolean is
+    begin
+      return nombouton(1..4) = "Defi";
+    end estDefi;
+
+    function numDefi(nombouton: in string) return positive is
+    begin
+      return integer'value(nombouton(5..5));
+    end numDefi;
+
 
 end p_vue_graph;
