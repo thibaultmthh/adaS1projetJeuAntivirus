@@ -57,11 +57,18 @@ begin -- av_graph
             CacherFenetre (fprincipale);
             exit;
           elsif Bouton = "Rejouer" then
-            changertexte(fprincipale,"Rejouer","Rejouer");
             defi:=InputDefi(fprincipale);
-            ecrire_ligne(defi);
-            ECRIRE_LIGNE ("rejouer");
-
+            if defi=0 then
+              ecrire_ligne("coucou");
+              changertexte(fprincipale,"NumeroDefi","il faut entrer un nombre");
+            elsif defi=21 then
+              changertexte(fprincipale,"NumeroDefi","il faut un nombre entre 1 et 20");
+            else
+              CacherElem(fprincipale,"NumeroDefi");
+              changertexte(fprincipale,"Rejouer","Rejouer");
+              ecrire_ligne(defi);
+              ECRIRE_LIGNE ("rejouer");
+            end if;
           elsif Bouton = "Stats" then
             ECRIRE_LIGNE ("stats");
 
