@@ -5,8 +5,7 @@ package body p_vue_graph is
     function min (a,b : in integer) return integer is
 
       begin
-        ecrire_ligne(a);
-        ecrire_ligne(b);
+      
         if a < b then
 
           return a;
@@ -104,7 +103,7 @@ package body p_vue_graph is
     begin
 
 
-      ecrire_ligne(tailleBouton);
+
       for i in T_col'Range loop
         for j in T_lig'range loop
 
@@ -222,15 +221,11 @@ package body p_vue_graph is
     for y in 1 .. 2 loop
       actX := x;
       for x in 1 .. 2 loop
-        ECRIRE_LIGNE (T_Direction'Image (btnList (y, x)));
         AjouterBouton
          (fenetre, "D"&T_Direction'Image (btnList (y, x)),
           T_Direction'Image (btnList (y, x)), actX, actY, xButton, yButton);
 
-        ECRIRE (actX);
-        ECRIRE (actY);
-        ECRIRE (xButton);
-        ECRIRE_LIGNE (yButton);
+
         actX := actX + xButton + 10;
 
       end loop;
@@ -266,12 +261,11 @@ package body p_vue_graph is
   function getCouleurCase(nomCase: String; grille : TV_Grille) return T_coul is
 
   begin
-  ecrire_ligne("coucou");
-  ecrire_ligne(nomCase(7..7));
-  ecrire_ligne(nomCase(8..8));
+
   return grille(T_lig'value(nomCase(8..8)) ,  nomCase(7) );
   end getCouleurCase;
 
+<<<<<<< HEAD
   procedure choixdefi(fenetre: in out TR_fenetre; numdefi: out integer)is
     hauteur    : constant integer := 85;
     largeur    : constant integer := 200;
@@ -284,6 +278,13 @@ package body p_vue_graph is
     AjouterBouton(fenetre,"difficile","difficile", x,y ,largeur, hauteur);  
     AjouterBouton(fenetre,"compliqué","complique", x,y ,largeur, hauteur);  
   end choixdefi;
+=======
+  --procedure choixdefi(numdefi: out integer) is
+  ---begin
+  --  loop
+  --    AjouterBouton
+  --end choixdefi;
+>>>>>>> 8f922a5d282edc58efdfd1ec2ade3ebfa7ceaf24
 
 
 end p_vue_graph;

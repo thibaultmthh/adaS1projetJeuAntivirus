@@ -34,7 +34,8 @@ procedure av_graph is
       changertexte (fprincipale, "Rejouer", "Rejouer");
       exitgame := True;
     elsif Bouton = "Stats" then
-      ECRIRE_LIGNE ("stats");
+      --Stats
+      null;
     end if;
   end basicButtonAcction;
 
@@ -99,13 +100,13 @@ begin -- av_graph
 
         end if;
 
-        ECRIRE_LIGNE (To_string(Bouton));
+
 
       end loop; -- loop principale d'une partie
 
     end loop; -- loop principale jusqu'a quiter
   end if;
 
-  ecrire_ligne (ConsulterTimer (fprincipale, "Chronometre"));
+
 
 end av_graph;
