@@ -358,6 +358,7 @@ package body p_vue_graph is
     procedure AfficherDef(fenetre : in out TR_Fenetre; numdefinf : in positive) is
 
     begin
+      ecrire_ligne(numdefinf+4 );
       for i in numdefinf..numdefinf+4 loop
         MontrerElem(fenetre, "Defi" & integer'image(i));
       end loop;
@@ -371,7 +372,7 @@ package body p_vue_graph is
 
     function numDefi(nombouton: in string) return positive is
     begin
-      return integer'value(nombouton(5..5));
+      return integer'value(nombouton(6..6));
     end numDefi;
 
 

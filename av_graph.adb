@@ -75,13 +75,34 @@ begin -- av_graph
 
       loop
         Bouton := To_Unbounded_String (Attendrebouton (fprincipale));
-        exit when bouton /= "Stats";
+
+        exit when bouton /= "Stats" and not (To_string(Bouton)(1..1)="G");
       end loop;
-      if Bouton = "Quitter" then
-        exitall := true;
-      elsif Bouton = "facile" then
+      exitall := (Bouton = "Quitter");
+
+      if Bouton = "facile" then
         cacherdefi(fprincipale);
         AfficherDef(fprincipale, 1);
+      elsif Bouton = "moyen" then
+        cacherdefi(fprincipale);
+        AfficherDef(fprincipale, 6);
+      elsif Bouton = "difficile" then
+        cacherdefi(fprincipale);
+        AfficherDef(fprincipale, 11);
+      elsif Bouton = "compliqué" then
+        cacherdefi(fprincipale);
+        AfficherDef(fprincipale, 16);
+      end if;
+
+
+      loop
+        Bouton := To_Unbounded_String (Attendrebouton (fprincipale));
+
+        exit when bouton /= "Stats" and not (To_string(Bouton)(1..1)="G");
+      end loop;
+      exitall := (Bouton = "Quitter");
+      if estDefi(To_String(Bouton)) then
+        numdef := numDefi(To_String(Bouton));
       end if;
 
       Configurer (f, numdef, Grille, Pieces);
