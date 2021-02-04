@@ -68,11 +68,7 @@ begin -- av_graph
     nombrecoup := 0;
     Open (f, In_File, "Defis.bin");
     Open (m, In_File, "historiqueMouvement.bin");
-<<<<<<< HEAD
-
-=======
     Open (s, In_File, "stats.bin");
->>>>>>> 24ef946e3fea70fc911c30ecbd7c38c9ae31908f
     while not exitall loop  -- loop principale jusqu'a quiter
 
       InitPartie (Grille, Pieces);
@@ -89,6 +85,7 @@ begin -- av_graph
       if Bouton = "Quitter" then
         exitall := true;
       elsif Bouton = "facile" then
+        cacherdefi(fprincipale);
         AfficherDef(fprincipale, 1);
       end if;
 
