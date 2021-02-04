@@ -80,10 +80,11 @@ begin -- av_graph
         Bouton := To_Unbounded_String (Attendrebouton (fprincipale));
         exit when bouton /= "Stats";
       end loop;
-      if bouton = "Quitter" then
-        exitall := True;
-      elsif bouton = "facile" then
-        AfficherDef (fprincipale, 1);
+      if Bouton = "Quitter" then
+        exitall := true;
+      elsif Bouton = "facile" then
+        cacherdefi(fprincipale);
+        AfficherDef(fprincipale, 1);
       end if;
 
       Configurer (f, numdef, Grille, Pieces);
