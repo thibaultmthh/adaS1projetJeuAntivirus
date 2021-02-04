@@ -83,7 +83,6 @@ package body p_vue_graph is
     ajouterBtnDeplacement (fenetre, "", XBOUTONDEP, YBOUTONDEP, XBOUTONDEP+LARGEURBOUTONDEP, YBOUTONDEP+HAUTEURBOUTONDEP, FESPACEMENT);
 
 
-    FinFenetre (fenetre);
   end InitFenetreprincipale;
 
 
