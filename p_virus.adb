@@ -1,12 +1,20 @@
 package body p_virus is
 
-  procedure SaveANewStat (s : in out p_joueur_io.File_Type; Joueur : TR_Joueur)
+  procedure SaveANewStat
+   (s     : in out p_joueur_io.File_Type; nomJoueur : in Unbounded_String;
+    temps : in     Float; numeroNiveau : in Positive; nombrecoup : in Positive)
   is
-  --{le s- contient les points et le nom du joueur précedenent}
-  -- ==> le dossier du joueur ( nom,points et date) a été sauvé dans stats
+    --{le s- contient les points et le nom du joueur précedenent}
+    -- ==> le dossier du joueur ( nom,points et date) a été sauvé dans stats
+    stat : TR_Stats;
   begin
+    stat.nomJoueur   := nomJoueur;
+    stat.numeroDefis := numeroNiveau;
+    stat.points      := nombrecoup;
+    stat.temps       := temps;
+    stat.date        := Clock;
     Open (s, Append_File, "stats.bin");
-    Write (s, Joueur);
+    Write (s, stat);
     Close (s);
   end SaveANewStat;
 
@@ -14,7 +22,6 @@ package body p_virus is
   is
   -- {} => {Tous les éléments de Grille ont été initialisés avec la couleur VIDE, y compris les cases inutilisables
   --                              Tous les élements de Pieces ont été initialisés à false}
-
   begin
 
     for i in T_Lig'Range loop
@@ -26,7 +33,6 @@ package body p_virus is
 
     for i in Pieces'Range loop
       Pieces (i) := False;
-
     end loop;
 
   end InitPartie;
@@ -161,14 +167,14 @@ package body p_virus is
     yDest : T_Col := T_Col'First;
 
     TAILLEPIECEMAX : constant Integer := 3;
-    nbpieceteste   : Integer := 0;
+    nbpieceteste   : Integer          := 0;
   begin
-      -- On vérifie que la couleur est dans la grille
-       --On retourne faux si la couleur n'est pas dans la grille
-      if not couleurPresente(Grille, coul) then
-         return false;
+    -- On vérifie que la couleur est dans la grille
+    --On retourne faux si la couleur n'est pas dans la grille
+    if not couleurPresente (Grille, coul) then
+      return False;
 
-      else  -- Si on a trouvé la piece;
+    else  -- Si on a trouvé la piece;
       loop
         possibleDansGrille := True;
         loop
@@ -234,7 +240,8 @@ package body p_virus is
       end loop;
     end if;
 
-    return possibleDansGrille and
+    return
+     possibleDansGrille and
      (Grille (xDest, yDest) = coul or Grille (xDest, yDest) = vide);
     -- On retourne vrai si la dernière piece testé a un destination qui :
     -- 1 - est dans la Grille
@@ -264,16 +271,20 @@ package body p_virus is
 
   end couleurPresente;
 
-  procedure historiqueMouvement ( m : in out p_mouvement_io.file_type ; direction : in T_direction ; couleur : in T_coulP) is
+  procedure historiqueMouvement
+   (m       : in out p_mouvement_io.File_Type; direction : in T_Direction;
+    couleur : in     T_CoulP)
+  is
     --{ m- contient le mouvement du joueur precedent}
     -- ==> le nouveau mouvement du joueur a été enregistré dans le fichier
     --binaire temporaire historiqueMouvement.bin
-    elem: TR_mouvement;
+    elem : TR_mouvement;
   begin
-    elem.direction := direction; elem.couleur := couleur;
-    Open(m , append_file, "historiqueMouvement.bin");
-    write( m , elem);
-    close(m);
+    elem.direction := direction;
+    elem.couleur   := couleur;
+    Open (m, Append_File, "historiqueMouvement.bin");
+    Write (m, elem);
+    Close (m);
 
   end historiqueMouvement;
 
