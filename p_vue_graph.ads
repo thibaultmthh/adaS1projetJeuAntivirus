@@ -34,6 +34,5 @@ package p_vue_graph is
   procedure afficherBtnDeplacements(fenetre : in out TR_Fenetre;  coul:in T_coul; grille: TV_Grille);
   procedure masquerBtnDeplacements(fenetre : in out TR_Fenetre);
   function getCouleurCase(nomCase: String; grille : TV_Grille)  return T_coul;
-  function InputDefi(fenetre: in TR_Fenetre) return integer;
 
 end p_vue_graph;

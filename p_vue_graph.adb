@@ -61,8 +61,6 @@ package body p_vue_graph is
     ChangerStyleTexte (fenetre, "Chronometre", FL_BOLD_Style);
     ChangerCouleurTexte (fenetre, "Chronometre", FL_DARKVIOLET);
 
-    AjouterChamp(fenetre,"defi","numéro de défi","entre 1 et 20", FESPACEMENT * 3 + TEXTELARGEUR * 2, FESPACEMENT, TEXTELARGEUR,
-      TEXTEHAUTEUR);
     ChangerAlignementTexte (fenetre, "NumeroDefi", FL_ALIGN_CENTER);
 
     ChangerStyleTexte(fenetre, "NomJoueur", FL_BOLD_Style);
@@ -282,20 +280,6 @@ package body p_vue_graph is
   ecrire_ligne(nomCase(8..8));
   return grille(T_lig'value(nomCase(8..8)) ,  nomCase(7) );
   end getCouleurCase;
-
-  function InputDefi(fenetre: in TR_Fenetre) return integer is
-    defi:integer:=integer'value(Consultercontenu(fenetre,"defi"));
-  begin
-    ecrire_ligne("coucou");
-    --if defi < 1 or defi > 20 then
-    --  ECRIRE_LIGNE ("Numéro incorect, doit être entre 1 et 20");
-    --  return 21;
-  --  else
-   --   return defi;
-   -- end if;
-	exception
-	  when constraint_error=>ecrire("arret du programme constraint");return 0;
-  end InputDefi;
 
 
 end p_vue_graph;
