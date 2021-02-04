@@ -61,16 +61,15 @@ package body p_vue_graph is
     ChangerStyleTexte (fenetre, "Chronometre", FL_BOLD_Style);
     ChangerCouleurTexte (fenetre, "Chronometre", FL_DARKVIOLET);
 
-    AjouterTexte
-     (fenetre, "NumeroDefi", "Pas de defi selectionne",
-      FESPACEMENT * 3 + TEXTELARGEUR * 2, FESPACEMENT, TEXTELARGEUR,
-      TEXTEHAUTEUR);
     AjouterChamp(fenetre,"defi","numéro de défi","entre 1 et 20", FESPACEMENT * 3 + TEXTELARGEUR * 2, FESPACEMENT, TEXTELARGEUR,
       TEXTEHAUTEUR);
     ChangerAlignementTexte (fenetre, "NumeroDefi", FL_ALIGN_CENTER);
 
     ChangerStyleTexte(fenetre, "NomJoueur", FL_BOLD_Style);
     ChangerTailleTexte(fenetre, "NomJoueur", 500);
+
+    AjouterTexte(fenetre, "NumeroDefi", "Pas de defi selectionne",
+      XBOUTONDEP, YBOUTONDEP, 200, TEXTEHAUTEUR);
 
     AjouterBouton
      (fenetre, "Stats", "STATS", FESPACEMENT, yboutoninf, BLARGEUR, BHAUTEUR);
@@ -285,18 +284,17 @@ package body p_vue_graph is
 
   function InputDefi(fenetre: in TR_Fenetre) return integer is
     defi:integer:=integer'value(Consultercontenu(fenetre,"defi"));
-    faux:integer;
   begin
-    if defi < 1 or defi > 20 then
-      ECRIRE_LIGNE ("Numéro incorect, doit être entre 1 et 20");
-      faux:=0;
-      return faux;
-    else
-      return defi;
-    end if;
-    exception
-      when constraint_error => faux:=0; return faux;
-    end InputDefi;
+    ecrire_ligne("coucou");
+    --if defi < 1 or defi > 20 then
+    --  ECRIRE_LIGNE ("Numéro incorect, doit être entre 1 et 20");
+    --  return 21;
+  --  else
+   --   return defi;
+   -- end if;
+	exception
+	  when constraint_error=>ecrire("arret du programme constraint");return 0;
+  end InputDefi;
 
 
 end p_vue_graph;
