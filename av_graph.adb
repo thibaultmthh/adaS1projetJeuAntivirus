@@ -56,7 +56,13 @@ begin -- av_graph
             CacherFenetre (fprincipale);
             exit;
           elsif Bouton = "Rejouer" then
+            changertexte(fprincipale,"Rejouer","Rejouer");
+            declare
+              defi:string:=Consultercontenu(fprincipale,"defi");
+            begin
+            ecrire_ligne(defi);
             ECRIRE_LIGNE ("rejouer");
+            end;
           elsif Bouton = "Stats" then
             ECRIRE_LIGNE ("stats");
 

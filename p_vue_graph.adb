@@ -65,6 +65,8 @@ package body p_vue_graph is
      (fenetre, "NumeroDefi", "Pas de defi selectionne",
       FESPACEMENT * 3 + TEXTELARGEUR * 2, FESPACEMENT, TEXTELARGEUR,
       TEXTEHAUTEUR);
+    AjouterChamp(fenetre,"defi","numéro de défi","entre 1 et 20", FESPACEMENT * 3 + TEXTELARGEUR * 2, FESPACEMENT, TEXTELARGEUR,
+      TEXTEHAUTEUR);
     ChangerAlignementTexte (fenetre, "NumeroDefi", FL_ALIGN_CENTER);
 
     ChangerStyleTexte(fenetre, "NomJoueur", FL_BOLD_Style);
@@ -73,7 +75,7 @@ package body p_vue_graph is
     AjouterBouton
      (fenetre, "Stats", "STATS", FESPACEMENT, yboutoninf, BLARGEUR, BHAUTEUR);
     AjouterBouton
-     (fenetre, "Rejouer", "REJOUER", FESPACEMENT * 2 + BLARGEUR, yboutoninf,
+     (fenetre, "Rejouer", "Jouer", FESPACEMENT * 2 + BLARGEUR, yboutoninf,
       BLARGEUR, BHAUTEUR);
     AjouterBouton
      (fenetre, "Quitter", "QUITTER", FESPACEMENT * 3 + BLARGEUR * 2,
