@@ -56,6 +56,7 @@ begin -- av_graph
             CacherFenetre (fprincipale);
             exit;
           elsif Bouton = "Rejouer" then
+            changertexte(fprincipale,"Rejouer","Rejouer");
             ECRIRE_LIGNE ("rejouer");
           elsif Bouton = "Stats" then
             ECRIRE_LIGNE ("stats");
