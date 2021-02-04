@@ -5,7 +5,7 @@ use p_fenbase, forms, p_esiut, p_vue_graph, p_virus, p_virus.p_mouvement_io,
  Ada.Strings.Unbounded, p_virus.p_piece_io;
 
 procedure av_graph is
-  fprincipale, fpseudo : TR_Fenetre;
+  fprincipale, fpseudo, FenetreWin : TR_Fenetre;
 
   exitall  : Boolean := False;
   exitgame : Boolean := False;
@@ -40,6 +40,7 @@ procedure av_graph is
   end basicButtonAcction;
 
 begin -- av_graph
+  InitwinVictoire(FenetreWin);
   InitialiserFenetres;
   initfenetrepseudo (fpseudo);
   MontrerFenetre (fpseudo);
@@ -105,6 +106,7 @@ begin -- av_graph
         if Guerison(Grille) then
           ecrire_ligne (ConsulterTimer (fprincipale, "Chronometre"));
           afficherGrille(fprincipale, "Grille", Grille);
+          MontrerFenetre(FenetreWin);
           ecrire_ligne("Vous avez gagné");
         end if;
     end loop; -- loop principale jusqu'a quiter

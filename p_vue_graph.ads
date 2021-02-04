@@ -36,4 +36,7 @@ package p_vue_graph is
   function getCouleurCase(nomCase: String; grille : TV_Grille)  return T_coul;
   procedure choixdefi(fenetre: in out TR_fenetre; numdefi: out integer);
 
+
+  procedure InitwinVictoire (FenetreWin : in out TR_Fenetre);
+
 end p_vue_graph;
