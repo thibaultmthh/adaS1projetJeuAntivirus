@@ -284,5 +284,20 @@ package body p_vue_graph is
   return grille(T_lig'value(nomCase(8..8)) ,  nomCase(7) );
   end getCouleurCase;
 
+  function InputDefi(fenetre: in TR_Fenetre) return integer is
+    defi:integer:=integer'value(Consultercontenu(fenetre,"defi"));
+    faux:integer;
+  begin
+    if defi < 1 or defi > 20 then
+      ECRIRE_LIGNE ("Numéro incorect, doit être entre 1 et 20");
+      faux:=0;
+      return faux;
+    else
+      return defi;
+    end if;
+    exception
+      when constraint_error => faux:=0; return faux;
+    end InputDefi;
+
 
 end p_vue_graph;
