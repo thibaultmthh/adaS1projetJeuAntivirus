@@ -210,6 +210,28 @@ package body p_vue_graph is
       FinFenetre (fenetre);
     end initfenetrepseudo;
 
+  --procedure afficheStats ( s : in out p_joueur_io.file_type) is
+  --  elem : TR_joueur;
+   -- date : TR_date;
+  --  begin
+   --   Open (s, in_file, "stats.bin");
+
+--reset( s , in_file);
+  --    read( s , elem);
+   --   if end_of_file(s) then
+   --     ecrire(" pas de dossier joueur sur stats encore");
+ --     else
+   --     while not end_of_file(s) loop
+   --       date := elem.date;
+   --       ecrire(elem.nomjoueur); ecrire("possede : "); ecrire(elem.points); ecrire(" points"); a_la_ligne;
+    --      ecrire(" , à la date : "); ecrire( date.jour );ecrire(" / "); ecrire( date.mois );ecrire(" / ");ecrire( date.an );
+    --      read( s , elem);
+  --      end loop;
+  --    end if;
+   --   Close (s);
+
+--end affichestats;
+
   procedure ajouterBtnDeplacement
      (fenetre      : in out TR_Fenetre; NomElement : in String;
       x, y, x2, y2, padding : in     Natural)

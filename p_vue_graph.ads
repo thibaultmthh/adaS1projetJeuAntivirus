@@ -29,6 +29,8 @@ package p_vue_graph is
   procedure initfenetrepseudo (fenetre : out TR_Fenetre);
   --procédure première fenètre de pseudo
 
+  -- procedure afficheStats ( s : in out p_joueur_io.file_type);
+
   procedure afficherGrille(fenetre : in out TR_Fenetre; NomGrille : in String; Grille : in TV_Grille);
   procedure AjouterBoutonChoixDef(fenetre : in out Tr_Fenetre; x, y, hauteur, largeur : in positive);
   procedure afficherBtnDeplacements(fenetre : in out TR_Fenetre;  coul:in T_coul; grille: TV_Grille);
@@ -44,5 +46,7 @@ package p_vue_graph is
 
 
   procedure InitwinVictoire (FenetreWin : in out TR_Fenetre);
+
+  
 
 end p_vue_graph;
