@@ -307,7 +307,7 @@ package body p_vue_graph is
                     48,
                     30);
 
-      AjouterImage(fenetre , "Stonks" , "Stonks.xpm" ,"" ,
+      AjouterImage(FenetreWin, "Stonks" , "Stonks.xpm" ,"" ,
                     0,
                     132,
                     300,
