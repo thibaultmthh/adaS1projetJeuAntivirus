@@ -74,7 +74,7 @@ begin -- av_graph
           Bouton : String := (Attendrebouton (fprincipale));
         begin
           -- if c'st un bouton
-          basicButtonAcction (Button, exitall, exitgame);
+          basicButtonAcction (Bouton, exitall, exitgame);
           -- if c'est une couleur
           if Bouton (1 .. 1) = "G" then
             ECRIRE ("Couleur");
@@ -84,7 +84,6 @@ begin -- av_graph
             if colorSel /= vide and colorSel /= blanc then
               afficherBtnDeplacements (fprincipale, colorSel, Grille);
             end if;
-
             -- if c'est un deplacement
           elsif Bouton (1 .. 1) = "D" and colorSet then
             ECRIRE ("Deplacement");
