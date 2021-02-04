@@ -1,27 +1,6 @@
 package body p_vue_graph is
 
   procedure InitFenetreprincipale(fenetre : out TR_Fenetre; joueur : in string) is
-    FLARGEUR            : constant integer := 500;
-    FHAUTEUR            : constant integer := 500;
-
-    NBTEXTE             : constant integer := 3;
-    TEXTELARGEUR        : constant integer := (FLARGEUR - FESPACEMENT * (NBTEXTE+1) ) / NBTEXTE;
-
-    TEXTEHAUTEUR        : constant integer := 50;
-
-    NBBOUTON            : constant integer := 3;
-    BLARGEUR            : constant integer := (FLARGEUR - FESPACEMENT * (NBBOUTON+1) ) / NBBOUTON;
-    --On calcule la taille d'un bouton par rapport à la taille de la fenetre, au nombre de bouton et a la taille de l'espacement.
-    BHAUTEUR            : constant integer := 30;
-    yboutoninf          : constant integer := FHAUTEUR - (FESPACEMENT + BHAUTEUR);
-
-    HAUTEURBOUTONDEP    : constant integer := 85;
-    LARGEURBOUTONDEP    : constant integer := 200;
-
-
-    XBOUTONDEP          : constant integer := (FLARGEUR / 2) - (LARGEURBOUTONDEP / 2);
-    YBOUTONDEP          : constant integer := FHAUTEUR - ((2 * FESPACEMENT) + BHAUTEUR + HAUTEURBOUTONDEP);
-
 
     function min (a,b : in integer) return integer is
 
@@ -36,11 +15,32 @@ package body p_vue_graph is
         end if;
     end min;
 
+    FLARGEUR            : constant integer := 500;
+    FHAUTEUR            : constant integer := 600;
 
-    yGrille             : constant integer := FESPACEMENT * 2 + TEXTEHAUTEUR;
+    -- Texte superieur et horloge
+    NBTEXTE             : constant integer := 3;
+    TEXTELARGEUR        : constant integer := (FLARGEUR - FESPACEMENT * (NBTEXTE+1) ) / NBTEXTE;
+    TEXTEHAUTEUR        : constant integer := 50;
+
+    -- Bouton inferieur (Rejouer, stats, quitter)
+    NBBOUTON            : constant integer := 3;
+    BLARGEUR            : constant integer := (FLARGEUR - FESPACEMENT * (NBBOUTON+1) ) / NBBOUTON;
+    --On calcule la taille d'un bouton par rapport à la taille de la fenetre, au nombre de bouton et a la taille de l'espacement.
+    BHAUTEUR            : constant integer := 30;
+    yboutoninf          : constant integer := FHAUTEUR - (FESPACEMENT + BHAUTEUR);
+
+    -- Bouton de déplacement
+    HAUTEURBOUTONDEP    : constant integer := 85;
+    LARGEURBOUTONDEP    : constant integer := 200;
+    XBOUTONDEP          : constant integer := (FLARGEUR / 2) - (LARGEURBOUTONDEP / 2);
+    YBOUTONDEP          : constant integer := FHAUTEUR - ((2 * FESPACEMENT) + BHAUTEUR + HAUTEURBOUTONDEP);
+
+    -- Grille
+    --espace disponible pour la grille
     XDispo              : constant integer := FHAUTEUR - ( FESPACEMENT * 5 ) - TEXTEHAUTEUR - HAUTEURBOUTONDEP - BHAUTEUR;
     YDispo              : constant integer := FLARGEUR - 2 * FESPACEMENT;
-
+    yGrille             : constant integer := FESPACEMENT * 2 + TEXTEHAUTEUR;
     TAILLEGRILLE        : constant integer := min(XDispo,YDispo);
 
 
@@ -87,6 +87,7 @@ package body p_vue_graph is
     FinFenetre (fenetre);
   end InitFenetreprincipale;
 
+
   procedure ajouterGrille(
   fenetre : in out TR_Fenetre;
   NomElement : in String;
@@ -119,7 +120,7 @@ package body p_vue_graph is
 
           --ecrire_ligne(nombouton);
           AjouterBouton(fenetre,nombouton , "",posX, posY, tailleBouton, tailleBouton  );
-          if ((intnumcol mod 2) = 0 and (j mod 2) = 0) or ((intnumcol mod 2) = 1 and (j mod 2) = 1) then
+          if ((j + intnumcol) mod 2) = 0 then
             ChangerCouleurFond(fenetre, nombouton, FL_RIGHT_BCOL);
           else
             ChangerCouleurFond(fenetre, nombouton, FL_BOTTOM_BCOL);
@@ -165,7 +166,7 @@ package body p_vue_graph is
             when vert =>
                 COULEUR_BOUTON := FL_GREEN;
             when others =>
-              if ((intnumcol mod 2) = 0 and (x mod 2) = 0) or ((intnumcol mod 2) = 1 and (x mod 2) = 1) then
+              if ((x + intnumcol) mod 2 = 0) then
                 COULEUR_BOUTON := FL_RIGHT_BCOL;
               else
                 COULEUR_BOUTON := FL_BOTTOM_BCOL;
