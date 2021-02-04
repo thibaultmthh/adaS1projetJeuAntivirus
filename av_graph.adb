@@ -1,12 +1,12 @@
-with p_fenbase, forms, p_esiut, p_vue_graph, p_virus, Sequential_IO;
-use p_fenbase, forms, p_esiut, p_vue_graph, p_virus, p_virus.p_mouvement_io,
+with p_fenbase, forms, p_esiut, p_vue_graph, p_virus, Sequential_IO, Ada.Strings.Unbounded;
+use p_fenbase, forms, p_esiut, p_vue_graph, p_virus, p_virus.p_mouvement_io, Ada.Strings.Unbounded,
  p_virus.p_piece_io;
 
 procedure av_graph is
   fprincipale, fpseudo : TR_Fenetre;
 
-  continue : Character;
-  pseudo   : String (1 .. 3);
+
+
 
 -- Partie jeu
   numdef   : Positive range 1 .. 20;
@@ -17,6 +17,8 @@ procedure av_graph is
   dir      : T_Direction;
   f        : p_piece_io.File_Type;
   m        : p_mouvement_io.File_Type;
+  pseudo, bouton : Unbounded_String;
+
 
 begin -- av_graph
   InitialiserFenetres;
@@ -25,28 +27,32 @@ begin -- av_graph
   ChangerTempsMinuteur (fprincipale, "Chronometre", 200_000.0);
   -- ChangerMinuteurEnChrono(fprincipale, "Chronometre");
 
-  declare
-    Bouton : String := (Attendrebouton (fpseudo));
-  begin
-    if Bouton = "quitter" then
-      CacherFenetre (fpseudo);
-    elsif Bouton = "jouer" then
-      pseudo := Consultercontenu (fpseudo, "pseudo");
-      CacherFenetre (fpseudo);
-      InitFenetreprincipale (fprincipale, pseudo);
-      masquerBtnDeplacements(fprincipale);
 
-      MontrerFenetre (fprincipale);
-
-      Open (f, In_File, "Defis.bin");
-      Open (m, In_File, "historiqueMouvement.bin");
-      InitPartie (Grille, Pieces);
-      numdef := 1;
-      Configurer (f, numdef, Grille, Pieces);
-      colorSet := False;
+  loop
+  Bouton := To_Unbounded_String(Attendrebouton(fpseudo));
+  exit when Bouton /= "pseudo";
+  end loop;
 
 
-      loop
+  if Bouton = "quitter" then
+    CacherFenetre (fpseudo);
+  elsif Bouton = "jouer" then
+    pseudo := To_Unbounded_String(Consultercontenu(fpseudo, "pseudo"));
+    CacherFenetre (fpseudo);
+    InitFenetreprincipale (fprincipale, To_string(pseudo));
+    masquerBtnDeplacements(fprincipale);
+
+    MontrerFenetre (fprincipale);
+
+    Open (f, In_File, "Defis.bin");
+    Open (m, In_File, "historiqueMouvement.bin");
+    InitPartie (Grille, Pieces);
+    numdef := 1;
+    Configurer (f, numdef, Grille, Pieces);
+    colorSet := False;
+
+
+    loop
         afficherGrille (fprincipale, "Grille", Grille);
         declare
           Bouton : String := (Attendrebouton (fprincipale));
@@ -91,7 +97,7 @@ begin -- av_graph
         end;
       end loop;
     end if;
-  end;
+
 
   ecrire_ligne
    (ConsulterTimer

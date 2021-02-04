@@ -188,23 +188,13 @@ package body p_vue_graph is
     FLARGEUR            : constant integer := 600;
     FHAUTEUR            : constant integer := 600;
 
-    NBTEXTE             : constant integer := 3;
-    TEXTELARGEUR        : constant integer := (FLARGEUR - FESPACEMENT * (NBTEXTE+1) ) / NBTEXTE;
-
-    TEXTEHAUTEUR        : constant integer := 30;
-
-    NBBOUTON           : constant integer := 2;
-    BLARGEUR            : constant integer := (FLARGEUR - FESPACEMENT * (NBBOUTON+1) ) / NBBOUTON;
-    --On calcule la taille d'un bouton par rapport à la taille de la fenetre, au nombre de bouton et a la taille de l'espacement.
-    BHAUTEUR    : constant Integer := 30;
-    yboutoninf : constant Integer := FHAUTEUR - (FESPACEMENT + BHAUTEUR);
 
   begin
-    fenetre:=DebutFenetre("pseudo", Flargeur, Fhauteur);
+    fenetre:=DebutFenetre("fpseudo", Flargeur, Fhauteur);
     ChangerCouleurFond(fenetre, "fond",  COULEURPRINCIPALE);
 
-    AjouterChamp(fenetre,"pseudo","Votre pseudo","ton", 300 - 75 ,400,150,30);
-    AjouterBouton(fenetre,"jouer","JOUER", 300 - 75 ,450,70,30);
+    AjouterChamp(fenetre,"pseudo","Votre pseudo","", 225 ,400,150,30);
+    AjouterBouton(fenetre,"jouer","JOUER", 225 ,450,70,30);
     AjouterBouton(fenetre,"quitter","Quitter",305,450,70,30);
 
     AjouterTexte( fenetre, "Bienvenue" , "Bienvenue au Jeu ANTI VIRUS!!" , 200, 20, 200, 50);
