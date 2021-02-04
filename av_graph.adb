@@ -8,7 +8,7 @@ procedure av_graph is
   continue : Character;
   pseudo   : String (1 .. 3);
   exitall  : Boolean := False;
-  defi     : Integer;
+  defi     : Integer :=0;
 
 -- Partie jeu
   numdef   : Positive range 1 .. 20;
@@ -59,6 +59,7 @@ begin -- av_graph
               exit;
             elsif Bouton = "Rejouer" then
               changertexte (fprincipale, "Rejouer", "Rejouer");
+              CacherElem (fprincipale,"NumeroDefi");
             elsif Bouton = "Stats" then
               ECRIRE_LIGNE ("stats");
 

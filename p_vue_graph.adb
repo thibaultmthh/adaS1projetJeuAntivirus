@@ -61,6 +61,8 @@ package body p_vue_graph is
     ChangerStyleTexte (fenetre, "Chronometre", FL_BOLD_Style);
     ChangerCouleurTexte (fenetre, "Chronometre", FL_DARKVIOLET);
 
+    Ajoutertexte(fenetre,"defi","numéro de défi", FESPACEMENT * 3 + TEXTELARGEUR * 2, FESPACEMENT, TEXTELARGEUR,
+      TEXTEHAUTEUR);
     ChangerAlignementTexte (fenetre, "NumeroDefi", FL_ALIGN_CENTER);
 
     ChangerStyleTexte(fenetre, "NomJoueur", FL_BOLD_Style);
@@ -83,6 +85,7 @@ package body p_vue_graph is
     ajouterBtnDeplacement (fenetre, "", XBOUTONDEP, YBOUTONDEP, XBOUTONDEP+LARGEURBOUTONDEP, YBOUTONDEP+HAUTEURBOUTONDEP, FESPACEMENT);
 
 
+    FinFenetre (fenetre);
   end InitFenetreprincipale;
 
 
