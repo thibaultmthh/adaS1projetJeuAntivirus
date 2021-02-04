@@ -266,16 +266,21 @@ package body p_vue_graph is
   end getCouleurCase;
 
   procedure choixdefi(fenetre: in out TR_fenetre; numdefi: out integer)is
-    hauteur    : constant integer := 85;
-    largeur    : constant integer := 200;
-    x:constant integer:=150;
-    y: constant integer := 465;
+    hauteur    : constant integer := 42;
+    largeur    : constant integer := 90;
+    espace    : constant  integer :=10;
+    x:constant integer:=55;
+    y: constant integer := 510;
   begin
-    ecrire_ligne("defi");
+    ajoutertexte(fenetre,"choixdefi","cliquer sur un bouton de difficulte:",130,460,240,40);
+    ChangerAlignementTexte (fenetre, "choixdefi", FL_ALIGN_CENTER);
     AjouterBouton(fenetre,"facile","facile", x,y ,largeur, hauteur);
-    AjouterBouton(fenetre,"moyen","moyen", x,y ,largeur, hauteur);  
-    AjouterBouton(fenetre,"difficile","difficile", x,y ,largeur, hauteur);  
-    AjouterBouton(fenetre,"compliqué","complique", x,y ,largeur, hauteur);  
+    AjouterBouton(fenetre,"moyen","moyen", x+largeur+espace,y ,largeur, hauteur);  
+    AjouterBouton(fenetre,"difficile","difficile", x+2*(largeur+espace),y ,largeur, hauteur);  
+    AjouterBouton(fenetre,"compliqué","complique", x+3*(largeur+espace),y ,largeur, hauteur);
+
+    Attendrebouton(fenetre);
+    
   end choixdefi;
 
 
