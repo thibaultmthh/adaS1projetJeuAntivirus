@@ -24,7 +24,7 @@ package p_vuetxt is
    --     timestampdebut: integer;
    --     timestampFin: integer;
    --     numeroDefis: natural;
-   -- end record;   
+   -- end record;
   -- package p_mouvement_io is new sequential_io(TR_mouvement); use p_mouvement_io;
 
 
@@ -39,6 +39,10 @@ package p_vuetxt is
 
     package p_coul_io is new P_ENUM (T_CoulP);
     use p_coul_io;
+
+    type T_reponse is (rouge, turquoise, orange, rose, marron, bleu, violet, vert, jaune,
+     blanc, vide , r , n );
+
 
     procedure AfficheGrille (Grille : in TV_Grille; colored : in boolean := true);
 
@@ -64,6 +68,8 @@ package p_vuetxt is
     procedure InputModeCouleur(couleurfonctionnelle : out boolean);
 
     procedure afficheLegende;
+
+    function RepEstCoulP (reponse : in T_reponse) return boolean;
 
     --procedure historiqueMouvement ( m : in out p_mouvement_io.file_type ; direction : in T_direction ; couleur : in T_coulP);
     --procedure retournerMouvement ( m : in out p_mouvement_io.file_type);

@@ -1,6 +1,6 @@
 package body p_vuetxt is
 
---Loic
+
 
     procedure AfficheCase
        (coul : in T_Coul; x : in Integer; y : in Integer; colored : in Boolean)
@@ -319,6 +319,15 @@ package body p_vuetxt is
         --end if;
         --mouvementPrecedent := elem;
     --end retournermouvement;
+
+    function RepEstCoulP (reponse : in T_reponse) return boolean is
+      coul : T_CoulP := T_CoulP'first;
+    begin
+      while not (coul = T_CoulP'last) and then T_reponse'image(reponse) /= T_CoulP'image(coul) loop
+        coul := T_CoulP'succ(coul);
+      end loop;
+      return T_reponse'image(reponse) = T_CoulP'image(coul);
+    end RepEstCoulP;
 
 
 end p_vuetxt;
