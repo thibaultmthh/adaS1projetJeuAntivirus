@@ -9,6 +9,7 @@ package p_vue_graph is
 
 
   type Tv_btn is array (1 .. 2, 1 .. 2) of T_Direction;
+  subtype T_defi is Integer range 1 .. 20;
 
   btnList : Tv_btn            := ((hg, hd), (bg, bd));
 

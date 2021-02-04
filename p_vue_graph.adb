@@ -61,16 +61,15 @@ package body p_vue_graph is
     ChangerStyleTexte (fenetre, "Chronometre", FL_BOLD_Style);
     ChangerCouleurTexte (fenetre, "Chronometre", FL_DARKVIOLET);
 
-    AjouterTexte
-     (fenetre, "NumeroDefi", "Pas de defi selectionne",
-      FESPACEMENT * 3 + TEXTELARGEUR * 2, FESPACEMENT, TEXTELARGEUR,
-      TEXTEHAUTEUR);
-    AjouterChamp(fenetre,"defi","numéro de défi","entre 1 et 20", FESPACEMENT * 3 + TEXTELARGEUR * 2, FESPACEMENT, TEXTELARGEUR,
+    Ajoutertexte(fenetre,"defi","numéro de défi", FESPACEMENT * 3 + TEXTELARGEUR * 2, FESPACEMENT, TEXTELARGEUR,
       TEXTEHAUTEUR);
     ChangerAlignementTexte (fenetre, "NumeroDefi", FL_ALIGN_CENTER);
 
     ChangerStyleTexte(fenetre, "NomJoueur", FL_BOLD_Style);
     ChangerTailleTexte(fenetre, "NomJoueur", 500);
+
+    AjouterTexte(fenetre, "NumeroDefi", "Pas de defi selectionne",
+      XBOUTONDEP, YBOUTONDEP, 200, TEXTEHAUTEUR);
 
     AjouterBouton
      (fenetre, "Stats", "STATS", FESPACEMENT, yboutoninf, BLARGEUR, BHAUTEUR);

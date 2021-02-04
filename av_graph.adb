@@ -7,11 +7,13 @@ procedure av_graph is
 
 
 
+  exitall  : Boolean := False;
+  defi     : Integer :=0;
 
 -- Partie jeu
   numdef   : Positive range 1 .. 20;
   colorSet : Boolean := False;
-  colorSel : T_coul;
+  colorSel : T_Coul;
   Grille   : TV_Grille;
   Pieces   : TV_Pieces;
   dir      : T_Direction;
@@ -24,7 +26,6 @@ begin -- av_graph
   InitialiserFenetres;
   initfenetrepseudo (fpseudo);
   MontrerFenetre (fpseudo);
-  ChangerTempsMinuteur (fprincipale, "Chronometre", 200_000.0);
   -- ChangerMinuteurEnChrono(fprincipale, "Chronometre");
 
 
@@ -46,13 +47,14 @@ begin -- av_graph
 
     Open (f, In_File, "Defis.bin");
     Open (m, In_File, "historiqueMouvement.bin");
-    InitPartie (Grille, Pieces);
-    numdef := 1;
-    Configurer (f, numdef, Grille, Pieces);
-    colorSet := False;
+    while not exitall loop  -- loop principale jusqu'a quiter
+      InitPartie (Grille, Pieces);
+      ChangerTempsMinuteur (fprincipale, "Chronometre", 200_000.0);
 
-
-    loop
+      numdef := 1;
+      Configurer (f, numdef, Grille, Pieces);
+      colorSet := False;
+      loop -- loop d'une game
         afficherGrille (fprincipale, "Grille", Grille);
         declare
           Bouton : String := (Attendrebouton (fprincipale));
@@ -60,15 +62,11 @@ begin -- av_graph
           -- if c'st un bouton
           if Bouton = "Quitter" then
             CacherFenetre (fprincipale);
+            exitall := True;
             exit;
           elsif Bouton = "Rejouer" then
-            changertexte(fprincipale,"Rejouer","Rejouer");
-            declare
-              defi:string:=Consultercontenu(fprincipale,"defi");
-            begin
-            ecrire_ligne(defi);
-            ECRIRE_LIGNE ("rejouer");
-            end;
+            changertexte (fprincipale, "Rejouer", "Rejouer");
+            CacherElem (fprincipale,"NumeroDefi");
           elsif Bouton = "Stats" then
             ECRIRE_LIGNE ("stats");
 
@@ -76,33 +74,34 @@ begin -- av_graph
           elsif Bouton (1 .. 1) = "G" then
             ECRIRE ("Couleur");
 
-            colorSel := getCouleurCase(bouton, grille);
+            colorSel := getCouleurCase (Bouton, Grille);
             colorSet := True;
             if colorSel /= vide and colorSel /= blanc then
-              afficherBtnDeplacements(fprincipale, colorSel, Grille );
+              afficherBtnDeplacements (fprincipale, colorSel, Grille);
             end if;
-
 
             -- if c'est un deplacement
           elsif Bouton (1 .. 1) = "D" and colorSet then
             ECRIRE ("Deplacement");
             dir := T_Direction'Value (Bouton (2 .. 3));
             MajGrille (Grille, colorSel, dir);
-            masquerBtnDeplacements(fprincipale);
+            masquerBtnDeplacements (fprincipale);
             colorSet := False;
+            if Guerison (Grille) then
+              exit;
+            end if;
+
 
           end if;
 
           ECRIRE_LIGNE (Bouton);
         end;
-      end loop;
+      end loop; -- loop principale d'une partie
+
+    end loop; -- loop principale jusqu'a quiter
     end if;
 
 
-  ecrire_ligne
-   (ConsulterTimer
-     (fprincipale,
-      "Chronometre"));        --nom de la fenêtreNomElement : inString      )
-  ECRIRE_LIGNE ("fin");
+  ecrire_ligne (ConsulterTimer (fprincipale, "Chronometre"));
 
 end av_graph;
