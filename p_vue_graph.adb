@@ -277,10 +277,7 @@ package body p_vue_graph is
     AjouterBouton(fenetre,"facile","facile", x,y ,largeur, hauteur);
     AjouterBouton(fenetre,"moyen","moyen", x+largeur+espace,y ,largeur, hauteur);  
     AjouterBouton(fenetre,"difficile","difficile", x+2*(largeur+espace),y ,largeur, hauteur);  
-    AjouterBouton(fenetre,"compliqué","complique", x+3*(largeur+espace),y ,largeur, hauteur);
-
-    Attendrebouton(fenetre);
-    
+    AjouterBouton(fenetre,"compliqué","complique", x+3*(largeur+espace),y ,largeur, hauteur);    
   end choixdefi;
 
 
