@@ -71,35 +71,37 @@ begin -- av_graph
       exitgame := False;
       while not exitgame and not exitall loop -- loop d'une game
         afficherGrille (fprincipale, "Grille", Grille);
-        declare
-          Bouton : String := (Attendrebouton (fprincipale));
-        begin
-          -- if c'st un bouton
-          basicButtonAcction (Bouton, exitall, exitgame);
-          -- if c'est une couleur
-          if Bouton (1 .. 1) = "G" then
-            ECRIRE ("Couleur");
+        Bouton := To_Unbounded_String(Attendrebouton (fprincipale));
 
-            colorSel := getCouleurCase (Bouton, Grille);
-            colorSet := True;
-            if colorSel /= vide and colorSel /= blanc then
-              afficherBtnDeplacements (fprincipale, colorSel, Grille);
-            end if;
-            -- if c'est un deplacement
-          elsif Bouton (1 .. 1) = "D" and colorSet then
-            ECRIRE ("Deplacement");
-            dir := T_Direction'Value (Bouton (2 .. 3));
-            MajGrille (Grille, colorSel, dir);
-            masquerBtnDeplacements (fprincipale);
-            colorSet := False;
-            if Guerison (Grille) then
-              exit;
-            end if;
+       -- if c'st un bouton
+        basicButtonAcction(To_string(Bouton), exitall, exitgame);
 
+          -- if c'est un bouton de la grille
+        if To_string(Bouton)(1..1) = "G" then
+
+
+          colorSel := getCouleurCase (To_string(Bouton), Grille);
+          colorSet := True;
+          if colorSel /= vide and colorSel /= blanc then
+            afficherBtnDeplacements (fprincipale, colorSel, Grille);
           end if;
 
-          ECRIRE_LIGNE (Bouton);
-        end;
+          -- if c'est un deplacement
+        elsif To_string(Bouton) (1 .. 1) = "D" and colorSet then
+
+          dir := T_Direction'Value (To_string(Bouton)(2 .. 3));
+          MajGrille (Grille, colorSel, dir);
+          masquerBtnDeplacements (fprincipale);
+          colorSet := False;
+          if Guerison (Grille) then
+            exit;
+          end if;
+
+
+        end if;
+
+        ECRIRE_LIGNE (To_string(Bouton));
+
       end loop; -- loop principale d'une partie
 
     end loop; -- loop principale jusqu'a quiter
