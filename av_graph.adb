@@ -40,36 +40,6 @@ begin -- av_graph
       MontrerFenetre (fprincipale);
       Open (f, In_File, "Defis.bin");
       Open (m, In_File, "historiqueMouvement.bin");
-      InitPartie (Grille, Pieces);
-      numdef := 1;
-      Configurer (f, numdef, Grille, Pieces);
-      colorSet := False;
-
-
-      loop
-        afficherGrille (fprincipale, "Grille", Grille);
-        declare
-          Bouton : String := (Attendrebouton (fprincipale));
-        begin
-          -- if c'st un bouton
-          if Bouton = "Quitter" then
-            CacherFenetre (fprincipale);
-            exit;
-          elsif Bouton = "Rejouer" then
-            defi:=InputDefi(fprincipale);
-            if defi=0 then
-              ecrire_ligne("coucou");
-              changertexte(fprincipale,"NumeroDefi","il faut entrer un nombre");
-            elsif defi=21 then
-              changertexte(fprincipale,"NumeroDefi","il faut un nombre entre 1 et 20");
-            else
-              CacherElem(fprincipale,"NumeroDefi");
-              changertexte(fprincipale,"Rejouer","Rejouer");
-              ecrire_ligne(defi);
-              ECRIRE_LIGNE ("rejouer");
-            end if;
-          elsif Bouton = "Stats" then
-            ECRIRE_LIGNE ("stats");
       while not exitall loop  -- loop principale jusqu'a quiter
         InitPartie (Grille, Pieces);
         ChangerTempsMinuteur (fprincipale, "Chronometre", 200_000.0);
