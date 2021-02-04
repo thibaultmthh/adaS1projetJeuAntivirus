@@ -61,6 +61,8 @@ package body p_vue_graph is
     ChangerStyleTexte (fenetre, "Chronometre", FL_BOLD_Style);
     ChangerCouleurTexte (fenetre, "Chronometre", FL_DARKVIOLET);
 
+    Ajoutertexte(fenetre,"defi","numéro de défi", FESPACEMENT * 3 + TEXTELARGEUR * 2, FESPACEMENT, TEXTELARGEUR,
+      TEXTEHAUTEUR);
     ChangerAlignementTexte (fenetre, "NumeroDefi", FL_ALIGN_CENTER);
 
     ChangerStyleTexte(fenetre, "NomJoueur", FL_BOLD_Style);
@@ -83,6 +85,7 @@ package body p_vue_graph is
     ajouterBtnDeplacement (fenetre, "", XBOUTONDEP, YBOUTONDEP, XBOUTONDEP+LARGEURBOUTONDEP, YBOUTONDEP+HAUTEURBOUTONDEP, FESPACEMENT);
 
 
+    FinFenetre (fenetre);
   end InitFenetreprincipale;
 
 
@@ -184,23 +187,13 @@ package body p_vue_graph is
     FLARGEUR            : constant integer := 600;
     FHAUTEUR            : constant integer := 600;
 
-    NBTEXTE             : constant integer := 3;
-    TEXTELARGEUR        : constant integer := (FLARGEUR - FESPACEMENT * (NBTEXTE+1) ) / NBTEXTE;
-
-    TEXTEHAUTEUR        : constant integer := 30;
-
-    NBBOUTON           : constant integer := 2;
-    BLARGEUR            : constant integer := (FLARGEUR - FESPACEMENT * (NBBOUTON+1) ) / NBBOUTON;
-    --On calcule la taille d'un bouton par rapport à la taille de la fenetre, au nombre de bouton et a la taille de l'espacement.
-    BHAUTEUR    : constant Integer := 30;
-    yboutoninf : constant Integer := FHAUTEUR - (FESPACEMENT + BHAUTEUR);
 
   begin
-    fenetre:=DebutFenetre("pseudo", Flargeur, Fhauteur);
+    fenetre:=DebutFenetre("fpseudo", Flargeur, Fhauteur);
     ChangerCouleurFond(fenetre, "fond",  COULEURPRINCIPALE);
 
-    AjouterChamp(fenetre,"pseudo","Votre pseudo","ton", 300 - 75 ,400,150,30);
-    AjouterBouton(fenetre,"jouer","JOUER", 300 - 75 ,450,70,30);
+    AjouterChamp(fenetre,"pseudo","Votre pseudo","", 225 ,400,150,30);
+    AjouterBouton(fenetre,"jouer","JOUER", 225 ,450,70,30);
     AjouterBouton(fenetre,"quitter","Quitter",305,450,70,30);
 
     AjouterTexte( fenetre, "Bienvenue" , "Bienvenue au Jeu ANTI VIRUS!!" , 200, 20, 200, 50);
@@ -279,6 +272,12 @@ package body p_vue_graph is
   ecrire_ligne(nomCase(8..8));
   return grille(T_lig'value(nomCase(8..8)) ,  nomCase(7) );
   end getCouleurCase;
+
+  --procedure choixdefi(numdefi: out integer) is 
+  ---begin
+  --  loop 
+  --    AjouterBouton
+  --end choixdefi;
 
 
 end p_vue_graph;
