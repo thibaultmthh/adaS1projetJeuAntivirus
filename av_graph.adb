@@ -41,18 +41,19 @@ procedure av_graph is
     elsif Bouton = "Stats" then
       --Stats
       null;
-    elsif Bouton="tgf" then
-      --initfenetrehelp(fhelp);
-      --MontrerFenetre(fhelp);
-     -- if Attendrebouton (fhelp) = "ok" then
-       -- cacherfenetre (fhelp);
-     -- end if;
+    elsif Bouton="help" then
+
+      MontrerFenetre(fhelp);
+      if Attendrebouton (fhelp) = "ok" then
+       cacherfenetre (fhelp);
+     end if;
      null;
     end if;
   end basicButtonAcction;
 
 begin -- av_graph
   InitialiserFenetres;
+  initfenetrehelp(fhelp);
   initfenetrepseudo (fpseudo);
   MontrerFenetre (fpseudo);
   -- ChangerMinuteurEnChrono(fprincipale, "Chronometre");
@@ -116,7 +117,7 @@ begin -- av_graph
         loop
           Bouton := To_Unbounded_String (Attendrebouton (fprincipale));
           basicButtonAcction(To_string(bouton), exitall, exitgame);
-          exit when bouton /= "Stats" and not (To_string(Bouton)(1..1)="G");
+          exit when bouton /= "Stats" and bouton /="help" and not (To_string(Bouton)(1..1)="G");
         end loop;
 
 

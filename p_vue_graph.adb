@@ -25,13 +25,13 @@ package body p_vue_graph is
 
     -- Bouton inferieur (Rejouer, stats, quitter)
     NBBOUTON            : constant integer := 3;
-    TAILLEBHELP         : constant integer  := 10;
-    BLARGEUR            : constant integer := (FLARGEUR - FESPACEMENT * (NBBOUTON+1) ) / NBBOUTON;
+    TAILLEBHELP         : constant integer  := 20;
+    BLARGEUR            : constant integer := (FLARGEUR - FESPACEMENT * (NBBOUTON+1) - (TAILLEBHELP+FESPACEMENT) ) / NBBOUTON;
 
 
     --On calcule la taille d'un bouton par rapport à la taille de la fenetre, au nombre de bouton et a la taille de l'espacement.
     BHAUTEUR            : constant integer := 30;
-    yboutoninf          : constant integer := FHAUTEUR - (FESPACEMENT + BHAUTEUR);
+    yboutoninf          : constant integer := FHAUTEUR - (FESPACEMENT + BHAUTEUR  );
 
     -- Bouton de déplacement
     HAUTEURBOUTONDEP    : constant integer := 85;
@@ -76,16 +76,16 @@ package body p_vue_graph is
 
     --AjouterTexte(fenetre, "NumeroDefi", "Pas de defi selectionne",
       --XBOUTONDEP, YBOUTONDEP, 200, TEXTEHAUTEUR);
-    --AjouterBouton(fenetre,"tgf","?", 5, 350, 20, BHAUTEUR);
+    AjouterBouton(fenetre,"help","?", FESPACEMENT, yboutoninf, TAILLEBHELP, BHAUTEUR);
 
     AjouterBouton
-     (fenetre, "Stats", "STATS", FESPACEMENT, yboutoninf, BLARGEUR, BHAUTEUR);
+     (fenetre, "Stats", "STATS",TAILLEBHELP+FESPACEMENT + FESPACEMENT, yboutoninf, BLARGEUR, BHAUTEUR);
     AjouterBouton
-     (fenetre, "Rejouer", "Rejouer", FESPACEMENT * 2 + BLARGEUR, yboutoninf,
+     (fenetre, "Rejouer", "Rejouer", TAILLEBHELP+FESPACEMENT+FESPACEMENT * 2 + BLARGEUR, yboutoninf,
       BLARGEUR, BHAUTEUR);
     CacherElem (fenetre, "Rejouer");
     AjouterBouton
-     (fenetre, "Quitter", "QUITTER", FESPACEMENT * 3 + BLARGEUR * 2,
+     (fenetre, "Quitter", "QUITTER", TAILLEBHELP+FESPACEMENT+FESPACEMENT * 3 + BLARGEUR * 2,
       yboutoninf, BLARGEUR, BHAUTEUR);
 
     ajouterGrille(fenetre, "Grille", (FLARGEUR / 2) - (TAILLEGRILLE/2) , yGrille, TAILLEGRILLE);
