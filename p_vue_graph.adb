@@ -223,13 +223,27 @@ package body p_vue_graph is
     end initfenetrepseudo;
 
   procedure initfenetrehelp(fenetre: out TR_fenetre) is
-    FLARGEUR  : constant integer:=400;
+    FLARGEUR  : constant integer:=450;
     FHAUTEUR  : constant integer:=300;
+    Newline   : constant character:=character'val(10);
   begin
     fenetre:=DebutFenetre("fhelp", Flargeur, Fhauteur);
     ecrire_ligne("coucou");
     ajoutertexte(fenetre, "help", "Regles du jeu:", 170, 10, 86,20);
     ChangerAlignementTexte(fenetre,"help",FL_ALIGN_CENTER);
+    ChangerStyleTexte(fenetre,"help", FL_BOLD_Style);
+
+    ajoutertexte(fenetre, "regles", "-Le but est de gagner, mais de bien gagner" & Newline &
+      "le but est d'ammener la pieces rouge dans l'angle en haut a droite" & Newline &
+      "- choississez un niveau de defi puis un numero entre 1 et 5 qui"
+      & Newline & " correspondra à votre numero de defi" & Newline &
+      "- une grille de jeu s'affiche: " & Newline &
+      "- pour jouer cliquer sur la couleur que vous voulez deplacer puis"
+      & Newline & " en bas sur la direction ou vous voulez allez" & Newline &
+      "bg= bas gauche, hg=haut gauche, hd= haut droit, bd = bas droit" & Newline &
+      " - le bouton stats vous montre vos stats de partie" & Newline &
+      "le bouton rejouer vous fais revenir au choix du defi pour recommencer" & Newline &
+      "le bouton quitter vous fait quitter la partie", 5, 35, 440, 235);
 
     AjouterBouton(fenetre,"ok", "J'ai lu", 170, 270, 55, 20);
 
@@ -336,9 +350,9 @@ package body p_vue_graph is
     begin
       FenetreWin:=DebutFenetre("Victoire", 300, 300);
       AjouterTexte(FenetreWin, "Bravo", "Bravo, vous avez terminé ce niveau",
-                    20,
+                    50,
                     10,
-                    259,
+                    230,
                     40);
 
       AjouterBouton(FenetreWin,"ok","Ok",
