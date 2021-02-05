@@ -216,6 +216,15 @@ package body p_vue_graph is
       FinFenetre (fenetre);
     end initfenetrepseudo;
 
+  procedure initfenetrehelp(fenetre: out TR_fenetre) is
+    FLARGEUR  : constant integer:=400;
+    FHAUTEUR  : constant integer:=300;
+  begin
+    ecrire_ligne("coucou");
+
+    finfenetre(fenetre);
+  end initfenetrehelp;
+
   procedure ajouterBtnDeplacement
      (fenetre      : in out TR_Fenetre; NomElement : in String;
       x, y, x2, y2, padding : in     Natural)
