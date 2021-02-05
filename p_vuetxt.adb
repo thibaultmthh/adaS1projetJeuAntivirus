@@ -191,13 +191,15 @@ package body p_vuetxt is
        (dir    : out T_Direction; couleur : in T_CoulP; Grille : in TV_Grille;
         cancel : in out Boolean; modeCouleur : in Boolean := True)
     is
+      compteur : integer := 0;
     begin
         loop
-
+            compteur := compteur +1 ;
             ECRIRE_LIGNE
                ("Dans quelle direction souhaitez vous vous déplacer ? Tapez (bg(bas gauche), hg(hautgauche), bd(bas droit) ou hd(haut droit))");
             LIRE (dir);
-            exit when Possible (Grille, couleur, dir);
+            cancel := compteur=2;
+            exit when Possible (Grille, couleur, dir) or compteur = 2;
             NettoyerTerminal;
             AfficheGrille (Grille, modeCouleur);
             ECRIRE ("vous ne pouvez pas bouger vers ");
