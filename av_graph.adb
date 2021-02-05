@@ -132,8 +132,9 @@ begin -- av_graph
       colorSet := False;
       exitgame := False;
       MontrerElem (fprincipale, "Rejouer");
+      ChangerTempsMinuteur (fprincipale, "Chronometre", 200_000.0);
       while not exitgame and not exitall loop -- loop d'une game
-        ChangerTempsMinuteur (fprincipale, "Chronometre", 200_000.0);
+
         afficherGrille (fprincipale, "Grille", Grille);
         Bouton := To_Unbounded_String (Attendrebouton (fprincipale));
 
@@ -180,6 +181,7 @@ begin -- av_graph
         if Attendrebouton (FenetreWin) = "ok" then
           cacherfenetre (FenetreWin);
         end if;
+        ChangerMinuteurEnChrono(fprincipale, "Chronometre");
         ecrire_ligne (ConsulterTimer (fprincipale, "Chronometre"));
         InitPartie(Grille, Pieces);
         afficherGrille (fprincipale, "Grille", Grille);
