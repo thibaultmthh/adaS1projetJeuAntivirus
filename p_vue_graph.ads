@@ -44,5 +44,6 @@ package p_vue_graph is
 
 
   procedure InitwinVictoire (FenetreWin : in out TR_Fenetre);
+  procedure initfenetrehelp(fenetre: out TR_fenetre);
 
 end p_vue_graph;

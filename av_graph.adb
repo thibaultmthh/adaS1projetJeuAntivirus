@@ -5,7 +5,7 @@ use p_fenbase, forms, p_esiut, p_vue_graph, p_virus, p_virus.p_mouvement_io,
  Ada.Strings.Unbounded, p_virus.p_piece_io, p_virus.p_joueur_io;
 
 procedure av_graph is
-  fprincipale, fpseudo, FenetreWin : TR_Fenetre;
+  fprincipale, fpseudo, FenetreWin, fhelp : TR_Fenetre;
 
   exitall  : Boolean := False;
   exitgame : Boolean := False;
@@ -41,6 +41,13 @@ procedure av_graph is
     elsif Bouton = "Stats" then
       --Stats
       null;
+    elsif Bouton="tgf" then
+      --initfenetrehelp(fhelp);
+      --MontrerFenetre(fhelp);
+     -- if Attendrebouton (fhelp) = "ok" then
+       -- cacherfenetre (fhelp);
+     -- end if;
+     null;
     end if;
   end basicButtonAcction;
 

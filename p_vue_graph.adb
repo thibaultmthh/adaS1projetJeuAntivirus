@@ -71,6 +71,7 @@ package body p_vue_graph is
 
     --AjouterTexte(fenetre, "NumeroDefi", "Pas de defi selectionne",
       --XBOUTONDEP, YBOUTONDEP, 200, TEXTEHAUTEUR);
+    --AjouterBouton(fenetre,"tgf","?", 5, 350, 20, BHAUTEUR);
 
     AjouterBouton
      (fenetre, "Stats", "STATS", FESPACEMENT, yboutoninf, BLARGEUR, BHAUTEUR);
@@ -220,7 +221,12 @@ package body p_vue_graph is
     FLARGEUR  : constant integer:=400;
     FHAUTEUR  : constant integer:=300;
   begin
+    fenetre:=DebutFenetre("fhelp", Flargeur, Fhauteur);
     ecrire_ligne("coucou");
+    ajoutertexte(fenetre, "help", "Regles du jeu:", 170, 10, 86,20);
+    ChangerAlignementTexte(fenetre,"help",FL_ALIGN_CENTER);
+
+    AjouterBouton(fenetre,"ok", "J'ai lu", 170, 270, 55, 20);
 
     finfenetre(fenetre);
   end initfenetrehelp;
