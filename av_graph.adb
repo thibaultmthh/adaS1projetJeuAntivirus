@@ -10,6 +10,7 @@ procedure av_graph is
   exitall  : Boolean := False;
   exitgame : Boolean := False;
   defi     : Integer;
+  retour   : boolean := true;
 
 -- Partie jeu
   numdef         : Positive range 1 .. 20;
@@ -24,6 +25,7 @@ procedure av_graph is
   s              : p_joueur_io.File_Type;
   pseudo, bouton : Unbounded_String;
 
+
   procedure basicButtonAcction
    (Bouton : in String; exitall : out Boolean; exitgame : out Boolean)
   is
@@ -33,7 +35,8 @@ procedure av_graph is
       exitall := True;
 
     elsif Bouton = "Rejouer" then
-      changertexte (fprincipale, "Rejouer", "Rejouer");
+      montrerdefi(fprincipale);
+
       exitgame := True;
     elsif Bouton = "Stats" then
       --Stats
@@ -55,6 +58,7 @@ begin -- av_graph
   if bouton = "quitter" then
     CacherFenetre (fpseudo);
   elsif bouton = "jouer" then
+
     pseudo := To_Unbounded_String (Consultercontenu (fpseudo, "pseudo"));
     CacherFenetre (fpseudo);
     InitFenetreprincipale (fprincipale, To_string (pseudo));
@@ -70,52 +74,70 @@ begin -- av_graph
 
       InitPartie (Grille, Pieces);
       afficherGrille (fprincipale, "Grille", Grille);
-      CacherElem (fprincipale, "Rejouer");
+
 
       --Choix du defi
-      cacherdefi (fprincipale);
-      numdef := 1;
+      --cacherdefi (fprincipale);
+      retour := false;
+      cacherelem(fprincipale, "Rejouer");
       loop
-        exit;
-        Bouton := To_Unbounded_String (Attendrebouton (fprincipale));
+        loop
 
-        exit when bouton /= "Stats" and not (To_string(Bouton)(1..1)="G");
-      end loop;
-      exitall := (Bouton = "Quitter");
+          Bouton := To_Unbounded_String (Attendrebouton (fprincipale));
+          basicButtonAcction(To_string(bouton), exitall, exitgame);
+          exit when bouton /= "Stats" and not (To_string(Bouton)(1..1)="G");
+        end loop;
 
-      if Bouton = "facile" then
-        cacherdefi(fprincipale);
-        AfficherDef(fprincipale, 1);
-      elsif Bouton = "moyen" then
-        cacherdefi(fprincipale);
-        AfficherDef(fprincipale, 6);
-      elsif Bouton = "difficile" then
-        cacherdefi(fprincipale);
-        AfficherDef(fprincipale, 11);
-      elsif Bouton = "compliqué" then
-        cacherdefi(fprincipale);
-        AfficherDef(fprincipale, 16);
-      end if;
+        exit when exitall;
+
+        if Bouton = "facile" then
+          cacherdefi(fprincipale);
+          AfficherDef(fprincipale, 1);
+        elsif Bouton = "moyen" then
+          cacherdefi(fprincipale);
+          AfficherDef(fprincipale, 6);
+        elsif Bouton = "difficile" then
+          cacherdefi(fprincipale);
+          AfficherDef(fprincipale, 11);
+        elsif Bouton = "compliqué" then
+          cacherdefi(fprincipale);
+          AfficherDef(fprincipale, 16);
+
+        end if;
 
 
-      loop
-        Bouton := To_Unbounded_String (Attendrebouton (fprincipale));
+        loop
+          Bouton := To_Unbounded_String (Attendrebouton (fprincipale));
+          basicButtonAcction(To_string(bouton), exitall, exitgame);
+          exit when bouton /= "Stats" and not (To_string(Bouton)(1..1)="G");
+        end loop;
 
-        exit when bouton /= "Stats" and not (To_string(Bouton)(1..1)="G");
-      end loop;
-      exitall := (Bouton = "Quitter");
-      if estDefi(To_String(Bouton)) then
-        numdef := numDefi(To_String(Bouton));
-      end if;
+
+        exit when exitall;
+
+        if estDefi(To_String(Bouton)) then
+          numdef := numDefi(To_String(Bouton));
+
+          changertexte(fprincipale, "defi", "Defi n" & positive'image(numdef));
+          cacherdef(fprincipale);
+        end if;
+        retour := (Bouton = "RetourDef");
+
+        exit when not retour;
+        CacherDef(fprincipale);
+        montrerdefi(fprincipale);
+    end loop;
 
       Configurer (f, numdef, Grille, Pieces);
       colorSet := False;
       exitgame := False;
+      MontrerElem (fprincipale, "Rejouer");
       while not exitgame and not exitall loop -- loop d'une game
         ChangerTempsMinuteur (fprincipale, "Chronometre", 200_000.0);
         afficherGrille (fprincipale, "Grille", Grille);
         Bouton := To_Unbounded_String (Attendrebouton (fprincipale));
 
+        CacherElem(fprincipale, "Messageerreur");
         -- if c'st un bouton
         basicButtonAcction (To_String (bouton), exitall, exitgame);
 
@@ -132,7 +154,11 @@ begin -- av_graph
         elsif To_String (bouton) (1 .. 1) = "D" and colorSet then
 
           dir := T_Direction'Value (To_String (bouton) (2 .. 3));
-          MajGrille (Grille, colorSel, dir);
+          if possible(Grille, colorSel, dir) then
+            MajGrille (Grille, colorSel, dir);
+          else
+            MontrerElem(fprincipale, "Messageerreur");
+          end if;
           masquerBtnDeplacements (fprincipale);
           colorSet   := False;
           nombrecoup := nombrecoup + 1;
@@ -143,17 +169,24 @@ begin -- av_graph
 
       end loop; -- loop principale d'une partie
       if Guerison (Grille) then
-        SaveANewStat
-         (s, pseudo, ConsulterTimer (fprincipale, "Chronometre"), numdef,
-          nombrecoup);
+        afficherGrille (fprincipale, "Grille", Grille);
+        --SaveANewStat
+         --(s, pseudo, ConsulterTimer (fprincipale, "Chronometre"), numdef,
+          --nombrecoup);
         InitwinVictoire (FenetreWin);
+        ecrire_ligne("Bravo, vous avez terminé ce niveau en :" & positive'image(nombrecoup) & " coups");
+        changertexte(FenetreWin, "Bravo", "Bravo, victoire en : " & positive'image(nombrecoup) & " coups");
         MontrerFenetre (FenetreWin);
         if Attendrebouton (FenetreWin) = "ok" then
           cacherfenetre (FenetreWin);
         end if;
         ecrire_ligne (ConsulterTimer (fprincipale, "Chronometre"));
+        InitPartie(Grille, Pieces);
         afficherGrille (fprincipale, "Grille", Grille);
         ECRIRE_LIGNE ("Vous avez gagné");
+        MontrerElem(fprincipale, "Rejouer");
+        Bouton := To_Unbounded_String (Attendrebouton (fprincipale));
+        basicButtonAcction(To_string(bouton), exitall, exitgame);
       end if;
     end loop; -- loop principale jusqu'a quiter
   end if;

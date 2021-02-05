@@ -64,7 +64,7 @@ package body p_vue_graph is
 
     Ajoutertexte(fenetre,"defi","numéro de défi", FESPACEMENT * 3 + TEXTELARGEUR * 2, FESPACEMENT, TEXTELARGEUR,
       TEXTEHAUTEUR);
-    ChangerAlignementTexte (fenetre, "NumeroDefi", FL_ALIGN_CENTER);
+    ChangerAlignementTexte (fenetre, "defi", FL_ALIGN_CENTER);
 
     ChangerStyleTexte(fenetre, "NomJoueur", FL_BOLD_Style);
     ChangerTailleTexte(fenetre, "NomJoueur", 500);
@@ -75,8 +75,9 @@ package body p_vue_graph is
     AjouterBouton
      (fenetre, "Stats", "STATS", FESPACEMENT, yboutoninf, BLARGEUR, BHAUTEUR);
     AjouterBouton
-     (fenetre, "Rejouer", "Jouer", FESPACEMENT * 2 + BLARGEUR, yboutoninf,
+     (fenetre, "Rejouer", "Rejouer", FESPACEMENT * 2 + BLARGEUR, yboutoninf,
       BLARGEUR, BHAUTEUR);
+    CacherElem (fenetre, "Rejouer");
     AjouterBouton
      (fenetre, "Quitter", "QUITTER", FESPACEMENT * 3 + BLARGEUR * 2,
       yboutoninf, BLARGEUR, BHAUTEUR);
@@ -89,6 +90,11 @@ package body p_vue_graph is
     AjouterBoutonChoixDef(fenetre, FESPACEMENT, YBOUTONDEP, HAUTEURBOUTONDEP, LARGEURBOUTONDEFS );
     AjouterBouton(fenetre, "RetourDef", "Retour", 6*FESPACEMENT  + 5*LARGEURBOUTONRETDEF,YBOUTONDEP, LARGEURBOUTONRETDEF, HAUTEURBOUTONDEP);
     CacherElem(fenetre, "RetourDef");
+
+    ajoutertexte(fenetre, "Messageerreur", "Ce mouvement est impossible, essayez de nouveau", FESPACEMENT, YBOUTONDEP, FLARGEUR - 2* FESPACEMENT, HAUTEURBOUTONDEP);
+    ChangerAlignementTexte(fenetre, "Messageerreur", FL_ALIGN_CENTER);
+    ChangerCouleurTexte(fenetre, "Messageerreur", FL_RED);
+    CacherElem(fenetre, "Messageerreur");
 
     FinFenetre (fenetre);
   end InitFenetreprincipale;
@@ -254,11 +260,11 @@ package body p_vue_graph is
 
       for y in 1 .. 2 loop
         for x in 1 .. 2 loop
-          if Possible(Grille, coul,btnList (y, x)) then
+          --if Possible(Grille, coul,btnList (y, x)) then
             MontrerElem(fenetre, "D" & T_Direction'Image (btnList (y, x)));
-          else
-            CacherElem(fenetre, "D" & T_Direction'Image (btnList (y, x)));
-          end if;
+          --else
+            --CacherElem(fenetre, "D" & T_Direction'Image (btnList (y, x)));
+          --end if;
         end loop;
       end loop;
     end afficherBtnDeplacements;
@@ -291,7 +297,7 @@ package body p_vue_graph is
     AjouterBouton(fenetre,"facile","facile", x,y ,largeur, hauteur);
     AjouterBouton(fenetre,"moyen","moyen", x+largeur+espace,y ,largeur, hauteur);
     AjouterBouton(fenetre,"difficile","difficile", x+2*(largeur+espace),y ,largeur, hauteur);
-    AjouterBouton(fenetre,"compliqué","complique", x+3*(largeur+espace),y ,largeur, hauteur);
+    AjouterBouton(fenetre,"compliqué","max", x+3*(largeur+espace),y ,largeur, hauteur);
   end choixdefi;
 
   procedure cacherdefi(fenetre: in out TR_fenetre)is
@@ -305,11 +311,11 @@ package body p_vue_graph is
 
   procedure montrerdefi(fenetre: in out TR_fenetre)is
   begin
-    CacherElem(fenetre,"choixdefi");
-    CacherElem(fenetre,"facile");
-    cacherelem(fenetre,"moyen");
-    cacherelem(fenetre, "difficile");
-    cacherelem(fenetre,"compliqué");
+    MontrerElem(fenetre,"choixdefi");
+    MontrerElem(fenetre,"facile");
+    Montrerelem(fenetre,"moyen");
+    Montrerelem(fenetre, "difficile");
+    Montrerelem(fenetre,"compliqué");
   end montrerdefi;
 
 
@@ -355,10 +361,10 @@ package body p_vue_graph is
     end loop;
     end AjouterBoutonChoixDef;
 
-    procedure CacherDef(fenetre : in out TR_Fenetre; numdefinf : in positive) is
+    procedure CacherDef(fenetre : in out TR_Fenetre) is
 
     begin
-      for i in numdefinf..numdefinf+4 loop
+      for i in 1..20 loop
         CacherElem(fenetre, "Defi" & integer'image(i));
       end loop;
       CacherElem(fenetre, "RetourDef");
@@ -381,7 +387,11 @@ package body p_vue_graph is
 
     function numDefi(nombouton: in string) return positive is
     begin
-      return integer'value(nombouton(6..6));
+      if nombouton'length = 6 then
+        return integer'value(nombouton(6..6));
+      else
+        return integer'value(nombouton(6..7));
+      end if;
     end numDefi;
 
 
