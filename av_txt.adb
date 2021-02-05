@@ -47,7 +47,7 @@ begin
       exit when annuler;
 
       InputDirection (dir, couleur, Grille, annuler, modeCouleur);
-      if not annuler then -- Si on ne souhaite pas changer de couleur
+      if not annuler and possible(Grille, couleur, dir) then -- Si on ne souhaite pas changer de couleur
 
         MajGrille (Grille, couleur, dir);
         compteurMvmt := compteurMvmt + 1;
