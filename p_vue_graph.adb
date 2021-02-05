@@ -25,13 +25,13 @@ package body p_vue_graph is
 
     -- Bouton inferieur (Rejouer, stats, quitter)
     NBBOUTON            : constant integer := 3;
-    TAILLEBHELP         : constant integer  := 10;
+    TAILLEBHELP         : constant integer  := 20;
     BLARGEUR            : constant integer := (FLARGEUR - FESPACEMENT * (NBBOUTON+1) ) / NBBOUTON;
 
 
     --On calcule la taille d'un bouton par rapport à la taille de la fenetre, au nombre de bouton et a la taille de l'espacement.
     BHAUTEUR            : constant integer := 30;
-    yboutoninf          : constant integer := FHAUTEUR - (FESPACEMENT + BHAUTEUR);
+    yboutoninf          : constant integer := FHAUTEUR - (FESPACEMENT + BHAUTEUR  );
 
     -- Bouton de déplacement
     HAUTEURBOUTONDEP    : constant integer := 85;
@@ -76,7 +76,7 @@ package body p_vue_graph is
 
     --AjouterTexte(fenetre, "NumeroDefi", "Pas de defi selectionne",
       --XBOUTONDEP, YBOUTONDEP, 200, TEXTEHAUTEUR);
-    --AjouterBouton(fenetre,"tgf","?", 5, 350, 20, BHAUTEUR);
+    AjouterBouton(fenetre,"help","?", 5, 350, TAILLEBHELP, BHAUTEUR);
 
     AjouterBouton
      (fenetre, "Stats", "STATS", FESPACEMENT, yboutoninf, BLARGEUR, BHAUTEUR);
