@@ -339,7 +339,7 @@ package body p_vue_graph is
                     20,
                     10,
                     259,
-                    13);
+                    40);
 
       AjouterBouton(FenetreWin,"ok","Ok",
                     126,
