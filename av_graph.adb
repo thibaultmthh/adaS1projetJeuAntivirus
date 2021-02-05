@@ -85,7 +85,7 @@ begin -- av_graph
 
           Bouton := To_Unbounded_String (Attendrebouton (fprincipale));
           basicButtonAcction(To_string(bouton), exitall, exitgame);
-          exit when bouton /= "Stats" and not (To_string(Bouton)(1..1)="G");
+          exit when bouton /= "Stats" and bouton /="help" and not (To_string(Bouton)(1..1)="G");
         end loop;
 
         exit when exitall;
@@ -169,7 +169,10 @@ begin -- av_graph
         end if;
 
       end loop; -- loop principale d'une partie
+
       if Guerison (Grille) then
+        --ChangerChronoenminuteur(fprincipale,"Chronometre");
+        PauseTimer(fprincipale, "Chronometre");
         afficherGrille (fprincipale, "Grille", Grille);
         --SaveANewStat
          --(s, pseudo, ConsulterTimer (fprincipale, "Chronometre"), numdef,
@@ -181,8 +184,8 @@ begin -- av_graph
         if Attendrebouton (FenetreWin) = "ok" then
           cacherfenetre (FenetreWin);
         end if;
-        ChangerMinuteurEnChrono(fprincipale, "Chronometre");
-        ecrire_ligne (ConsulterTimer (fprincipale, "Chronometre"));
+        --ChangerMinuteurEnChrono(fprincipale, "Chronometre");
+        --ecrire_ligne ( (fprincipale, "Chronometre"));
         InitPartie(Grille, Pieces);
         afficherGrille (fprincipale, "Grille", Grille);
         ECRIRE_LIGNE ("Vous avez gagné");

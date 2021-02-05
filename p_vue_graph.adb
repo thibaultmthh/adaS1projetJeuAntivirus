@@ -25,7 +25,10 @@ package body p_vue_graph is
 
     -- Bouton inferieur (Rejouer, stats, quitter)
     NBBOUTON            : constant integer := 3;
+    TAILLEBHELP         : constant integer  := 10;
     BLARGEUR            : constant integer := (FLARGEUR - FESPACEMENT * (NBBOUTON+1) ) / NBBOUTON;
+
+
     --On calcule la taille d'un bouton par rapport à la taille de la fenetre, au nombre de bouton et a la taille de l'espacement.
     BHAUTEUR            : constant integer := 30;
     yboutoninf          : constant integer := FHAUTEUR - (FESPACEMENT + BHAUTEUR);
@@ -45,6 +48,8 @@ package body p_vue_graph is
 
     LARGEURBOUTONDEFS    : constant integer := FLARGEUR - 2*FESPACEMENT;
     LARGEURBOUTONRETDEF  : constant integer := (LARGEURBOUTONDEFS - 5*FESPACEMENT) / 6;
+
+
   begin
 
 
