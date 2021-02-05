@@ -198,7 +198,7 @@ package body p_vuetxt is
             ECRIRE_LIGNE
                ("Dans quelle direction souhaitez vous vous déplacer ? Tapez (bg(bas gauche), hg(hautgauche), bd(bas droit) ou hd(haut droit))");
             LIRE (dir);
-            cancel := compteur=2;
+            
             exit when Possible (Grille, couleur, dir) or compteur = 2;
             NettoyerTerminal;
             AfficheGrille (Grille, modeCouleur);
