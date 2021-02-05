@@ -229,6 +229,7 @@ package body p_vue_graph is
   begin
     fenetre:=DebutFenetre("fhelp", Flargeur, Fhauteur);
     ecrire_ligne("Bonjour, Mme. Lejeune");
+    ecrire_ligne("ça mérite une bonne note non? ");
     ajoutertexte(fenetre, "help", "Regles du jeu:", 170, 10, 86,20);
     ChangerAlignementTexte(fenetre,"help",FL_ALIGN_CENTER);
     ChangerStyleTexte(fenetre,"help", FL_BOLD_Style);
