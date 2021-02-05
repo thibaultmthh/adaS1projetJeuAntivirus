@@ -198,9 +198,15 @@ begin -- av_graph
         InitPartie(Grille, Pieces);
         afficherGrille (fprincipale, "Grille", Grille);
         ECRIRE_LIGNE ("Vous avez gagné");
+
         MontrerElem(fprincipale, "Rejouer");
-        Bouton := To_Unbounded_String (Attendrebouton (fprincipale));
-        basicButtonAcction(To_string(bouton), exitall, exitgame);
+        loop
+
+          Bouton := To_Unbounded_String (Attendrebouton (fprincipale));
+          basicButtonAcction(To_string(bouton), exitall, exitgame);
+
+        exit when exitall or exitgame;
+        end loop;
       end if;
     end loop; -- loop principale jusqu'a quiter
   end if;
