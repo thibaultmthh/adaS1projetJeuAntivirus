@@ -25,10 +25,13 @@ package body p_vue_graph is
 
     -- Bouton inferieur (Rejouer, stats, quitter)
     NBBOUTON            : constant integer := 3;
-    BLARGEUR            : constant integer := (FLARGEUR - FESPACEMENT * (NBBOUTON+1) ) / NBBOUTON;
+    TAILLEBHELP         : constant integer  := 20;
+    BLARGEUR            : constant integer := (FLARGEUR - FESPACEMENT * (NBBOUTON+1) - (TAILLEBHELP+FESPACEMENT) ) / NBBOUTON;
+
+
     --On calcule la taille d'un bouton par rapport à la taille de la fenetre, au nombre de bouton et a la taille de l'espacement.
     BHAUTEUR            : constant integer := 30;
-    yboutoninf          : constant integer := FHAUTEUR - (FESPACEMENT + BHAUTEUR);
+    yboutoninf          : constant integer := FHAUTEUR - (FESPACEMENT + BHAUTEUR  );
 
     -- Bouton de déplacement
     HAUTEURBOUTONDEP    : constant integer := 85;
@@ -45,6 +48,8 @@ package body p_vue_graph is
 
     LARGEURBOUTONDEFS    : constant integer := FLARGEUR - 2*FESPACEMENT;
     LARGEURBOUTONRETDEF  : constant integer := (LARGEURBOUTONDEFS - 5*FESPACEMENT) / 6;
+
+
   begin
 
 
@@ -64,21 +69,23 @@ package body p_vue_graph is
 
     Ajoutertexte(fenetre,"defi","numéro de défi", FESPACEMENT * 3 + TEXTELARGEUR * 2, FESPACEMENT, TEXTELARGEUR,
       TEXTEHAUTEUR);
-    ChangerAlignementTexte (fenetre, "NumeroDefi", FL_ALIGN_CENTER);
+    ChangerAlignementTexte (fenetre, "defi", FL_ALIGN_CENTER);
 
     ChangerStyleTexte(fenetre, "NomJoueur", FL_BOLD_Style);
     ChangerTailleTexte(fenetre, "NomJoueur", 500);
 
     --AjouterTexte(fenetre, "NumeroDefi", "Pas de defi selectionne",
       --XBOUTONDEP, YBOUTONDEP, 200, TEXTEHAUTEUR);
+    AjouterBouton(fenetre,"help","?", FESPACEMENT, yboutoninf, TAILLEBHELP, BHAUTEUR);
 
     AjouterBouton
-     (fenetre, "Stats", "STATS", FESPACEMENT, yboutoninf, BLARGEUR, BHAUTEUR);
+     (fenetre, "Stats", "STATS",TAILLEBHELP+FESPACEMENT + FESPACEMENT, yboutoninf, BLARGEUR, BHAUTEUR);
     AjouterBouton
-     (fenetre, "Rejouer", "Jouer", FESPACEMENT * 2 + BLARGEUR, yboutoninf,
+     (fenetre, "Rejouer", "Rejouer", TAILLEBHELP+FESPACEMENT+FESPACEMENT * 2 + BLARGEUR, yboutoninf,
       BLARGEUR, BHAUTEUR);
+    CacherElem (fenetre, "Rejouer");
     AjouterBouton
-     (fenetre, "Quitter", "QUITTER", FESPACEMENT * 3 + BLARGEUR * 2,
+     (fenetre, "Quitter", "QUITTER", TAILLEBHELP+FESPACEMENT+FESPACEMENT * 3 + BLARGEUR * 2,
       yboutoninf, BLARGEUR, BHAUTEUR);
 
     ajouterGrille(fenetre, "Grille", (FLARGEUR / 2) - (TAILLEGRILLE/2) , yGrille, TAILLEGRILLE);
@@ -89,6 +96,11 @@ package body p_vue_graph is
     AjouterBoutonChoixDef(fenetre, FESPACEMENT, YBOUTONDEP, HAUTEURBOUTONDEP, LARGEURBOUTONDEFS );
     AjouterBouton(fenetre, "RetourDef", "Retour", 6*FESPACEMENT  + 5*LARGEURBOUTONRETDEF,YBOUTONDEP, LARGEURBOUTONRETDEF, HAUTEURBOUTONDEP);
     CacherElem(fenetre, "RetourDef");
+
+    ajoutertexte(fenetre, "Messageerreur", "Ce mouvement est impossible, essayez de nouveau", FESPACEMENT, YBOUTONDEP, FLARGEUR - 2* FESPACEMENT, HAUTEURBOUTONDEP);
+    ChangerAlignementTexte(fenetre, "Messageerreur", FL_ALIGN_CENTER);
+    ChangerCouleurTexte(fenetre, "Messageerreur", FL_RED);
+    CacherElem(fenetre, "Messageerreur");
 
     FinFenetre (fenetre);
   end InitFenetreprincipale;
@@ -231,6 +243,34 @@ package body p_vue_graph is
    --   Close (s);
 
 --end affichestats;
+  procedure initfenetrehelp(fenetre: out TR_fenetre) is
+    FLARGEUR  : constant integer:=450;
+    FHAUTEUR  : constant integer:=300;
+    Newline   : constant character:=character'val(10);
+  begin
+    fenetre:=DebutFenetre("fhelp", Flargeur, Fhauteur);
+    ecrire_ligne("Bonjour, Mme. Lejeune");
+    ecrire_ligne("ça mérite une bonne note non? ");
+    ajoutertexte(fenetre, "help", "Regles du jeu:", 170, 10, 86,20);
+    ChangerAlignementTexte(fenetre,"help",FL_ALIGN_CENTER);
+    ChangerStyleTexte(fenetre,"help", FL_BOLD_Style);
+
+    ajoutertexte(fenetre, "regles", "-Le but est de gagner, mais de bien gagner" & Newline &
+      "le but est d'ammener la pieces rouge dans l'angle en haut a droite" & Newline &
+      "- choississez un niveau de defi puis un numero entre 1 et 5 qui"
+      & Newline & " correspondra à votre numero de defi" & Newline &
+      "- une grille de jeu s'affiche: " & Newline &
+      "- pour jouer cliquer sur la couleur que vous voulez deplacer puis"
+      & Newline & " en bas sur la direction ou vous voulez allez" & Newline &
+      "bg= bas gauche, hg=haut gauche, hd= haut droit, bd = bas droit" & Newline &
+      " - le bouton stats vous montre vos stats de partie" & Newline &
+      "le bouton rejouer vous fais revenir au choix du defi pour recommencer" & Newline &
+      "le bouton quitter vous fait quitter la partie", 5, 35, 440, 235);
+
+    AjouterBouton(fenetre,"ok", "J'ai lu", 170, 270, 55, 20);
+
+    finfenetre(fenetre);
+  end initfenetrehelp;
 
   procedure ajouterBtnDeplacement
      (fenetre      : in out TR_Fenetre; NomElement : in String;
@@ -267,11 +307,11 @@ package body p_vue_graph is
 
       for y in 1 .. 2 loop
         for x in 1 .. 2 loop
-          if Possible(Grille, coul,btnList (y, x)) then
+          --if Possible(Grille, coul,btnList (y, x)) then
             MontrerElem(fenetre, "D" & T_Direction'Image (btnList (y, x)));
-          else
-            CacherElem(fenetre, "D" & T_Direction'Image (btnList (y, x)));
-          end if;
+          --else
+            --CacherElem(fenetre, "D" & T_Direction'Image (btnList (y, x)));
+          --end if;
         end loop;
       end loop;
     end afficherBtnDeplacements;
@@ -304,7 +344,7 @@ package body p_vue_graph is
     AjouterBouton(fenetre,"facile","facile", x,y ,largeur, hauteur);
     AjouterBouton(fenetre,"moyen","moyen", x+largeur+espace,y ,largeur, hauteur);
     AjouterBouton(fenetre,"difficile","difficile", x+2*(largeur+espace),y ,largeur, hauteur);
-    AjouterBouton(fenetre,"compliqué","complique", x+3*(largeur+espace),y ,largeur, hauteur);
+    AjouterBouton(fenetre,"compliqué","max", x+3*(largeur+espace),y ,largeur, hauteur);
   end choixdefi;
 
   procedure cacherdefi(fenetre: in out TR_fenetre)is
@@ -318,11 +358,11 @@ package body p_vue_graph is
 
   procedure montrerdefi(fenetre: in out TR_fenetre)is
   begin
-    CacherElem(fenetre,"choixdefi");
-    CacherElem(fenetre,"facile");
-    cacherelem(fenetre,"moyen");
-    cacherelem(fenetre, "difficile");
-    cacherelem(fenetre,"compliqué");
+    MontrerElem(fenetre,"choixdefi");
+    MontrerElem(fenetre,"facile");
+    Montrerelem(fenetre,"moyen");
+    Montrerelem(fenetre, "difficile");
+    Montrerelem(fenetre,"compliqué");
   end montrerdefi;
 
 
@@ -332,10 +372,10 @@ package body p_vue_graph is
     begin
       FenetreWin:=DebutFenetre("Victoire", 300, 300);
       AjouterTexte(FenetreWin, "Bravo", "Bravo, vous avez terminé ce niveau",
-                    20,
+                    50,
                     10,
-                    259,
-                    13);
+                    230,
+                    40);
 
       AjouterBouton(FenetreWin,"ok","Ok",
                     126,
@@ -368,10 +408,10 @@ package body p_vue_graph is
     end loop;
     end AjouterBoutonChoixDef;
 
-    procedure CacherDef(fenetre : in out TR_Fenetre; numdefinf : in positive) is
+    procedure CacherDef(fenetre : in out TR_Fenetre) is
 
     begin
-      for i in numdefinf..numdefinf+4 loop
+      for i in 1..20 loop
         CacherElem(fenetre, "Defi" & integer'image(i));
       end loop;
       CacherElem(fenetre, "RetourDef");
@@ -380,6 +420,7 @@ package body p_vue_graph is
     procedure AfficherDef(fenetre : in out TR_Fenetre; numdefinf : in positive) is
 
     begin
+      ecrire_ligne(numdefinf+4 );
       for i in numdefinf..numdefinf+4 loop
         MontrerElem(fenetre, "Defi" & integer'image(i));
       end loop;
@@ -393,7 +434,11 @@ package body p_vue_graph is
 
     function numDefi(nombouton: in string) return positive is
     begin
-      return integer'value(nombouton(5..5));
+      if nombouton'length = 6 then
+        return integer'value(nombouton(6..6));
+      else
+        return integer'value(nombouton(6..7));
+      end if;
     end numDefi;
 
 
