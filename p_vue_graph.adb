@@ -228,7 +228,7 @@ package body p_vue_graph is
     Newline   : constant character:=character'val(10);
   begin
     fenetre:=DebutFenetre("fhelp", Flargeur, Fhauteur);
-    ecrire_ligne("coucou");
+    ecrire_ligne("Bonjour, Mme. Lejeune");
     ajoutertexte(fenetre, "help", "Regles du jeu:", 170, 10, 86,20);
     ChangerAlignementTexte(fenetre,"help",FL_ALIGN_CENTER);
     ChangerStyleTexte(fenetre,"help", FL_BOLD_Style);
