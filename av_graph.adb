@@ -30,6 +30,7 @@ procedure av_graph is
    (Bouton : in String; exitall : out Boolean; exitgame : out Boolean)
   is
   begin
+    masquerBtnDeplacements (fprincipale);
     if Bouton = "Quitter" then
       CacherFenetre (fprincipale);
       exitall := True;
